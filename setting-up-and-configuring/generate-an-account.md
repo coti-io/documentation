@@ -10,6 +10,7 @@ This step generates a new private key and account.
 * Execution: To execute the script, navigate to the main directory (Devnet) and run the appropriate command depending on the language choice:
 
 {% tabs %}
+
 {% tab title="Python" %}
 ```bash
 python3 -m onboardUser.scripts.python.gen_account
