@@ -1,4 +1,4 @@
-# The SDK
+# 💻 SDKs
 
 The Sodalabs SDK provides functionalities for AES and RSA encryption schemes, ECDSA signature scheme and some functionalities used for working with sodalabs interface. The SDK provide the all functionalities in three common widely used languages - Golang, Python and JavaScript.
 
