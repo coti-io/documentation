@@ -2,11 +2,12 @@
 
 ## 📝 Introduction
 
-* [🔏 Privacy in blockchains](README.md)
-* [☑️ Use cases](introduction/use-cases.md)
-* [🔐 The Developer Network (DevNet)](introduction/the-developer-network-devnet.md)
-* [🥂 About Soda Labs](introduction/about-soda-labs.md)
-* [🎇 Garbled Circuits](introduction/garbled-circuits.md)
+* [Welcome to Coti Docs](README.md)
+* [Privacy in Blockchains](introduction/privacy-in-blockchains.md)
+* [Use cases](introduction/use-cases.md)
+* [The Developer Network (DevNet)](introduction/the-developer-network-devnet.md)
+* [About Soda Labs](introduction/about-soda-labs.md)
+* [Garbled Circuits](introduction/garbled-circuits.md)
 * [📃 White Paper 0.1](introduction/white-paper-0.1.md)
 
 ## 🗄️ Setting Up and Configuring
