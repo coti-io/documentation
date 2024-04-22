@@ -1,72 +1,78 @@
 # Table of contents
 
-## 📝 Introduction
+## Introduction
 
 * [Welcome to Coti Docs](README.md)
 * [Privacy in Blockchains](introduction/privacy-in-blockchains.md)
+* [Conceptual overview](introduction/garbled-circuits.md)
+* [Coti Token Contracts](introduction/coti-token-contracts.md)
 * [Use cases](introduction/use-cases.md)
 * [The Developer Network (DevNet)](introduction/the-developer-network-devnet.md)
-* [About Soda Labs](introduction/about-soda-labs.md)
-* [Garbled Circuits](introduction/garbled-circuits.md)
-* [📃 White Paper 0.1](introduction/white-paper-0.1.md)
+* [Coti v2 White Paper](introduction/white-paper-0.1.md)
 
-## 🗄️ Setting Up and Configuring
+## Core Concepts
 
-* [📪 Generate an Account](setting-up-and-configuring/generate-an-account.md)
-* [🪙 Faucet](setting-up-and-configuring/faucet/README.md)
-  * [Faucet](https://faucet.sodalabs.net)
-* [🏂 Onboard User](setting-up-and-configuring/onboard-user.md)
-* [🔗 Connect to Soda Devnet](setting-up-and-configuring/connect-to-soda-devnet.md)
-* [📄 Block Explorer](setting-up-and-configuring/block-explorer/README.md)
+* [Accounts](core-concepts/accounts/README.md)
+  * [Generate an Account](core-concepts/accounts/generate-an-account.md)
+  * [Onboard Account](core-concepts/accounts/onboard-user.md)
+* [Block Explorer](core-concepts/block-explorer/README.md)
   * [Block Explorer](https://explorer.sodalabs.net)
+* [Garbled Circuits](core-concepts/garbled-circuits.md)
+* [Smart Contracts](core-concepts/smart-contracts.md)
+* [Faucet](core-concepts/faucet.md)
+* [Bridges](core-concepts/bridges.md)
+* [Coti Nodes](core-concepts/coti-nodes.md)
+* [Transactions](core-concepts/transactions/README.md)
+  * [Secure Data Types](core-concepts/transactions/secure-data-types.md)
+  * [Secure Operations and Gas](core-concepts/transactions/secure-operations-and-gas.md)
+  * [Library](core-concepts/transactions/library/README.md)
+    * [Examples](core-concepts/transactions/library/examples.md)
+  * [Special Functions](core-concepts/transactions/special-functions/README.md)
+    * [Validate Input Text](core-concepts/transactions/special-functions/validate-input-text.md)
+    * [Offboard](core-concepts/transactions/special-functions/offboard.md)
+    * [Offboard To User Key](core-concepts/transactions/special-functions/offboard-to-user-key.md)
+    * [📤 Onboard](core-concepts/transactions/special-functions/onboard.md)
+    * [📨 Set Public](core-concepts/transactions/special-functions/set-public.md)
+    * [💲 Transfer](core-concepts/transactions/special-functions/transfer.md)
+    * [❓ Random](core-concepts/transactions/special-functions/random.md)
+    * [🌟 Decrypt](core-concepts/transactions/special-functions/decrypt.md)
 
-## Privacy-Preserving Transactions
+## Networks
 
-* [🪄 Secure Data Types](privacy-preserving-transactions/secure-data-types.md)
-* [✨ Secure Operations and Gas](privacy-preserving-transactions/secure-operations-and-gas.md)
-* [📚 Library](privacy-preserving-transactions/library/README.md)
-  * [🖥️ Examples](privacy-preserving-transactions/library/examples.md)
-* [🤩 Special Functions](privacy-preserving-transactions/special-functions/README.md)
-  * [🚨 Validate Input Text](privacy-preserving-transactions/special-functions/validate-input-text.md)
-  * [📥 Offboard](privacy-preserving-transactions/special-functions/offboard.md)
-  * [🗝️ Offboard To User Key](privacy-preserving-transactions/special-functions/offboard-to-user-key.md)
-  * [📤 Onboard](privacy-preserving-transactions/special-functions/onboard.md)
-  * [📨 Set Public](privacy-preserving-transactions/special-functions/set-public.md)
-  * [💲 Transfer](privacy-preserving-transactions/special-functions/transfer.md)
-  * [❓ Random](privacy-preserving-transactions/special-functions/random.md)
-  * [🌟 Decrypt](privacy-preserving-transactions/special-functions/decrypt.md)
+* [Devnet](networks/connect-to-soda-devnet.md)
+* [Testnet](networks/testnet.md)
+* [Mainnet](networks/mainnet.md)
 
-## SDK
+## Tutorials
 
-* [🧙 The SDK](sdk/the-sdk.md)
-* [🥸 How to Use the SDK](sdk/how-to-use-the-sdk/README.md)
-  * [👊 RSA encryption scheme](sdk/how-to-use-the-sdk/rsa-encryption-scheme.md)
-  * [🤝 ECDSA Signature](sdk/how-to-use-the-sdk/ecdsa-signature.md)
-  * [🙏 Prepare Private Inputs](sdk/how-to-use-the-sdk/prepare-private-inputs.md)
-  * [💪 Decrypt Output](sdk/how-to-use-the-sdk/decrypt-output.md)
+* [Writing a Private Smart Contract](tutorials/writing-a-private-smart-contract.md)
+* [Private ERC20 Example](tutorials/private-erc20-example/README.md)
+  * [Balance Of](tutorials/private-erc20-example/balance-of.md)
+  * [Transfer](tutorials/private-erc20-example/transfer.md)
+  * [Approve](tutorials/private-erc20-example/approve.md)
+  * [Transfer With Allowance](tutorials/private-erc20-example/transfer-with-allowance.md)
+* [Dos and Don'ts](tutorials/dos-and-donts/README.md)
+  * [Proper Use of Types](tutorials/dos-and-donts/proper-use-of-types.md)
+  * [No Constant/Immutable Secret Types](tutorials/dos-and-donts/no-constant-immutable-secret-types.md)
+  * [No Public Contract Variables](tutorials/dos-and-donts/no-public-contract-variables.md)
+* [Best Practices](tutorials/best-practices/README.md)
+  * [Careful Decrypting](tutorials/best-practices/careful-decrypting.md)
+  * [Avoid Secret Array indexes](tutorials/best-practices/avoid-secret-array-indexes.md)
+  * [Check Overflow](tutorials/best-practices/check-overflow.md)
 
-## Private Smart Contracts Development
+## SDKs
 
-* [✍️ Writing a Private Smart Contract](private-smart-contracts-development/writing-a-private-smart-contract.md)
-* [💰 Private ERC20 Example](private-smart-contracts-development/private-erc20-example/README.md)
-  * [🤑 Balance Of](private-smart-contracts-development/private-erc20-example/balance-of.md)
-  * [💳 Transfer](private-smart-contracts-development/private-erc20-example/transfer.md)
-  * [🆗 Approve](private-smart-contracts-development/private-erc20-example/approve.md)
-  * [🪪 Transfer With Allowance](private-smart-contracts-development/private-erc20-example/transfer-with-allowance.md)
+* [The SDK](sdks/the-sdk.md)
+* [How to Use the SDK](sdks/how-to-use-the-sdk/README.md)
+  * [RSA encryption scheme](sdks/how-to-use-the-sdk/rsa-encryption-scheme.md)
+  * [ECDSA Signature](sdks/how-to-use-the-sdk/ecdsa-signature.md)
+  * [Prepare Private Inputs](sdks/how-to-use-the-sdk/prepare-private-inputs.md)
+  * [Decrypt Output](sdks/how-to-use-the-sdk/decrypt-output.md)
 
-## Secure Interaction: Dos, Don'ts, and Best Practices
+## 👥 Support and Community
 
-* [🚦 Dos and Don'ts](secure-interaction-dos-donts-and-best-practices/dos-and-donts/README.md)
-  * [🆎 Proper Use of Types](secure-interaction-dos-donts-and-best-practices/dos-and-donts/proper-use-of-types.md)
-  * [❌ No Constant/Immutable Secret Types](secure-interaction-dos-donts-and-best-practices/dos-and-donts/no-constant-immutable-secret-types.md)
-  * [📢 No Public Contract Variables](secure-interaction-dos-donts-and-best-practices/dos-and-donts/no-public-contract-variables.md)
-* [⚓ Best Practices](secure-interaction-dos-donts-and-best-practices/best-practices/README.md)
-  * [🔑 Careful Decrypting](secure-interaction-dos-donts-and-best-practices/best-practices/careful-decrypting.md)
-  * [🏋️ Avoid Secret Array indexes](secure-interaction-dos-donts-and-best-practices/best-practices/avoid-secret-array-indexes.md)
-  * [🔍 Check Overflow](secure-interaction-dos-donts-and-best-practices/best-practices/check-overflow.md)
-
-## ⛓️ Links
-
-* [Soda Labs](https://www.sodalabs.xyz)
-* [LinkedIn](https://www.linkedin.com/company/101438776/admin/feed/posts/)
-* [Twitter](https://twitter.com/i/flow/login?redirect\_after\_login=%2Fsodabubblelabs)
+* [Glossary](support-and-community/glossary.md)
+* [Telegram](https://t.me/COTInetwork)
+* [Discord](https://discord.com/invite/wfAQfbc3Df)
+* [GitHub](https://github.com/coti-io)
+* [X](https://twitter.com/COTInetwork)

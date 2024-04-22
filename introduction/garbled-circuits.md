@@ -1,6 +1,6 @@
-# 🎇 Garbled Circuits
+# Conceptual overview
 
-### How do Garbled Circuits Preserve Privacy? <a href="#eca7" id="eca7"></a>
+### Garbled Circuits and how they preserve privacy <a href="#eca7" id="eca7"></a>
 
 As a privacy-preserving cryptographic technique, garbled circuits were essentially designed to solve one problem: The Millionaires problem created by Andrew Yao. In this theoretical scenario, two millionaires, Alice and Bob, want to work out which one of them is richer without disclosing their actual net worth.
 
@@ -14,7 +14,5 @@ To do this, they can use a garbled circuit which can be simplified into the foll
 * **Step 5** — At this point Bob may communicate the result, B, to Alice, so she can learn which of them is richer.
 
 This is obviously a very simplified explanation, make sure to revise [this article](https://medium.com/cotinetwork/how-coti-is-gearing-up-for-2024-and-beyond-e0d465794767#400d) for a more detailed walkthrough of the process.
-
-
 
 <figure><img src="../.gitbook/assets/cotygc.png" alt=""><figcaption></figcaption></figure>

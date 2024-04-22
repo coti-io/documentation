@@ -1,10 +1,8 @@
-# 🔐 The Developer Network (DevNet)
+# The Developer Network (DevNet)
 
 **A Privacy Preserving Blockchain**
 
 Privacy is a fundamental and crucial aspect of blockchain technology, and our DevNet endeavors to provide the privacy features expected in a blockchain by utilizing garbled circuits (GC). The DevNet employs mechanisms to integrate security and privacy characteristics that are important in a public domain like a blockchain. As the main building block of preserving privacy on-chain is garbled circuit, we call such an EVM compatible system a **`gcEVM`**.
-
-
 
 **High-Level Aspects of the Developer Network (DevNet )**
 
@@ -15,9 +13,8 @@ Privacy is a fundamental and crucial aspect of blockchain technology, and our De
 
 The DevNet offers developers a tangible platform to imagine a new world where on-chain privacy is easy; it allows developers to test their applications and protocols. The DevNet bridges the conceptual gap between theory and practical implementation, advancing the frontier of blockchain privacy.
 
-We invite you to join us in exploring the potential of the gcEVM DevNet. Dive into its functionalities, experiment with its capabilities, and contribute to the ongoing dialogue about privacy in blockchain. \
+We invite you to join us in exploring the potential of the gcEVM DevNet. Dive into its functionalities, experiment with its capabilities, and contribute to the ongoing dialogue about privacy in blockchain.\
 \
 **Together, let's push the boundaries of innovation and shape the future of decentralized privacy!**
 
 **Happy coding!**
-
