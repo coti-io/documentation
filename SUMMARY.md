@@ -1,8 +1,10 @@
 # Table of contents
 
-* [ℹ️ Introduction](README.md)
+* [🚀 Quickstart](README.md)
+* [ℹ️ Introduction](<README (1).md>)
   * [Privacy in Blockchains](readme/privacy-in-blockchains.md)
   * [Conceptual overview](readme/garbled-circuits.md)
+  * [Detailed Overview](readme/detailed-overview.md)
   * [Coti Token Contracts](readme/coti-token-contracts.md)
   * [Use cases](readme/use-cases.md)
   * [The Developer Network (DevNet)](readme/the-developer-network-devnet.md)
