@@ -4,7 +4,6 @@
 * [ℹ️ Introduction](<README (1).md>)
   * [Privacy in Blockchains](readme/privacy-in-blockchains.md)
   * [Conceptual overview](readme/garbled-circuits.md)
-  * [Detailed Overview](readme/detailed-overview.md)
   * [The Coti Token](readme/coti-token-contracts/README.md)
     * [Faucet](readme/coti-token-contracts/faucet.md)
   * [Use cases](readme/use-cases.md)
