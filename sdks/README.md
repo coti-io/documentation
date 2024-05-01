@@ -1,26 +1,13 @@
 # 💻 SDKs
 
-The Sodalabs SDK provides functionalities for AES and RSA encryption schemes, ECDSA signature scheme and some functionalities used for working with sodalabs interface. The SDK provide the all functionalities in three common widely used languages - Golang, Python and JavaScript.
+The SDKs specified below, contain smart contracts examples that implement confidentiality features using the COTI V2 protocol.&#x20;
 
-The SDK provides the following functionalities:
+The contracts provide examples for various use cases, such as Non-Fungible Tokens (NFTs), ERC20 tokens, Auctions, and Identity management.
 
-* AES encryption scheme:
-  * Generate AES key
-  * Write AES key
-  * Load AES key
-  * Encrypt
-  * Decrypt
-* RSA encryption scheme:
-  * Generate RSA key pair
-  * Encrypt
-  * Decrypt
-* ECDSA signature scheme:
-  * Generate ECDSA private key
-  * Sign
-* Hash:
-  * Keccak 256
-* Functionalities related to sodalabs InputText:
-  * Sign InputText
-  * Verify InputText (Available only in Golang)
-  * Prepare InputText
-  * Get function signature
+These contracts demonstrate how to leverage the confidentiality features of the COTI V2 protocol to enhance privacy and security in decentralized applications. The contracts written in Solidity and can be compiled and deployed using popular development tools like Hardhat and Foundry (work in progress).
+
+Visit the relevant GitHub repository for the desired SDK:
+
+1. [**python-sdk**](https://github.com/coti-io/coti-sdk-python)
+2. [**typescript-sdk**](https://github.com/coti-io/coti-sdk-typescript)
+3. [**hardhat development environment**](https://github.com/coti-io/confidentiality-contracts)
