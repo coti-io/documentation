@@ -13,8 +13,11 @@ Privacy is a fundamental and crucial aspect of blockchain technology, and our De
 
 The DevNet offers developers a tangible platform to imagine a new world where on-chain privacy is easy; it allows developers to test their applications and protocols. The DevNet bridges the conceptual gap between theory and practical implementation, advancing the frontier of blockchain privacy.
 
-We invite you to join us in exploring the potential of the gcEVM DevNet. Dive into its functionalities, experiment with its capabilities, and contribute to the ongoing dialogue about privacy in blockchain.\
-\
-**Together, let's push the boundaries of innovation and shape the future of decentralized privacy!**
+We invite you to join us in exploring the potential of the gcEVM DevNet. Dive into its functionalities, experiment with its capabilities, and contribute to the ongoing dialogue about privacy in blockchain.
 
-**Happy coding!**
+## COTI Devnet Info
+
+* Network name: Coti Devnet
+* RPC URL: [https://devnet.coti.io](https://devnet.coti.io)
+* Chain ID: 13068200
+* Currency symbol: COTI2

@@ -1,2 +1,0 @@
-# Coti Nodes
-

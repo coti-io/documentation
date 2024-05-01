@@ -2,6 +2,10 @@
 
 This quick start guide will help you quickly get started  with Coti. If you are already familiar with Ethereum, EVM-related technologies, smart contracts and web3, follow the steps below to get started.
 
+{% hint style="info" %}
+For questions & support [**join our Discord**](https://discord.com/invite/wfAQfbc3Df)!
+{% endhint %}
+
 If you want to get familiar with Coti and the wider privacy topic, get started with the [**Introduction**](<README (1).md>) section.
 
 1. Prerequisites
@@ -19,7 +23,7 @@ If you want to get familiar with Coti and the wider privacy topic, get started w
       3. Chain ID: 13068200
       4. Currency symbol: COTI2
       5. Block explorer URL: leave blank
-3. Request devnet funds: while the Coti faucet becomes operational, request funds via telegram to [`@gmesika`](https://t.me/gmesika) with the following message (replace `<<your_eoa_address>>`with your metamask wallet address)
+3. Request devnet funds: while the Coti faucet becomes operational, request funds via telegram to [`@gmesika`](https://t.me/gmesika) with the following message:
    * `please send devnet COTI2 to account <<your_eoa_address>>`
 4. Clone the desired SDK from GitHub.  Follow instructions for desired SDK on its readme
    1. [**Python SDK**](https://github.com/coti-io/coti-sdk-python)

@@ -2,7 +2,7 @@
 
 Once the account is created and funded with native coins, it needs to be onboarded to the system to obtain an AES key. This AES key may be used for encryption and decryption purposes within the system.
 
-* Script: The script named onboard\_user, available in both Python and JavaScript, is provided to facilitate the the onboarding process.
+* Script: The script named `onboard_user`, available in both Python and JavaScript, is provided to facilitate the the onboarding process.
 * Execution: Navigate to the main directory (Devnet) and run the appropriate command depending on the language choice:
 
 {% tabs %}
