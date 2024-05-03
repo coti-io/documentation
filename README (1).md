@@ -6,9 +6,11 @@ coverY: 0
 
 COTI is a privacy-centric Ethereum L2. It is the fastest and lightest confidentiality layer on Ethereum.&#x20;
 
-Powered by the breakthrough cryptographic protocol [Garbled Circuits ](https://en.wikipedia.org/wiki/Garbled\_circuit)and secured by Ethereum, COTI offers the most advanced solution for data protection on public blockchains. Paving the way for the next wave of Web3 innovation and adoption, COTI unlocks new use cases, including confidential transactions, machine learning, DeFi, decentralized identification, and more.
+Powered by the breakthrough cryptographic protocol [Garbled Circuits ](https://en.wikipedia.org/wiki/Garbled\_circuit)and secured by Ethereum, COTI offers the most advanced solution for data protection on public blockchains. Paving the way for the next wave of web3 innovation and adoption, COTI unlocks new use cases, including confidential transactions, machine learning, DeFi, decentralized identification, and more.
 
 COTI V2 introduces a sophisticated cryptographic framework centered around garbled circuits (GC) and multiparty computation (MPC), offering a new standard for on-chain privacy as an EVM-compatible L2.
+
+Multi-party computation performed on-chain provides superior modularity, security, privacy, and performance.&#x20;
 
 COTI enhances Ethereum ecosystem’s scalability and security by enabling confidential transactions and data management.
 

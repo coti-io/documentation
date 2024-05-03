@@ -4,7 +4,7 @@ The SDKs specified below, contain smart contracts examples that implement confid
 
 The contracts provide examples for various use cases, such as Non-Fungible Tokens (NFTs), ERC20 tokens, Auctions, and Identity management.
 
-These contracts demonstrate how to leverage the confidentiality features of the COTI V2 protocol to enhance privacy and security in decentralized applications. The contracts written in Solidity and can be compiled and deployed using popular development tools like Hardhat and Foundry (work in progress).
+These contracts demonstrate how to leverage the confidentiality features of the COTI V2 protocol to enhance privacy and security in decentralized applications. The contracts are written in Solidity and can be compiled and deployed using popular development tools like Hardhat and Foundry (work in progress).
 
 Visit the relevant GitHub repository for the desired SDK:
 

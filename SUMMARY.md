@@ -6,7 +6,7 @@
   * [Conceptual overview](readme/garbled-circuits.md)
   * [The Coti Token](readme/coti-token-contracts/README.md)
     * [Faucet](readme/coti-token-contracts/faucet.md)
-  * [Use cases](readme/use-cases.md)
+  * [Use cases and applications](readme/use-cases.md)
   * [The Developer Network (DevNet)](readme/the-developer-network-devnet.md)
   * [Coti v2 White Paper](readme/white-paper-0.1.md)
 * [📚 Core Concepts](core-concepts/README.md)

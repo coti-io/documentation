@@ -2,16 +2,21 @@
 
 This quick start guide will help you quickly get started  with Coti. If you are already familiar with Ethereum, EVM-related technologies, smart contracts and web3, follow the steps below to get started.
 
+You should already be familiar with concepts such as **Ethereum**, **EVM**, and **Smart Contracts**.
+
+If you are new to Ethereum and smart contracts, get familiar with these topics by following these introductory guides:
+
+* [Introduction to Ethereum](https://ethereum.org/en/developers/docs/intro-to-ethereum/)
+* [Introduction to Smart Contracts](https://ethereum.org/en/developers/docs/smart-contracts/)
+* [Ethereum Virtual Machine (EVM)](https://ethereum.org/en/developers/docs/evm/)
+
 {% hint style="info" %}
 For questions & support [**join our Discord**](https://discord.com/invite/wfAQfbc3Df)!
 {% endhint %}
 
 If you want to get familiar with Coti and the wider privacy topic, get started with the [**Introduction**](<README (1).md>) section.
 
-1. Prerequisites
-   1. [**Install Node**](https://nodejs.org/en/learn/getting-started/how-to-install-nodejs)
-   2. [**Install Git**](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
-   3. [**Install Metamask wallet**](https://metamask.io/download/)
+1. Download a web3 wallet. We recommend Metamask. See [**Install Metamask wallet**](https://metamask.io/download/)**.**
 2. Add the Coti network to Metamask
    1. Open Metamask
    2. Click on the network drop-down on the upper left-hand side

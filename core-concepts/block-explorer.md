@@ -1,3 +1,3 @@
 # Block Explorer
 
-TBD
+Coti block explorer coming soon.
