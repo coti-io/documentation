@@ -1,6 +1,6 @@
 # 🚀 Quickstart
 
-This quick start guide will help you quickly get started  with Coti. If you are already familiar with Ethereum, EVM-related technologies, smart contracts and web3, follow the steps below to get started.
+This quick start guide will help developers get started with deploying smart contracts onto the COTI network. If you are already familiar with Ethereum, EVM-related technologies, smart contracts and web3, follow the steps below to get started.
 
 You should already be familiar with concepts such as **Ethereum**, **EVM**, and **Smart Contracts**.
 
@@ -14,7 +14,7 @@ If you are new to Ethereum and smart contracts, get familiar with these topics b
 For questions & support [**join our Discord**](https://discord.com/invite/wfAQfbc3Df)!
 {% endhint %}
 
-If you want to get familiar with Coti and the wider privacy topic, get started with the [**Introduction**](<README (1).md>) section.
+If you want to get familiar with COTI and the wider privacy topic, get started with the [**Introduction**](<README (1).md>) section.
 
 1. Download a web3 wallet. We recommend Metamask. See [**Install Metamask wallet**](https://metamask.io/download/)**.**
 2. Add the Coti network to Metamask
