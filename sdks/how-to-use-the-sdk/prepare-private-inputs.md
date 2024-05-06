@@ -20,12 +20,6 @@ def prepare_IT(plaintext, user_aes_key, sender, contract, func_sig, signing_key)
 function prepareIT(plaintext, userAesKey, sender, contract, hashFunc, signingKey)
 ```
 {% endtab %}
-
-{% tab title="Golang" %}
-```go
-func prepareIT(plaintext uint64, userAesKey []byte, sender, contract common.Address, funcSig string, signingKey []byte) (*big.Int, []byte, error) 
-```
-{% endtab %}
 {% endtabs %}
 
 The function encrypts the plaintext using the AES key to get the ciphertext, then sign the concatenation of the addresses, hashed function signature and ciphertext using the ECDSA private key.

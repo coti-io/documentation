@@ -18,12 +18,6 @@ def sign(message, key)
 function sign(message, key) 
 ```
 {% endtab %}
-
-{% tab title="Golang" %}
-```go
-func Sign(message, key []byte) ([]byte, error)
-```
-{% endtab %}
 {% endtabs %}
 
 The function signs the message using the given ECDSA private key.

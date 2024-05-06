@@ -20,12 +20,6 @@ def generate_rsa_keypair()
 function generateRSAKeyPair() 
 ```
 {% endtab %}
-
-{% tab title="Golang" %}
-```go
-func GenerateRSAKeyPair() ([]byte, []byte, error)
-```
-{% endtab %}
 {% endtabs %}
 
 * **Encrypt**
@@ -42,12 +36,6 @@ def encrypt_rsa(public_key_bytes, plaintext)
 function encryptRSA(publicKey, plaintext)
 ```
 {% endtab %}
-
-{% tab title="Golang" %}
-```go
-func EncryptRSA(publicKeyBytes []byte, message []byte) ([]byte, error) 
-```
-{% endtab %}
 {% endtabs %}
 
 * **Decrypt**
@@ -62,12 +50,6 @@ def decrypt_rsa(private_key_bytes, ciphertext)
 {% tab title="JavaScript" %}
 ```javascript
 function decryptRSA(privateKey, ciphertext)
-```
-{% endtab %}
-
-{% tab title="Golang" %}
-```go
-func DecryptRSA(privateKeyBytes []byte, ciphertext []byte) ([]byte, error) 
 ```
 {% endtab %}
 {% endtabs %}

@@ -16,12 +16,6 @@ def decrypt(key, r, ciphertext)
 function decrypt(key, r, ciphertext)
 ```
 {% endtab %}
-
-{% tab title="Golang" %}
-```go
-func Decrypt(key, r, ct []byte) ([]byte, error)
-```
-{% endtab %}
 {% endtabs %}
 
 The function decrypts the Ciphertext (that includes two values - r and AES(r)^plaintext) using the AES key.
