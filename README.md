@@ -17,13 +17,13 @@ For questions & support [**join our Discord**](https://discord.com/invite/wfAQfb
 If you want to get familiar with COTI and the wider privacy topic, get started with the [**Introduction**](<README (1).md>) section.
 
 1. Download a web3 wallet. We recommend Metamask. See [**Install Metamask wallet**](https://metamask.io/download/)**.**
-2. Add the Coti network to Metamask
+2. Add the COTI network to Metamask
    1. Open Metamask
    2. Click on the network drop-down on the upper left-hand side
    3. Click on "**+Add network**" at the bottom of the prompt
    4. Click on "**Add a network manually**" at the bottom of the screen
-   5. Enter the following details for Coti Devnet
-      1. Network name: Coti Devnet
+   5. Enter the following details for COTI Devnet
+      1. Network name: COTI Devnet
       2. New RPC URL: [https://devnet.coti.io](https://devnet.coti.io)
       3. Chain ID: 13068200
       4. Currency symbol: COTI2
