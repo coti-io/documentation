@@ -6,8 +6,6 @@ function decrypt(gtUint8 ct) internal returns (uint8)
 
 Decrypt function returns the clear value of the given Ciphertext.
 
-
-
 ## Usage example
 
 ```solidity
@@ -19,6 +17,7 @@ function randomExample() public {
     gtUint8 smaller = MpcCore.mux(bit,a,random);
     
     uint8 res = MpcCore.decrypt(smaller);
+    returns res;
 }
 ```
 

@@ -6,7 +6,7 @@ function offBoard(gtUint8 pt) internal returns (ctUint8)
 
 The function offboards the given Garbledtext™ from the gcEVM, resulting in a Ciphertext.
 
-The offboarding process uses the **system AES key** to encrypt the value inside the Garbledtext™.
+The offboarding process uses the **network AES key** to encrypt the value inside the Garbledtext™.
 
 ## Usage example
 
