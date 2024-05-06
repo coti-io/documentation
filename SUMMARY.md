@@ -31,7 +31,6 @@
       * [🌟 Decrypt](core-concepts/transactions/special-functions/decrypt.md)
 * [🌎 Networks](networks.md)
 * [👩‍🏫 Tutorials](tutorials/README.md)
-  * [Writing a Private Smart Contract](tutorials/writing-a-private-smart-contract.md)
   * [Private ERC20 Example](tutorials/private-erc20-example/README.md)
     * [Balance Of](tutorials/private-erc20-example/balance-of.md)
     * [Transfer](tutorials/private-erc20-example/transfer.md)
