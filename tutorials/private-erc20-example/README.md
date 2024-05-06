@@ -10,10 +10,6 @@ Key Features:
 
 The contract utilizes encryption techniques to encrypt sensitive data such as token balances and allowances. Encryption is performed using both user-specific and system-wide encryption keys to safeguard transaction details.
 
-* Encrypted Balances and Allowances:
-
-Token balances and allowances are stored in encrypted form within the contract's state variables. This ensures that sensitive information remains confidential and inaccessible to unauthorized parties.
-
 * Integration with MPC Core:
 
 The contract leverages functionalities provided by an external component called MpcCore. This component implements cryptographic operations such as encryption, decryption, and signature verification.
@@ -21,7 +17,3 @@ The contract leverages functionalities provided by an external component called 
 * Token Transfer Methods:
 
 The contract provides multiple transfer methods, allowing token transfers in both encrypted and clear (unencrypted) forms. Transfers can occur between addresses with encrypted token values or clear token values.
-
-* Approval Mechanism:
-
-An approval mechanism is implemented to allow token holders to grant spending permissions (allowances) to other addresses. Approvals are also encrypted to maintain transaction privacy.
