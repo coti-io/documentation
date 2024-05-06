@@ -43,7 +43,7 @@
     * [No Public Contract Variables](tutorials/dos-and-donts/no-public-contract-variables.md)
   * [Best Practices](tutorials/best-practices/README.md)
     * [Careful Decrypting](tutorials/best-practices/careful-decrypting.md)
-    * [Avoid Secret Array indexes](tutorials/best-practices/avoid-secret-array-indexes.md)
+    * [Don't loop over an array without an index](tutorials/best-practices/avoid-secret-array-indexes.md)
     * [Check Overflow](tutorials/best-practices/check-overflow.md)
 * [💻 SDKs](sdks/README.md)
   * [How to Use the SDK](sdks/how-to-use-the-sdk/README.md)

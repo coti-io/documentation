@@ -32,14 +32,6 @@ The balance of the calling account encrypted using his AES key.
 ```python
 my_CTBalance = contract.functions.balanceOf().call({'from': account.address})
 my_balance = decrypt_value(my_CTBalance, user_key)
-
-```
-{% endtab %}
-
-{% tab title="JavaScript" %}
-```javascript
-let my_CTBalance = await sodaHelper.callContractView("private_erc20", "balanceOf")
-let my_balance = decryptValue(my_CTBalance, user_key);
 ```
 {% endtab %}
 {% endtabs %}
