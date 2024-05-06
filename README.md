@@ -28,9 +28,15 @@ If you want to get familiar with COTI and the wider privacy topic, get started w
       3. Chain ID: 13068200
       4. Currency symbol: COTI2
       5. Block explorer URL: leave blank
-3. Request devnet funds: while the Coti faucet becomes operational, request funds via telegram to [`@gmesika`](https://t.me/gmesika) with the following message:
-   * `please send devnet COTI2 to account <<your_eoa_address>>`
+3. Request devnet funds by visiting the COTI faucet
+   1. Head to [**https://faucet.coti.io/**](https://faucet.coti.io/)
+   2. Send a message to the bot in the following format: \
+      `<network>+<your_eoa_address>`\
+      \
+      For Example:\
+      `devnet 0xDA8004D6AB073B9D5549b7D5599D51FF1191C747`\
+
 4. Clone the desired SDK from GitHub.  Follow instructions for desired SDK on its readme
    1. [**Python SDK**](https://github.com/coti-io/coti-sdk-python)
-   2. [**Typescrypt SDK**](https://github.com/coti-io/coti-sdk-typescript)
-   3. [**Hardhat SDK**](https://github.com/coti-io/confidentiality-contracts?tab=readme-ov-file#hardhat-confidential-contracts---usage)
+   2. [**Typescript SDK**](https://github.com/coti-io/coti-sdk-typescript)
+   3. [**Hardhat** ](https://github.com/coti-io/confidentiality-contracts?tab=readme-ov-file#hardhat-confidential-contracts---usage)[**Development Environment**](https://github.com/coti-io/confidentiality-contracts?tab=readme-ov-file#hardhat-confidential-contracts---usage)
