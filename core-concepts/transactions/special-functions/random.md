@@ -10,12 +10,10 @@ function randBoundedBits8(uint8 numBits) internal returns (gtUint8)
 
 `RandBoundedBits8` function generates an encrypted random value that falls within the range of \[0, 2^numBits]
 
-
-
 ## Usage example
 
 ```solidity
-function randomExample() public {
+function rand8() public {
 gtUint8 a = MpcCore.setPublic8(uint8(5));
 gtUint8 random = MpcCore.rand8();
 
@@ -25,4 +23,3 @@ gtUint8 smaller = MpcCore.mux(bit,a,random);
 uint8 res = MpcCore.decrypt(smaller);
 }
 ```
-
