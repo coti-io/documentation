@@ -2,8 +2,8 @@
 
 The following diagram shows a high level workflow to encrypt data on the COTI network, it assumes the following is true:
 
-* network key has been created by initiating the network instance
-* wallet key has been created by the network for the user
+* User account has been created
+* User AES key has been created
 
 This is the overview of the process, using the [**data\_on\_chain.py**](https://github.com/coti-io/coti-sdk-python/blob/main/examples/data\_onchain/data\_on\_chain.py) example from the [Python SDK](https://github.com/coti-io/coti-sdk-python/tree/main) as a reference:
 
