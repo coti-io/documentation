@@ -17,8 +17,8 @@ We make a distinction between secret data types that are used for security ‘at
 Detailed examples of these types are presented in the following link
 {% endhint %}
 
-{% content-ref url="../../tutorials/private-erc20-example/" %}
-[private-erc20-example](../../tutorials/private-erc20-example/)
+{% content-ref url="broken-reference" %}
+[Broken link](broken-reference)
 {% endcontent-ref %}
 
 Usage\\
