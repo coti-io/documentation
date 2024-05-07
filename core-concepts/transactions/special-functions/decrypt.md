@@ -17,7 +17,6 @@ function randomExample() public {
     gtUint8 smaller = MpcCore.mux(bit,a,random);
     
     uint8 res = MpcCore.decrypt(smaller);
-    returns res;
 }
 ```
 
