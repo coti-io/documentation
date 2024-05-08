@@ -1,8 +1,8 @@
 # Accounts
 
-Accounts are the central starting point when interacting with the COTI network and using COTI Services. A COTI account is an entity, a distinct object type, stored in the ledger, that holds tokens. Accounts can hold the native COTI token (COTI), custom fungible, and custom non-fungible tokens (NFTs) created on the COTI network.
+Accounts are the central starting point when interacting with the COTI network and using COTI Services. A COTI account is an entity, a distinct object type, stored in the ledger, that holds coins. Accounts can hold the native COTI coin (COTI), custom fungible, and custom non-fungible tokens (NFTs) created on the COTI network.
 
-The COTI native token COTI is a utility token primarily used to pay for transactions and gas fees when interacting with the network.&#x20;
+The COTI native coin COTI is a utility coin primarily used to pay for transactions and gas fees when interacting with the network.&#x20;
 
 You interact with the network by submitting transactions that modify the ledger's state or submitting query requests that read data from the ledger. Most transactions and queries have a transaction fee that is charged in COTI.
 
@@ -11,7 +11,7 @@ You interact with the network by submitting transactions that modify the ledger'
 The easiest way to create an account is by running an existing test from one of the COTI SDKs. If your `.env` file does contain an account, one will be automatically created. Run one of the following tests to create an account.
 
 {% tabs %}
-{% tab title="Hardhat SDK" %}
+{% tab title="Hardhat" %}
 Runnning tests will create an account automatically. The account will be saved to the `.env` file and will need to be funded. Use the COTI [faucet.md](../../readme/coti-token-contracts/faucet.md "mention") to request devnet/testnet funds.
 
 1.  Install dependencies
@@ -30,7 +30,7 @@ Runnning tests will create an account automatically. The account will be saved t
     yarn test
     ```
 
-See the [**Hardhat SDK Readme**](https://github.com/coti-io/confidentiality-contracts?tab=readme-ov-file#hardhat-confidential-contracts---usage) for more info.
+See the [**Hardhat Readme**](https://github.com/coti-io/confidentiality-contracts?tab=readme-ov-file#hardhat-confidential-contracts---usage) for more info.
 {% endtab %}
 
 {% tab title="Python SDK" %}

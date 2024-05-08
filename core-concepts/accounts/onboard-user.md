@@ -1,6 +1,6 @@
 # Onboard Account
 
-Once the account is created and funded with native coins, it needs to be onboarded to the system to obtain an AES key. This AES key may be used for encryption and decryption purposes within the system.
+Once the account is created and funded with native coin, it needs to be onboarded to the system to obtain an AES key. This AES key may be used for encryption and decryption purposes within the system.
 
 * Script: The script named `onboard_user`, available in both Python and JavaScript, is provided to facilitate the the onboarding process.
 * Execution: Navigate to the main directory (Devnet) and run the appropriate command depending on the language choice:
@@ -12,7 +12,7 @@ python3 -m onboardUser.scripts.python.onboard_user
 ```
 {% endtab %}
 
-{% tab title="JavaScript" %}
+{% tab title="Typescript" %}
 ```bash
 node onboardUser/scripts/js/onboard_user.mjs
 ```
@@ -26,4 +26,4 @@ node onboardUser/scripts/js/onboard_user.mjs
     source .env
     ```
 
-After completing these steps, the user has a functional account with the necessary credentials and tokens, allowing them to start interacting with the system, including running smart contracts or performing other actions as needed.
+After completing these steps, the user has a functional account with the necessary credentials and coins, allowing them to start interacting with the system, including running smart contracts or performing other actions as needed.

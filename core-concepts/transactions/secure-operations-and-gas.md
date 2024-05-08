@@ -11,7 +11,7 @@ To bring a new private datum into the gvEVM the function's signature should incl
 ## List of Operations and Their Required Gas
 
 {% hint style="warning" %}
-We have set a required gas for each operation within the network. It's important to note that the following gas allocations are intended to be proportional and serve as initial estimates. The final determination of gas requirements will be made at a later stage, taking into account various factors such as network performance, usage patterns, and protocol optimizations.
+Each operation within the network requires a specific amount of gas. It's important to note that the following gas allocations are intended to be proportional and serve as initial estimates. The final determination of gas requirements will be made at a later stage, taking into account various factors such as network performance, usage patterns, and protocol optimizations.
 {% endhint %}
 
 List of operations supported on `Garbledtext`and their required gas prices

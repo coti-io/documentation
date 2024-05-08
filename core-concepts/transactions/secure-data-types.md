@@ -29,10 +29,8 @@ Usage\\
 
 ## Life-cycle of private data within the gcEVM
 
-<figure><img src="../../.gitbook/assets/datatypes-interplay.png" alt=""><figcaption><p>Transition between secret data types</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/gcevm_lifecycle.jpeg" alt=""><figcaption></figcaption></figure>
 
 {% hint style="success" %}
 It's essential to acknowledge that without a security mechanism in place, there's a risk of potential malicious exploitation of these types. To mitigate such risks, the gcEVM incorporates a security mechanism aimed at preventing any dishonest activities, such as unauthorized copying of secret data. For more information about the security mechanism please refer to the white paper.
 {% endhint %}
-
-##

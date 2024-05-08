@@ -6,7 +6,9 @@ A user wishing to invoke operations on private data should import this library i
 
 The following list pertains to a single type size, as the signatures remain consistent across all type sizes and for mixed-size calls.\\
 
-## Secret Boolean type and various operations.
+## Secret Boolean type and various operations
+
+#### (please note this is a small subset, for full reference see [MpcCore.sol](https://github.com/coti-io/confidentiality-contracts/blob/main/contracts/lib/MpcCore.sol))
 
 ```solidity
 // Boolean secret type
@@ -27,47 +29,41 @@ function not(gtBool a) internal returns (gtBool);
 
 ```
 
-## Secret type of 32 bits and various operations.
+## Secret type of 32 bits and various operations&#x20;
+
+#### (see [MpcInterface.sol](https://github.com/coti-io/confidentiality-contracts/blob/main/contracts/lib/MpcInterface.sol))
 
 ```solidity
-// 32 bit operations 
-function validateCiphertext(itUint32 memory input) internal returns (gtUint32);
-function onBoard(ctUint32 ct) internal returns (gtUint32);
-function offBoard(gtUint32 pt) internal returns (ctUint32);
-function offBoardToUser(gtUint32 pt, address addr) internal returns (ctUint32);
-function setPublic32(uint32 pt) internal returns (gtUint32);
-function rand32() internal returns (gtUint32);
-function randBoundedBits32(uint8 numBits) internal returns (gtUint32);
-function add(gtUint32 a, gtUint32 b) internal returns (gtUint32);
-function sub(gtUint32 a, gtUint32 b) internal returns (gtUint32);
-function mul(gtUint32 a, gtUint32 b) internal returns (gtUint64);
-function div(gtUint32 a, gtUint32 b) internal returns (gtUint32);
-function rem(gtUint32 a, gtUint32 b) internal returns (gtUint32);
-function and(gtUint32 a, gtUint32 b) internal returns (gtUint32);
-function or(gtUint32 a, gtUint32 b) internal returns (gtUint32);
-function xor(gtUint32 a, gtUint32 b) internal returns (gtUint32);
-function shl(gtUint32 a, gtUint32 b) internal returns (gtUint32);
-function shr(gtUint32 a, gtUint32 b) internal returns (gtUint32);
-function eq(gtUint32 a, gtUint32 b) internal returns (gtBool);
-function ne(gtUint32 a, gtUint32 b) internal returns (gtBool);
-function ge(gtUint32 a, gtUint32 b) internal returns (gtBool);
-function gt(gtUint32 a, gtUint32 b) internal returns (gtBool);
-function le(gtUint32 a, gtUint32 b) internal returns (gtBool);
-function lt(gtUint32 a, gtUint32 b) internal returns (gtBool);
-function min(gtUint32 a, gtUint32 b) internal returns (gtUint32);
-function max(gtUint32 a, gtUint32 b) internal returns (gtUint32);
-function decrypt(gtUint32 ct) internal returns (uint32);
-function mux(gtBool bit, gtUint32 a, gtUint32 b) internal returns (gtUint32);
-function transfer(gtUint32 a, gtUint32 b, gtUint32 amount) internal returns (gtUint32, gtUint32, gtBool);
-
-// 32 bit add example with scalars
-function add(gtUint32 a, uint32 b) internal returns (gtUint32);
-function add(uint32 a, gtUint32 b) internal returns (gtUint32);
-
-// 32 bit add example with different sized types
-function add(gtUint8 a, gtUint32 b) internal returns (gtUint32);
-function add(gtUint32 a, gtUint8 b) internal returns (gtUint32);
-function add(gtUint16 a, gtUint32 b) internal returns (gtUint32);
-function add(gtUint32 a, gtUint16 b) internal returns (gtUint32);
+function OnBoard(bytes1 metaData, uint256 ct) external returns (uint256 result);
+function OffBoard(bytes1 metaData, uint256 ct) external returns (uint256 result);
+function OffBoardToUser(bytes1 metaData, uint256 ct, bytes calldata addr) external returns (uint256 result);
+function SetPublic(bytes1 metaData, uint256 ct) external returns (uint256 result);
+function Rand(bytes1 metaData) external returns (uint256 result);
+function RandBoundedBits(bytes1 metaData, uint8 numBits) external returns (uint256 result);
+function Add(bytes3 metaData, uint256 lhs, uint256 rhs) external returns (uint256 result);
+function Sub(bytes3 metaData, uint256 lhs, uint256 rhs) external returns (uint256 result);
+function Mul(bytes3 metaData, uint256 lhs, uint256 rhs) external returns (uint256 result);
+function Div(bytes3 metaData, uint256 lhs, uint256 rhs) external returns (uint256 result);
+function Rem(bytes3 metaData, uint256 lhs, uint256 rhs) external returns (uint256 result);
+function And(bytes3 metaData, uint256 lhs, uint256 rhs) external returns (uint256 result);
+function Or(bytes3 metaData, uint256 lhs, uint256 rhs) external returns (uint256 result);
+function Xor(bytes3 metaData, uint256 lhs, uint256 rhs) external returns (uint256 result);
+function Shl(bytes3 metaData, uint256 lhs, uint256 rhs) external returns (uint256 result);
+function Shr(bytes3 metaData, uint256 lhs, uint256 rhs) external returns (uint256 result);
+function Eq(bytes3 metaData, uint256 lhs, uint256 rhs) external returns (uint256 result);
+function Ne(bytes3 metaData, uint256 lhs, uint256 rhs) external returns (uint256 result);
+function Ge(bytes3 metaData, uint256 lhs, uint256 rhs) external returns (uint256 result);
+function Gt(bytes3 metaData, uint256 lhs, uint256 rhs) external returns (uint256 result);
+function Le(bytes3 metaData, uint256 lhs, uint256 rhs) external returns (uint256 result);
+function Lt(bytes3 metaData, uint256 lhs, uint256 rhs) external returns (uint256 result);
+function Min(bytes3 metaData, uint256 lhs, uint256 rhs) external returns (uint256 result);
+function Max(bytes3 metaData, uint256 lhs, uint256 rhs) external returns (uint256 result);
+function Decrypt(bytes1 metaData, uint256 a) external returns (uint256 result);
+function Mux(bytes3 metaData, uint256 bit, uint256 a,uint256 b) external returns (uint256 result);
+function Not(bytes1 metaData, uint256 a) external returns (uint256 result);
+function Transfer(bytes4 metaData, uint256 a, uint256 b, uint256 amount) external returns (uint256 new_a, uint256 new_b, uint256 res);
+function TransferWithAllowance(bytes4 metaData, uint256 a, uint256 b, uint256 amount, uint256 allowance) external returns (uint256 new_a, uint256 new_b, uint256 res, uint256 new_allowance);
+function ValidateCiphertext(bytes1 metaData, uint256 ciphertext, bytes calldata signature) external returns (uint256 result);
+function GetUserKey(bytes calldata signedEK) external view returns (bytes memory encryptedKey);
 
 ```

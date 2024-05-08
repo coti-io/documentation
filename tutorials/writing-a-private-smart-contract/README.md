@@ -1,6 +1,6 @@
 # Writing a Private Smart Contract
 
-To begin utilizing the privacy features of our blockchain platform effectively, follow these instructions as a contract writer:
+To start using the privacy features of the COTI platform effectively, keep the following in mind when writing contracts:
 
 1. **Understand Privacy Features**: Familiarize yourself with the privacy features offered by our blockchain platform. Explore how secret data types operate to ensure confidentiality.
 2. **Define Contract Requirements**: Clearly outline the requirements and functionality of your smart contract. Identify the specific use case and consider how privacy features can enhance security and confidentiality.
