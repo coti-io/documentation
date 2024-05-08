@@ -2,10 +2,9 @@
 
 * [🚀 Quickstart](README.md)
 * [ℹ️ Introduction](<README (1).md>)
-  * [Privacy in Blockchains](readme/privacy-in-blockchains.md)
+  * [Confidentiality in Blockchains](readme/privacy-in-blockchains.md)
   * [Conceptual overview](readme/garbled-circuits.md)
-  * [The COTI Token](readme/coti-token-contracts/README.md)
-    * [Faucet](readme/coti-token-contracts/faucet.md)
+  * [Faucet](readme-1/faucet.md)
   * [Use cases and applications](readme/use-cases.md)
   * [The Developer Network (devnet)](readme/the-developer-network-devnet.md)
   * [COTI v2 White Paper](readme/white-paper-0.1.md)

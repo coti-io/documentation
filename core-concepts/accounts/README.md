@@ -12,7 +12,7 @@ The easiest way to create an account is by running an existing test from one of 
 
 {% tabs %}
 {% tab title="Hardhat" %}
-Runnning tests will create an account automatically. The account will be saved to the `.env` file and will need to be funded. Use the COTI [faucet.md](../../readme/coti-token-contracts/faucet.md "mention") to request devnet/testnet funds.
+Runnning tests will create an account automatically. The account will be saved to the `.env` file and will need to be funded. Use the COTI [faucet.md](../../readme-1/faucet.md "mention") to request devnet/testnet funds.
 
 1.  Install dependencies
 
@@ -42,7 +42,7 @@ See the [**Python SDK Readme**](https://github.com/coti-io/coti-sdk-python) for 
 {% endtab %}
 
 {% tab title="Typescrypt SDK" %}
-Runnning tests will create an account automatically. The account will be saved to the `.env` file and will need to be funded. Use the COTI [faucet.md](../../readme/coti-token-contracts/faucet.md "mention") to request devnet/testnet funds.
+Runnning tests will create an account automatically. The account will be saved to the `.env` file and will need to be funded. Use the COTI [faucet.md](../../readme-1/faucet.md "mention") to request devnet/testnet funds.
 
 1.  Install dependencies
 
