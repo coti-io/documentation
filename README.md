@@ -168,6 +168,105 @@ This is a mandatory script for any operation executed in a contract that require
 
 ## Deploy Data On-Chain
 
-The following process will help you deploy the [**`DataOnChain.sol`**](https://github.com/coti-io/confidentiality-contracts/blob/main/contracts/examples/DataOnChain.sol) example from the [**confidentiality-contracts**](https://github.com/coti-io/confidentiality-contracts/) repo, which is imported as a git submodule in the Python SDK. This contract can be used in order to browse and get a feel for the COTI network. This contract should be run at the root of `confidentiality-contracts` directory. If using an editor, set it as your working directory.
+The following process will help you deploy the [**`DataOnChain.sol`**](https://github.com/coti-io/confidentiality-contracts/blob/main/contracts/examples/DataOnChain.sol) example from the [**confidentiality-contracts**](https://github.com/coti-io/confidentiality-contracts/) repo, which is imported as a git submodule in the Python SDK. This contract can be used in order to browse and get a feel for the COTI network. This contract should be run at the root of `confidentiality-contracts` directory. If using an editor, set it as your working directory.\
+\
+We will use Hardhat to showcase how to compile and deploy the contract to the COTI network.
 
-1.
+{% hint style="info" %}
+If not yet installed, follow the directions to install the **Hardhat development environment**.
+{% endhint %}
+
+1.  Navigate to the `examples` directory in the `confidentiality-contracts` directory inside the `coti-sdk-python` project.
+
+    ```bash
+    cd confidentiality-contracts/contracts/examples
+    ```
+
+
+2.  Install Hardhat locally
+
+    ```bash
+    npm install --save-dev hardhat
+    ```
+
+
+3.  Add a Hardhat task to compile the contract: to compile the specific contract we'll need to make use of a custom task, as Hardhat does not support direct modification of the `solidity` configuration for compiling specific contracts. Update the Hardhat config file`hardhat.config.ts` to add the task as follows:\
+
+
+    ```typescript
+    import { HardhatUserConfig } from "hardhat/config"
+    import { task } from "hardhat/config";
+    import "@nomicfoundation/hardhat-toolbox"
+    import dotenv from "dotenv"
+    dotenv.config()
+
+    // Define a new task called "compileDataOnChain"
+    task("compileDataOnChain", "Compiles only DataOnChain.sol", async (_, hre) => {
+      await hre.run("compile", {
+        paths: ["contracts/DataOnChain.sol"]
+      });
+    });
+
+    const config: HardhatUserConfig = {
+      defaultNetwork: "devnet",
+      solidity: "0.8.24",
+      networks: {
+        // hardhat: {},
+        devnet: {
+          url: "https://devnet.coti.io",
+          chainId: 13068200,
+        },
+      },
+      paths:{
+        tests:'test-hardhat',
+      }
+    }
+
+    export default config
+    ```
+
+
+4.  Compile the `DataOnChain.sol` contract
+
+    ```bash
+    npx hardhat compileDataOnChain
+    ```
+
+
+5.  Deploy the `DataOnChain.sol` contract: in order to deploy the contract, we'll create a simple deployment script. The script should be placed under the `scripts` folder of your project. In our particular case, we'll create under the `confidentiality-contracts` directory. If you don't have a `scripts` directory, you can create one. Then create a file inside the directory, we'll call it **`deploy_dataonchain.js`**. The contents of the file as follows:\
+
+
+    ```bash
+    // Import ethers from Hardhat package
+    const { ethers } = require("hardhat");
+
+    async function main() {
+      // Get the Contract Factory
+      const doc = await ethers.getContractFactory("doc");
+
+      // Deploy the contract
+      const doc = await doc.deploy(/* constructor arguments */);
+
+      // Wait for the contract to be deployed
+      await doc.deployed();
+
+      console.log("DataOnChain deployed to:", doc.address);
+    }
+
+    main().catch((error) => {
+      console.error(error);
+      process.exit(1);
+    });
+    ```
+
+    \
+    Save the file.\
+
+6.  Change directory to `confidentiality-contracts` and run the deployment script:
+
+    ```bash
+    npx hardhat run scripts/deploy_dataonchain.js --network devnet
+    ```
+
+    \
+    If you receive an `insufficient funds` error, ensure your account has sufficient funds. You can head to the COTI [faucet.md](readme-1/faucet.md "mention") to request funds.
