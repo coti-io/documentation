@@ -122,10 +122,6 @@ Ensure your environment meets all the pre-requisites. Visit the [pre-requisites 
 
 The following process will help you deploy the [**`onboard_account.py`**](https://github.com/coti-io/coti-sdk-python/blob/main/examples/onboard/onboard\_account.py) example from the [COTI Python SDK](https://github.com/coti-io/coti-sdk-python/tree/main). This script onboards an EOA into the network. It will also:
 
-{% hint style="info" %}
-asdf
-{% endhint %}
-
 * Create an AES key unique for the user
 * Use the AES key to encrypt all data sent back to the wallet
 
@@ -168,13 +164,13 @@ This is a mandatory script for any operation executed in a contract that require
 
 ## Deploy Data On-Chain
 
-The following process will help you deploy the [**`DataOnChain.sol`**](https://github.com/coti-io/confidentiality-contracts/blob/main/contracts/examples/DataOnChain.sol) example from the [**confidentiality-contracts**](https://github.com/coti-io/confidentiality-contracts/) repo, which is imported as a git submodule in the Python SDK. This contract can be used in order to browse and get a feel for the COTI network. This contract should be run at the root of `confidentiality-contracts` directory. If using an editor, set it as your working directory.\
+The following process will help you deploy the [**`DataOnChain.sol`**](https://github.com/coti-io/confidentiality-contracts/blob/main/contracts/examples/DataOnChain.sol) example from the [**confidentiality-contracts**](https://github.com/coti-io/confidentiality-contracts/) repo, which is imported as a git submodule in the Python SDK.&#x20;
+
+This contract can be used in order to browse and get a feel for the COTI network. The contract allows for the secure handling of encrypted data, enabling storage, transformation, and arithmetic operations on encrypted values using the `MpcCore` library. It supports operations where values are encrypted using both network and user keys, ensuring data privacy and security on-chain.
+
+This contract should be run at the root of `confidentiality-contracts` directory. If using an editor, set it as your working directory.\
 \
 We will use Hardhat to showcase how to compile and deploy the contract to the COTI network.
-
-{% hint style="info" %}
-If not yet installed, follow the directions to install the **Hardhat development environment**.
-{% endhint %}
 
 1.  Navigate to the `examples` directory in the `confidentiality-contracts` directory inside the `coti-sdk-python` project.
 
@@ -183,10 +179,10 @@ If not yet installed, follow the directions to install the **Hardhat development
     ```
 
 
-2.  Install Hardhat locally
+2.  Install Hardhat and dependencies locally
 
     ```bash
-    npm install --save-dev hardhat
+    npm install --save-dev hardhat @nomicfoundation/hardhat-toolbox ethers dotenv
     ```
 
 
@@ -236,21 +232,32 @@ If not yet installed, follow the directions to install the **Hardhat development
 5.  Deploy the `DataOnChain.sol` contract: in order to deploy the contract, we'll create a simple deployment script. The script should be placed under the `scripts` folder of your project. In our particular case, we'll create under the `confidentiality-contracts` directory. If you don't have a `scripts` directory, you can create one. Then create a file inside the directory, we'll call it **`deploy_dataonchain.js`**. The contents of the file as follows:\
 
 
-    ```bash
-    // Import ethers from Hardhat package
+    ```javascript
     const { ethers } = require("hardhat");
 
     async function main() {
+      // Log the account being used to deploy
+      const [deployer] = await ethers.getSigners();
+      console.log("Deploying contracts with the account:", deployer.address);
+
       // Get the Contract Factory
-      const doc = await ethers.getContractFactory("doc");
+      const DataOnChain = await ethers.getContractFactory("DataOnChain");
 
-      // Deploy the contract
-      const doc = await doc.deploy(/* constructor arguments */);
+      // Deploy the contract and get the deployment transaction
+      const deployTx = await DataOnChain.getDeployTransaction(/* constructor arguments, if any */);
+      console.log("Deployment transaction:", deployTx);
 
-      // Wait for the contract to be deployed
-      await doc.deployed();
+      // Send the deployment transaction
+      const sentTx = await deployer.sendTransaction(deployTx);
+      console.log("Sent transaction:", sentTx);
 
-      console.log("DataOnChain deployed to:", doc.address);
+      // Wait for the contract deployment transaction to be mined
+      const receipt = await sentTx.wait();
+      console.log("Transaction receipt:", receipt);
+
+      // Log the contract address
+      const contractAddress = receipt.contractAddress;
+      console.log("DataOnChain deployed to:", contractAddress);
     }
 
     main().catch((error) => {
@@ -265,8 +272,18 @@ If not yet installed, follow the directions to install the **Hardhat development
 6.  Change directory to `confidentiality-contracts` and run the deployment script:
 
     ```bash
-    npx hardhat run scripts/deploy_dataonchain.js --network devnet
+    node scripts/deploy_dataonchain.js
+    ```
+
+
+7.  The deployment will include the transaction data as well as the address the contract was deployed to:
+
+    ```bash
+    DataOnChain deployed to: 0x9cDFC135967cd16E2b6A1cE60f1748013096B97e
     ```
 
     \
-    If you receive an `insufficient funds` error, ensure your account has sufficient funds. You can head to the COTI [faucet.md](readme-1/faucet.md "mention") to request funds.
+    You can now view the contract on devnet explorer using the following convention:\
+    `https://explorer-devnet.coti.io/address/<contract deployment address>`\
+    \
+    In our case: [**https://explorer-devnet.coti.io/address/0x9cdfc135967cd16e2b6a1ce60f1748013096b97e**](https://explorer-devnet.coti.io/address/0x9cdfc135967cd16e2b6a1ce60f1748013096b97e?tab=transactions)
