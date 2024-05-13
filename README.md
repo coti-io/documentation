@@ -16,6 +16,13 @@ For questions & support [**join our Discord**](https://discord.com/invite/wfAQfb
 
 If you want to get familiar with COTI and the wider privacy topic, get started with the [**Introduction**](<README (1).md>) section.
 
+## Network Info
+
+You can view the COTI network info on the [networks.md](networks.md "mention") page. To easily add the network to an EOA wallet you can use one the following sites:
+
+* [https://chainlist.org](https://chainlist.org)
+* [https://chainlist.wtf](https://chainlist.wtf)
+
 ## Native Transfer
 
 The following process will help you deploy the [**`native_transfer.py`**](https://github.com/coti-io/coti-sdk-python/blob/main/examples/basics/native\_transfer.py) example from the [COTI Python SDK](https://github.com/coti-io/coti-sdk-python/tree/main). This script will transfer native funds from your wallet account to a random wallet. It will also:
