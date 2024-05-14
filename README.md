@@ -4,7 +4,7 @@ This quick start guide will help developers get started with deploying smart con
 
 You should already be familiar with concepts such as **Ethereum**, **EVM**, and **Smart Contracts**.
 
-If you are new to Ethereum and smart contracts, get familiar with these topics by following these introductory guides:
+If you are new to Ethereum and smart contracts, the following introductory guides are a great place to get started:
 
 * [Introduction to Ethereum](https://ethereum.org/en/developers/docs/intro-to-ethereum/)
 * [Introduction to Smart Contracts](https://ethereum.org/en/developers/docs/smart-contracts/)
@@ -14,11 +14,11 @@ If you are new to Ethereum and smart contracts, get familiar with these topics b
 For questions & support [**join our Discord**](https://discord.com/invite/wfAQfbc3Df)!
 {% endhint %}
 
-If you want to get familiar with COTI and the wider privacy topic, get started with the [**Introduction**](<README (1).md>) section.
+If you'd like to learn more about [COTI's evolution from V1 to V2](https://medium.com/cotinetwork/how-coti-is-gearing-up-for-2024-and-beyond-e0d465794767#6e09) or understand some of the core concepts of blockchain privacy, get started with the [**Introduction**](<README (1).md>) section.
 
 ## Network Info
 
-You can view the COTI network info on the [networks.md](networks.md "mention") page. To easily add the network to an EOA wallet you can use one the following sites:
+You can view the COTI network info on the [networks.md](networks.md "mention") page. To add the network to an EOA wallet you can use one the following sites:
 
 * [https://chainlist.org](https://chainlist.org)
 * [https://chainlist.wtf](https://chainlist.wtf)
@@ -32,7 +32,7 @@ The following process will help you deploy the [**`native_transfer.py`**](https:
 * Validate minimum balance
 
 {% hint style="info" %}
-Ensure your environment meets all the pre-requisites. Visit the [pre-requisites section of the readme](https://github.com/coti-io/coti-sdk-python/tree/main?tab=readme-ov-file#python-sdk-coti-sdk-python---usage). Alternatively, use an editor like [PyCharm](https://www.jetbrains.com/pycharm/download/), which will take care of the pre-requisites for you.
+Ensure your environment meets all the pre-requisites. Visit the [pre-requisites section of the readme](https://github.com/coti-io/coti-sdk-python/tree/main?tab=readme-ov-file#python-sdk-coti-sdk-python---usage). Alternatively, use an editor like [PyCharm](https://www.jetbrains.com/pycharm/download/) that can take care of the pre-requisites for you.
 {% endhint %}
 
 1.  Clone the Python SDK along with its submodules into your desired location
@@ -90,7 +90,7 @@ Ensure your environment meets all the pre-requisites. Visit the [pre-requisites 
     ```
 
     \
-    It is normal to receive the exception `Not enough balance!` on first run. This will be resolved once the account is funded.\
+    It is normal to receive the exception `Not enough balance!` on the first run. This will be resolved once the account is funded.\
 
 5. Head to the faucet at [**https://faucet.coti.io**](https://faucet.coti.io) to get devnet funds. Send the following message to the bot using your newly created `account address`:\
    \
@@ -123,7 +123,7 @@ Ensure your environment meets all the pre-requisites. Visit the [pre-requisites 
     ```
 
     \
-    Now that your account is created and funded, we can now onboard the account to get our new network key.
+    Now that your account is created and funded, you can now onboard the account to get your new network key.
 
 ## On-board Account
 
