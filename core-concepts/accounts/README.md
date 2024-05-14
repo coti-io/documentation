@@ -8,7 +8,7 @@ You interact with the network by submitting transactions that modify the ledger'
 
 ## Creating an account
 
-The easiest way to create an account is by running an existing test from one of the COTI SDKs. If your `.env` file does contain an account, one will be automatically created. Run one of the following tests to create an account.
+The easiest way to create an account is by running an existing test from one of the COTI SDKs. If your `.env` file doesn't contain an account, one will be automatically created. Run one of the following tests to create an account.
 
 {% tabs %}
 {% tab title="Hardhat" %}

@@ -9,7 +9,7 @@ The incorporation of advanced privacy features expands the possibilities for app
 5. Private transfers within a private blockchain ensure the confidentiality of balances and transaction amounts, delivering heightened privacy and security. See [**ConfidentialIdentityRegistry.sol**](https://github.com/coti-io/confidentiality-contracts/blob/main/contracts/examples/ConfidentialIdentityRegistry.sol).
 
 {% hint style="info" %}
-See more use cases and examples on the [**confidentiality-contracts repo on Github**](https://github.com/coti-io/confidentiality-contracts/tree/main/contracts/examples).
+See more use cases and examples on the [**confidentiality-contracts repo on GitHub**](https://github.com/coti-io/confidentiality-contracts/tree/main/contracts/examples).
 {% endhint %}
 
 These innovative use cases highlight the transformative potential of private blockchains, revolutionizing various industries with unparalleled levels of confidentiality, security, and transparency.

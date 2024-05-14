@@ -1,13 +1,5 @@
-# How to Use the SDK
+# SDK Functions
 
-The COTI SDKs provide access to various example smart contracts that implement functionality of the gcEVM. Click on the desired SDK to view its information:
+The COTI SDKs provide several functions that allow for key management, signing, and managing inputs & outputs. These are currently available for the Python and Typescript SDKs, with more coming soon.
 
-* [**Python SDK**](https://github.com/coti-io/coti-sdk-python)
-* [**Typescript SDK**](https://github.com/coti-io/coti-sdk-typescript)
-* [**Hardhat** ](https://github.com/coti-io/confidentiality-contracts?tab=readme-ov-file#hardhat-confidential-contracts---usage)[**Development Environment**](https://github.com/coti-io/confidentiality-contracts?tab=readme-ov-file#hardhat-confidential-contracts---usage)
-
-
-
-~~The SDKs also support ECDSA signature schemes, ensuring the integrity and authenticity of transactions. Additionally, we provide seamless integration with the COTI network interface, offering convenient methods for signing, verifying, and preparing input text, along with generating function signatures.~~&#x20;
-
-~~Whether you're encrypting sensitive data, verifying signatures, or interacting with the COTI network interface, these SDKs provide the necessary tools to build robust and secure applications across multiple programming languages. The following examples demonstrate how to use the SDK.~~
+If you would like to see a particular feature built for an SDK or spot an issue, please drop us a note via a [GitHub issue](https://github.com/coti-io/confidentiality-contracts/issues).

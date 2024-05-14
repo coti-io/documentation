@@ -41,7 +41,7 @@
     * [❓ Random](transactions/special-functions/random.md)
     * [🌟 Decrypt](transactions/special-functions/decrypt.md)
 * [💻 SDKs](sdks/README.md)
-  * [How to Use the SDK](sdks/how-to-use-the-sdk/README.md)
+  * [SDK Functions](sdks/how-to-use-the-sdk/README.md)
     * [RSA encryption scheme](sdks/how-to-use-the-sdk/rsa-encryption-scheme.md)
     * [ECDSA Signature](sdks/how-to-use-the-sdk/ecdsa-signature.md)
     * [Prepare Private Inputs](sdks/how-to-use-the-sdk/prepare-private-inputs.md)
