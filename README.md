@@ -291,6 +291,8 @@ We will use Hardhat to showcase how to compile and deploy the contract to the CO
 
     \
     You can now view the contract on devnet explorer using the following convention:\
-    `https://explorer-devnet.coti.io/address/<contract deployment address>`\
+    `https://explorer-devnet.coti.io/address/<contract deployment address>` \
     \
-    In our case: [**https://explorer-devnet.coti.io/address/0x9cdfc135967cd16e2b6a1ce60f1748013096b97e**](https://explorer-devnet.coti.io/address/0x9cdfc135967cd16e2b6a1ce60f1748013096b97e?tab=transactions)
+    In our case:\
+    [**https://explorer-devnet.coti.io/address/0x9cdfc135967cd16e2b6a1ce60f1748013096b97e**](https://explorer-devnet.coti.io/address/0x9cdfc135967cd16e2b6a1ce60f1748013096b97e?tab=transactions)
+
