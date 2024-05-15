@@ -15,7 +15,7 @@ def prepare_IT(plaintext, user_aes_key, sender, contract, func_sig, signing_key)
 ```
 {% endtab %}
 
-{% tab title="JavaScript" %}
+{% tab title="Typescript" %}
 ```javascript
 function prepareIT(plaintext, userAesKey, sender, contract, hashFunc, signingKey)
 ```
@@ -60,7 +60,7 @@ function = contract.functions.transfer(alice_address.address, ct, signature, Fal
 ```
 {% endtab %}
 
-{% tab title="JavaScript" %}
+{% tab title="Typescript" %}
 ```javascript
 // In order to generate the input text, we need to use some data of the function. 
 // For example, the address of the user, the address of the contract and also the function signature.

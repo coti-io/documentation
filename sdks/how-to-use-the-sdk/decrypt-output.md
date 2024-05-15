@@ -11,7 +11,7 @@ def decrypt(key, r, ciphertext)
 ```
 {% endtab %}
 
-{% tab title="JavaScript" %}
+{% tab title="Typescript" %}
 ```javascript
 function decrypt(key, r, ciphertext)
 ```
@@ -60,7 +60,7 @@ def decrypt_value(my_CTBalance, user_key):
 ```
 {% endtab %}
 
-{% tab title="JavaScript" %}
+{% tab title="Typescript" %}
 ```javascript
 function decryptValue(myCTBalance, userKey) {
     // Convert CT to bytes

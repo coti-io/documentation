@@ -15,7 +15,7 @@ def generate_rsa_keypair()
 ```
 {% endtab %}
 
-{% tab title="JavaScript" %}
+{% tab title="Typescript" %}
 ```javascript
 function generateRSAKeyPair() 
 ```
@@ -31,7 +31,7 @@ def encrypt_rsa(public_key_bytes, plaintext)
 ```
 {% endtab %}
 
-{% tab title="JavaScript" %}
+{% tab title="Typescript" %}
 ```javascript
 function encryptRSA(publicKey, plaintext)
 ```
@@ -47,7 +47,7 @@ def decrypt_rsa(private_key_bytes, ciphertext)
 ```
 {% endtab %}
 
-{% tab title="JavaScript" %}
+{% tab title="Typescript" %}
 ```javascript
 function decryptRSA(privateKey, ciphertext)
 ```
@@ -102,7 +102,7 @@ decrypted_aes_key = decrypt_rsa(private_key, encryptedKey)
 ```
 {% endtab %}
 
-{% tab title="JavaScript" %}
+{% tab title="Typescript" %}
 ```javascript
 // Generate RSA keys and sign the public key using ECDSA private key
 const { publicKey, privateKey } = generateRSAKeyPair();

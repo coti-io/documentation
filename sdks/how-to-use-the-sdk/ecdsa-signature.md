@@ -13,7 +13,7 @@ def sign(message, key)
 ```
 {% endtab %}
 
-{% tab title="JavaScript" %}
+{% tab title="Typescript" %}
 ```javascript
 function sign(message, key) 
 ```
@@ -57,7 +57,7 @@ decrypted_aes_key = decrypt_rsa(private_key, encryptedKey)
 ```
 {% endtab %}
 
-{% tab title="JavaScript" %}
+{% tab title="Typescript" %}
 ```javascript
 // Generate RSA keys and sign the public key using ECDSA private key
 const { publicKey, privateKey } = generateRSAKeyPair();
