@@ -1,4 +1,4 @@
-# 🚀 Quickstart
+# 🚀 COTI v2 Quickstart
 
 This quick start guide will help developers get started with deploying smart contracts onto the COTI network. If you are already familiar with Ethereum, EVM-related technologies, smart contracts and web3, follow the steps below to get started.
 
@@ -14,28 +14,28 @@ If you are new to Ethereum and smart contracts, the following introductory guide
 For questions & support [**join our Discord**](https://discord.com/invite/wfAQfbc3Df)!
 {% endhint %}
 
-If you'd like to learn more about V1 to V2 transformation, read [COTI's evolution from V1 to V2](https://medium.com/cotinetwork/how-coti-is-gearing-up-for-2024-and-beyond-e0d465794767#6e09); To get familiar with some of the core concepts of blockchain privacy, get started with the [**Introduction**](<README (1).md>) section.
+If you'd like to learn more about COTI's progression, read [**COTI's evolution from V1 to V2**](https://medium.com/cotinetwork/how-coti-is-gearing-up-for-2024-and-beyond-e0d465794767#6e09)**.** To get familiar with some of the core concepts of blockchain privacy, get started with the [README (1).md](<README (1).md> "mention")section.
 
 ## Network Info
 
-You can view COTI network information on the [networks.md](networks.md "mention") page, Also to add it to the networks of your wallet application you can use one the following sites:
+You can view COTI network information on the [networks.md](networks.md "mention") page. To add it to the networks of your wallet application you can use one the following sites:
 
 * [https://chainlist.org](https://chainlist.org)
 * [https://chainlist.wtf](https://chainlist.wtf)
-* [https://explorer-devnet.coti.io](https://explorer-devnet.coti.io) (Add to Metamask option)
+* [https://explorer-devnet.coti.io](https://explorer-devnet.coti.io)
 
 ## Native Transfer
 
 The following process will help you deploy the [**`native_transfer.py`**](https://github.com/coti-io/coti-sdk-python/blob/main/examples/basics/native\_transfer.py) example from the [COTI Python SDK](https://github.com/coti-io/coti-sdk-python/tree/main). This script will transfer native funds from your wallet account to a random wallet. It will also:
 
-* Create a EOA (External Owner Account)
+* Create a EOA (Externally Owned Account)
 * Validate minimum balance
 
 {% hint style="info" %}
-Ensure your environment meets all the pre-requisites. Visit the [pre-requisites section of the readme](https://github.com/coti-io/coti-sdk-python/tree/main?tab=readme-ov-file#python-sdk-coti-sdk-python---usage). Alternatively, use an editor like [PyCharm](https://www.jetbrains.com/pycharm/download/) that can take care of the pre-requisites for you.
+Ensure your environment meets all the pre-requisites. Visit the [pre-requisites section of the readme](https://github.com/coti-io/coti-sdk-python/tree/main?tab=readme-ov-file#python-sdk-coti-sdk-python---usage). Alternatively, use an editor like [PyCharm](https://www.jetbrains.com/pycharm/download/) to take care of the pre-requisites for you.
 {% endhint %}
 
-1.  Clone the Python SDK along with its submodules into your desired location
+1.  Clone the Python examples repo along with its submodules into your desired location
 
     ```bash
     git clone --recurse-submodules git@github.com:coti-io/coti-sdk-python-examples.git
@@ -61,6 +61,8 @@ Ensure your environment meets all the pre-requisites. Visit the [pre-requisites 
     ```bash
     export PYTHONPATH=$PWD
     ```
+
+
 5.  Run the `native_transfer.py` script
 
     ```bash
@@ -105,7 +107,7 @@ Ensure your environment meets all the pre-requisites. Visit the [pre-requisites 
    The bot will reply with the message:\
    \
    `<username> faucet transferred 5 COTIv2 (devnet)` \
-
+   &#x20;
 7.  Run the `native_transfer.py` script once more
 
     ```bash
