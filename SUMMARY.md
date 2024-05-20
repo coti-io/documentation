@@ -1,6 +1,6 @@
 # Table of contents
 
-* [🚀 COTI v2 Quickstart](README.md)
+* [🚀 COTI V2 Quickstart](README.md)
 * [ℹ️ Introduction](<README (1).md>)
   * [Confidentiality in Blockchains](readme/privacy-in-blockchains.md)
   * [Conceptual overview](readme/garbled-circuits.md)
