@@ -132,12 +132,12 @@ Ensure your environment meets all the pre-requisites. Visit the [pre-requisites 
 
 ## On-board Account
 
-The following process will help you deploy the [**`onboard_account.py`**](https://github.com/coti-io/coti-sdk-python/blob/main/examples/onboard/onboard\_account.py) example from the [COTI Python SDK Examples](https://github.com/coti-io/coti-sdk-python-examples). This script onboards an EOA into the network. It will also:
+The following process will help you deploy the [**`onboard_account.py`**](https://github.com/coti-io/coti-sdk-python/blob/main/examples/onboard/onboard\_account.py) example from the [**COTI Python SDK Examples**](https://github.com/coti-io/coti-sdk-python-examples) repo. This script onboards an EOA into the network. It will also:
 
-* Trigger the network to create an AES key unique for the user
-* Encrypt the unique user AES key using Public key so that its value can be viewed only by the EOA owner
+* Trigger the network to create a unique AES key for the user
+* Encrypt the unique user-specific AES key using the Public key so that its value can be viewed only by the EOA owner.
 
-This is a mandatory script for any operation executed in any contract that requires encrypt/decrypt that are part of the new EVM precompiles actions.
+This is a mandatory script for any operation executed in any contract requiring encrypt/decrypt operations which are part of the new EVM precompiles actions.
 
 1.  Run the `onboard_account.py` script
 
@@ -162,7 +162,7 @@ This is a mandatory script for any operation executed in any contract that requi
 
 
     {% hint style="info" %}
-    This encryption key is **sensitive.** Ensure it is not uploaded to public places and keep it safe. This key is prodiced per EOA wallet, meaning a unique wallet/EOA will have a unique encryption key.
+    This encryption key is **sensitive.** Ensure it is not uploaded to public places and keep it safe. This key is produced per EOA wallet, meaning a unique wallet/EOA combination will have a unique encryption key.
     {% endhint %}
 
     \
