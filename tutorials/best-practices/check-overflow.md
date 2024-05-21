@@ -1,6 +1,6 @@
 # Check Overflow
 
-Extra caution should be exercised when performing addition, subtraction, or division operations. For instance, it's important to verify that an overflow hasn't occurred in cases where it could potentially happen.\\
+Extra caution should be exercised when performing addition, subtraction, or division operations. For instance, it's important to verify that an overflow hasn't occurred in cases where it could potentially happen.
 
 {% hint style="info" %}
 Coming soon addition and subtraction operations, accompanied by a resulting gtBool value indicating overflow.
