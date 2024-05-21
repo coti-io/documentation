@@ -26,7 +26,7 @@ You can view COTI network information on the [networks.md](networks.md "mention"
 
 ## Native Transfer
 
-The following process will help you deploy the [**`native_transfer.py`**](https://github.com/coti-io/coti-sdk-python/blob/main/examples/basics/native\_transfer.py) example from the [COTI Python SDK](https://github.com/coti-io/coti-sdk-python/tree/main). This script will transfer native funds from your wallet account to a random wallet. It will also:
+The following process will help you deploy the [**`native_transfer.py`**](https://github.com/coti-io/coti-sdk-python/blob/main/examples/basics/native\_transfer.py) example from the [**COTI Python SDK**](https://github.com/coti-io/coti-sdk-python/). This script will transfer native funds from your wallet account to a random wallet. It will also:
 
 * Create a EOA (Externally Owned Account)
 * Validate minimum balance
