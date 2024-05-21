@@ -4,7 +4,7 @@ Our solidity library provides methods for manipulating secret data. It's essenti
 
 A user wishing to invoke operations on private data should import this library in `MpcCore.sol`
 
-The following list pertains to a single type size, as the signatures remain consistent across all type sizes and for mixed-size calls.\\
+The following list pertains to a single type size, as the signatures remain consistent across all type sizes and for mixed-size calls.
 
 ## Secret Boolean type and various operations
 

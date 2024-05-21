@@ -1,6 +1,6 @@
 # Secure Data Types
 
-The gcEVM extends the capabilities of the EVM across various dimensions. Initially, it introduces novel data types to accommodate the necessity of maintaining confidentiality. Subsequently, it introduces additional operations capable of manipulating these confidential data types without compromising their secrecy.\\
+The gcEVM extends the capabilities of the EVM across various dimensions. Initially, it introduces novel data types to accommodate the necessity of maintaining confidentiality. Subsequently, it introduces additional operations capable of manipulating these confidential data types without compromising their secrecy.
 
 ## Data Types
 
@@ -24,12 +24,12 @@ Detailed examples of these types are presented in the following link
 Usage\\
 
 * **Inputtext** is used when a user initially presents encrypted data to the gcEVM. It undergoes initial validation and subsequently gets transformed into "garbledtext" for subsequent computations.
-* **Garbledtext™** is used either in operations or by passing secret data from contract to contract.It's important to note that these values are temporary and valid only throughout the execution of the transaction, being promptly deleted once execution concludes. To preserve such secret data, it must be converted into ciphertext.
+* **Garbledtext™** is used either in operations or by passing secret data from contract to contract. It's important to note that these values are temporary and valid only throughout the execution of the transaction, being promptly deleted once execution concludes. To preserve such secret data, it must be converted into ciphertext.
 * **Ciphertext** is the format utilized for storing data in storage by transitioning from garbledtext, and conversely, it is transformed into garbledtext through onboarding.
 
 ## Life-cycle of private data within the gcEVM
 
-<figure><img src="../../.gitbook/assets/gcevm_lifecycle.jpeg" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/gcevm_lifecycle.jpeg" alt=""><figcaption></figcaption></figure>
 
 {% hint style="success" %}
 It's essential to acknowledge that without a security mechanism in place, there's a risk of potential malicious exploitation of these types. To mitigate such risks, the gcEVM incorporates a security mechanism aimed at preventing any dishonest activities, such as unauthorized copying of secret data. For more information about the security mechanism please refer to the white paper.
