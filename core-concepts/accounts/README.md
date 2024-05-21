@@ -12,7 +12,7 @@ The easiest way to create an account is by running an existing test from one of 
 
 {% tabs %}
 {% tab title="Hardhat" %}
-Runnning tests will create an account automatically. The account will be saved to the `.env` file and will need to be funded. Use the COTI [faucet.md](../../readme-1/faucet.md "mention") to request devnet/testnet funds.
+Running tests will create an account automatically. The account will be saved to the `.env` file and will need to be funded. Use the COTI [faucet.md](../../readme-1/faucet.md "mention") to request devnet/testnet funds.
 
 1.  Install dependencies
 
@@ -34,14 +34,14 @@ See the [**Hardhat Readme**](https://github.com/coti-io/confidentiality-contract
 {% endtab %}
 
 {% tab title="Python SDK" %}
-Run the `native_transfer.py` script, it will transfer a small amount to a random address - demonstrating standard native transfer.
+Run the `native_transfer.py` script, it will transfer a small amount to a random address - demonstrating standard native transfer . Use the COTI [faucet.md](../../readme-1/faucet.md "mention") to request devnet/testnet funds.
 
 It will create a new EOA (you will see your public address in the script output), and an `ACCOUNT_PRIVATE_KEY` will be recorded in the `.env` file.
 
 See the [**Python SDK Readme**](https://github.com/coti-io/coti-sdk-python) for more info.
 {% endtab %}
 
-{% tab title="Typescrypt SDK" %}
+{% tab title="Typescript SDK" %}
 Runnning tests will create an account automatically. The account will be saved to the `.env` file and will need to be funded. Use the COTI [faucet.md](../../readme-1/faucet.md "mention") to request devnet/testnet funds.
 
 1.  Install dependencies
@@ -55,7 +55,7 @@ Runnning tests will create an account automatically. The account will be saved t
     yarn erc20
     ```
 
-See the [**Typescrypt SDK Readme**](https://github.com/coti-io/coti-sdk-typescript) for more info
+See the [**Typescript SDK Readme**](https://github.com/coti-io/coti-sdk-typescript) for more info
 {% endtab %}
 {% endtabs %}
 
