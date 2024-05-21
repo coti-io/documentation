@@ -1,4 +1,4 @@
-# 🚀 COTI v2 Quickstart
+# 🚀 COTI V2 Quickstart
 
 This quick start guide will help developers get started with deploying smart contracts onto the COTI network. If you are already familiar with Ethereum, EVM-related technologies, smart contracts and web3, follow the steps below to get started.
 
@@ -14,7 +14,7 @@ If you are new to Ethereum and smart contracts, the following introductory guide
 For questions & support [**join our Discord**](https://discord.com/invite/wfAQfbc3Df)!
 {% endhint %}
 
-If you'd like to learn more about COTI's progression, read [**COTI's evolution from V1 to V2**](https://medium.com/cotinetwork/how-coti-is-gearing-up-for-2024-and-beyond-e0d465794767#6e09)**.** To get familiar with some of the core concepts of blockchain privacy, get started with the [README (1).md](<README (1).md> "mention")section.
+If you'd like to learn more about COTI's progression, read [**COTI's evolution from V1 to V2**](https://medium.com/cotinetwork/how-coti-is-gearing-up-for-2024-and-beyond-e0d465794767#6e09)**.** To get familiar with some of the core concepts of blockchain privacy, get started with the [README (1).md](<README (1).md> "mention")  section.
 
 ## Network Info
 
