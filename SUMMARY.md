@@ -52,3 +52,4 @@
   * [Discord](https://discord.com/invite/wfAQfbc3Df)
   * [GitHub](https://github.com/coti-io)
   * [X](https://twitter.com/COTInetwork)
+* [🛠️ COTI Builders Program](https://cotinetwork.notion.site/Overview-COTI-Builders-Program-f742a22ff8ef4e648935362b9b4a9c34)
