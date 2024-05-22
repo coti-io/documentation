@@ -198,7 +198,7 @@ This contract can be used in order to browse and get a feel of the COTI network.
     ```
 
     \
-    Running the script will deploy the contract and return the address the contract was deployed to. The script output will look something like this (with some omitted block hashes at the end of ther response):\
+    Running the script will deploy the contract and output the address where the contract was deployed. The script output will look something like this (with some omitted block hashes at the end of ther response):\
 
 
     ```bash
@@ -238,13 +238,13 @@ Let's note the following facts about the contract and the script:
         }
     ```
 * The function [`getSomeValue`](https://github.com/coti-io/confidentiality-contracts/blob/main/contracts/examples/DataOnChain.sol#L67-L69) of the contract will then return the value of `clearValue`
-* The function [`basic_get_value`](https://github.com/coti-io/coti-sdk-python-examples/blob/master/examples/data\_onchain/data\_on\_chain.py#L286-L290) of the python script is making sure the value was received as expected.
+* The function [`basic_get_value`](https://github.com/coti-io/coti-sdk-python-examples/blob/master/examples/data\_onchain/data\_on\_chain.py#L286-L290) of the python script is making sure the value was set as expected.
 
 Now let's take a look on at the basic flow that sends a clear value, encrypts it, and decrypts it.
 
 * The python function [`basic_clear_encrypt_decrypt`](https://github.com/coti-io/coti-sdk-python-examples/blob/master/examples/data\_onchain/data\_on\_chain.py#L172-L184) initiates the process, calling other functions as necessary.
 * The python function [`save_clear_value_network_encrypted_in_contract`](https://github.com/coti-io/coti-sdk-python-examples/blob/master/examples/data\_onchain/data\_on\_chain.py#L229-L235) is used to pass a clear value from the user.&#x20;
-* Once the value is populated, the script will call the Solidity contract and use its [`setSomeEncryptedValue`](https://github.com/coti-io/confidentiality-contracts/blob/main/contracts/examples/DataOnChain.sol#L41-L43) function. This function in turn calls `setPublic64` from the MpcCore library, which turns the value into GarbledText and then into CipherText using the network key. This value is now encrypted in a network block.
+* Once the value is populated, the script will call the Solidity contract and use its [`setSomeEncryptedValue`](https://github.com/coti-io/confidentiality-contracts/blob/main/contracts/examples/DataOnChain.sol#L41-L43) function. This function in turn calls `setPublic64` from the [`MpcCore`](https://github.com/coti-io/confidentiality-contracts/blob/main/contracts/lib/MpcCore.sol)  library, which turns the value into GarbledText and then into CipherText using the network key. This value is now encrypted in a network block.
 * In order to validate the block had a ClearText input, the block details from the transaction are extracted using the [`validate_block_has_tx_input_encrypted_value`](https://github.com/coti-io/coti-sdk-python-examples/blob/master/examples/data\_onchain/data\_on\_chain.py#L253-L265) function.
-* The value is then encrypted using the function [`save_network_encrypted_to_user_encrypted_input_in_contract`](https://github.com/coti-io/coti-sdk-python-examples/blob/master/examples/data\_onchain/data\_on\_chain.py#L303-L305)`.`
-* The encrypted value is retrieved from the contract using the function [`get_user_encrypted_from_contract`](https://github.com/coti-io/coti-sdk-python-examples/blob/master/examples/data\_onchain/data\_on\_chain.py#L268C5-L269) to ensure the encrypted value exists on the block and matches the deployed contract.
+* The value is then encrypted using the function [`save_network_encrypted_to_user_encrypted_input_in_contract`](https://github.com/coti-io/coti-sdk-python-examples/blob/master/examples/data\_onchain/data\_on\_chain.py#L303-L305)  , this function saves the network-encrypted value to the user-encrypted input in the contract.
+* The encrypted value is retrieved from the contract using the function [`get_user_encrypted_from_contract`](https://github.com/coti-io/coti-sdk-python-examples/blob/master/examples/data\_onchain/data\_on\_chain.py#L268C5-L269) to ensure the encrypted value can be successfully retrieved with the user's AES key.
