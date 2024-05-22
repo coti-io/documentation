@@ -172,128 +172,71 @@ This is a mandatory script for any operation executed in any contract requiring 
 
 ## Deploy Data On-Chain
 
-The following process will help you deploy the [**`DataOnChain.sol`**](https://github.com/coti-io/confidentiality-contracts/blob/main/contracts/examples/DataOnChain.sol) example from the [**confidentiality-contracts**](https://github.com/coti-io/confidentiality-contracts/) repository, which is imported as a git submodule in the Python SDK Examples.&#x20;
+The following process will help you deploy the [**`data_on_chain.py`**](https://github.com/coti-io/coti-sdk-python-examples/blob/master/examples/data\_onchain/data\_on\_chain.py) example from the [**COTI Python SDK Examples**](https://github.com/coti-io/coti-sdk-python-examples) repo. As its name suggests, the contract will compile and deploy the corresponding [**`DataOnChain.sol`**](https://github.com/coti-io/confidentiality-contracts/blob/main/contracts/examples/DataOnChain.sol) contract, located in the `confidentiality-contracts` directory.
 
-This contract can be used in order to browse and get a feel of the COTI network. The contract allows for the secure handling of encrypted data, enabling storage, transformation, and arithmetic operations on encrypted values using the `MpcCore` library. It supports operations where values are encrypted using both network and user keys, ensuring data privacy and security on-chain.
+This contract can be used in order to browse and get a feel of the COTI network. The contract allows for the secure handling of encrypted data, enabling storage, transformation, and arithmetic operations on encrypted values using the [**`MpcCore`**](https://github.com/coti-io/confidentiality-contracts/blob/main/contracts/lib/MpcCore.sol) library. It supports operations where values are encrypted using both network and user keys, ensuring data privacy and security on-chain.
 
-This contract should be run at the root of `confidentiality-contracts` directory. If using an editor, set it as your working directory.\
-\
-We will use Hardhat to showcase how to compile and deploy the contract to the COTI network.
-
-1.  Navigate to the `examples` directory in the `confidentiality-contracts` directory inside the `coti-sdk-python` project.
+1.  Navigate to the `examples` directory in the `confidentiality-contracts` directory inside the `coti-sdk-python-examples` project.
 
     ```bash
     cd confidentiality-contracts/contracts/examples
     ```
 
 
-2.  Install Hardhat and dependencies locally
+2.  Run the `data_on_chain.py` script
 
     ```bash
-    npm install --save-dev hardhat @nomicfoundation/hardhat-toolbox ethers dotenv
-    ```
-
-
-3.  Add a Hardhat task to compile the contract: to compile the specific contract we'll need to make use of a custom task, as Hardhat does not support direct modification of the `solidity` configuration for compiling specific contracts. Update the Hardhat config file`hardhat.config.ts` to add the task as follows:\
-
-
-    ```typescript
-    import { HardhatUserConfig } from "hardhat/config"
-    import { task } from "hardhat/config";
-    import "@nomicfoundation/hardhat-toolbox"
-    import dotenv from "dotenv"
-    dotenv.config()
-
-    // Define a new task called "compileDataOnChain"
-    task("compileDataOnChain", "Compiles only DataOnChain.sol", async (_, hre) => {
-      await hre.run("compile", {
-        paths: ["contracts/DataOnChain.sol"]
-      });
-    });
-
-    const config: HardhatUserConfig = {
-      defaultNetwork: "devnet",
-      solidity: "0.8.24",
-      networks: {
-        // hardhat: {},
-        devnet: {
-          url: "https://devnet.coti.io",
-          chainId: 13068200,
-        },
-      },
-      paths:{
-        tests:'test-hardhat',
-      }
-    }
-
-    export default config
-    ```
-
-
-4.  Compile the `DataOnChain.sol` contract
-
-    ```bash
-    npx hardhat compileDataOnChain
-    ```
-
-
-5.  Deploy the `DataOnChain.sol` contract: in order to deploy the contract, we'll create a simple deployment script. The script should be placed under the `scripts` folder of your project. In our particular case, we'll create under the `confidentiality-contracts` directory. If you don't have a `scripts` directory, you can create one. Then create a file inside the directory, we'll call it **`deploy_dataonchain.js`**. The contents of the file as follows:\
-
-
-    ```javascript
-    const { ethers } = require("hardhat");
-
-    async function main() {
-      // Log the account being used to deploy
-      const [deployer] = await ethers.getSigners();
-      console.log("Deploying contracts with the account:", deployer.address);
-
-      // Get the Contract Factory
-      const DataOnChain = await ethers.getContractFactory("DataOnChain");
-
-      // Deploy the contract and get the deployment transaction
-      const deployTx = await DataOnChain.getDeployTransaction(/* constructor arguments, if any */);
-      console.log("Deployment transaction:", deployTx);
-
-      // Send the deployment transaction
-      const sentTx = await deployer.sendTransaction(deployTx);
-      console.log("Sent transaction:", sentTx);
-
-      // Wait for the contract deployment transaction to be mined
-      const receipt = await sentTx.wait();
-      console.log("Transaction receipt:", receipt);
-
-      // Log the contract address
-      const contractAddress = receipt.contractAddress;
-      console.log("DataOnChain deployed to:", contractAddress);
-    }
-
-    main().catch((error) => {
-      console.error(error);
-      process.exit(1);
-    });
+    python3 ../../examples/data_onchain/data_on_chain.py
     ```
 
     \
-    Save the file.\
+    Running the script will deploy the contract and return the address the contract was deployed to. The script output will look something like this (with some omitted block hashes at the end of ther response):\
 
-6.  Change directory to `confidentiality-contracts` and run the deployment script:
 
     ```bash
-    node scripts/deploy_dataonchain.js
+    provider:  https://devnet.coti.io/rpc
+    chain-id:  13068200
+    latest block:  0x75a2f9d10db48fdc53f14d9ce565420e680b06231cd34e3c194f14fbd0c5f999
+    account address: 0xB101fbd6938AaE2e472E247e36555528d7ff4A89
+    account balance:  4993201875000000000 wei ( 4.993201875  ether)
+    account nonce:  2
+    Compiling DataOnChain...
+    Deploying DataOnChain...
+    Contract deployed at address: 0x91Af1CD8Bbc3b7dCcd5fF19f522cd9A49067F928
+    contract address:  0x91Af1CD8Bbc3b7dCcd5fF19f522cd9A49067F928
     ```
 
-
-7.  The deployment will include the transaction data as well as the address the contract was deployed to:
+    \
+    The deployment will include the transaction data as well as the address the contract was deployed to:
 
     ```bash
-    DataOnChain deployed to: 0x9cDFC135967cd16E2b6A1cE60f1748013096B97e
+    Contract deployed at address: 0x91Af1CD8Bbc3b7dCcd5fF19f522cd9A49067F928
     ```
 
     \
     You can now view the contract on devnet explorer using the following convention:\
     `https://explorer-devnet.coti.io/address/<contract deployment address>` \
     \
-    In our case:\
-    [**https://explorer-devnet.coti.io/address/0x9cdfc135967cd16e2b6a1ce60f1748013096b97e**](https://explorer-devnet.coti.io/address/0x9cdfc135967cd16e2b6a1ce60f1748013096b97e?tab=transactions)
+    In our case: \
+    [**https://explorer-devnet.coti.io/contract/0x91af1cd8bbc3b7dccd5ff19f522cd9a49067f928**](https://explorer-devnet.coti.io/contract/0x91af1cd8bbc3b7dccd5ff19f522cd9a49067f928)
 
+Let's note the following facts about the contract and the script:
+
+*   When the contract was deployed, the `uint64 private clearValue` variable was assigned a value of `5` as evidenced by [lines 15-17](https://github.com/coti-io/confidentiality-contracts/blob/main/contracts/examples/DataOnChain.sol#L15-L17) of the contract:&#x20;
+
+    ```solidity
+     constructor () {
+            clearValue = 5;
+        }
+    ```
+* The function [`getSomeValue`](https://github.com/coti-io/confidentiality-contracts/blob/main/contracts/examples/DataOnChain.sol#L67-L69) of the contract will then return the value of `clearValue`
+* The function [`basic_get_value`](https://github.com/coti-io/coti-sdk-python-examples/blob/master/examples/data\_onchain/data\_on\_chain.py#L286-L290) of the python script is making sure the value was received as expected.
+
+Now let's take a look on at the basic flow that sends a clear value, encrypts it, and decrypts it.
+
+* The python function [`basic_clear_encrypt_decrypt`](https://github.com/coti-io/coti-sdk-python-examples/blob/master/examples/data\_onchain/data\_on\_chain.py#L172-L184) initiates the process, calling other functions as necessary.
+* The python function [`save_clear_value_network_encrypted_in_contract`](https://github.com/coti-io/coti-sdk-python-examples/blob/master/examples/data\_onchain/data\_on\_chain.py#L229-L235) is used to pass a clear value from the user.&#x20;
+* Once the value is populated, the script will call the Solidity contract and use its [`setSomeEncryptedValue`](https://github.com/coti-io/confidentiality-contracts/blob/main/contracts/examples/DataOnChain.sol#L41-L43) function. This function in turn calls `setPublic64` from the MpcCore library, which turns the value into GarbledText and then into CipherText using the network key. This value is now encrypted in a network block.
+* In order to validate the block had a ClearText input, the block details from the transaction are extracted using the [`validate_block_has_tx_input_encrypted_value`](https://github.com/coti-io/coti-sdk-python-examples/blob/master/examples/data\_onchain/data\_on\_chain.py#L253-L265) function.
+* The value is then encrypted using the function [`save_network_encrypted_to_user_encrypted_input_in_contract`](https://github.com/coti-io/coti-sdk-python-examples/blob/master/examples/data\_onchain/data\_on\_chain.py#L303-L305)`.`
+* The encrypted value is retrieved from the contract using the function [`get_user_encrypted_from_contract`](https://github.com/coti-io/coti-sdk-python-examples/blob/master/examples/data\_onchain/data\_on\_chain.py#L268C5-L269) to ensure the encrypted value exists on the block and matches the deployed contract.
