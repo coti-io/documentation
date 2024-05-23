@@ -32,9 +32,13 @@ You can view COTI network information on the [networks.md](networks.md "mention"
 * [https://chainlist.wtf](https://chainlist.wtf)
 * [https://explorer-devnet.coti.io](https://explorer-devnet.coti.io)
 
+***
+
+{% tabs %}
+{% tab title="Python" %}
 ## Native Transfer
 
-The following process will help you deploy the [**`native_transfer.py`**](https://github.com/coti-io/coti-sdk-python/blob/main/examples/basics/native\_transfer.py) example from the [**COTI Python SDK**](https://github.com/coti-io/coti-sdk-python/). This script will transfer native funds from your wallet account to a random wallet. It will also:
+The following process will help you deploy the [**`native_transfer.py`**](https://github.com/coti-io/coti-sdk-python-examples/blob/master/examples/basics/native\_transfer.py) example from the [**COTI Python SDK Examples**](https://github.com/coti-io/coti-sdk-python-examples) project. This script will transfer native funds from your wallet account to a random wallet. It will also:
 
 * Create a EOA (Externally Owned Account)
 * Validate minimum balance
@@ -248,3 +252,204 @@ Now let's take a look on at the basic flow that sends a clear value, encrypts it
 * In order to validate the block had a ClearText input, the block details from the transaction are extracted using the [`validate_block_has_tx_input_encrypted_value`](https://github.com/coti-io/coti-sdk-python-examples/blob/master/examples/data\_onchain/data\_on\_chain.py#L253-L265) function.
 * The value is then encrypted using the function [`save_network_encrypted_to_user_encrypted_input_in_contract`](https://github.com/coti-io/coti-sdk-python-examples/blob/master/examples/data\_onchain/data\_on\_chain.py#L303-L305)  , this function saves the network-encrypted value to the user-encrypted input in the contract.
 * The encrypted value is retrieved from the contract using the function [`get_user_encrypted_from_contract`](https://github.com/coti-io/coti-sdk-python-examples/blob/master/examples/data\_onchain/data\_on\_chain.py#L268C5-L269) to ensure the encrypted value can be successfully retrieved with the user's AES key.
+{% endtab %}
+
+{% tab title="Typescript" %}
+## ERC20
+
+The following process will help you run the [**`erc20.ts`**](https://github.com/coti-io/coti-sdk-typescript-examples/blob/main/src/examples/erc20.ts) example from the [**COTI Typescript SDK Examples**](https://github.com/coti-io/coti-sdk-typescript-examples) project. The script includes functions for transferring tokens, approving allowances, and handling confidential transactions. The script uses various utilities from the SDK to manage confidential accounts, decrypt values, and ensure correct balances and allowances during transactions. It will also:
+
+* Create a EOA (Externally Owned Account)
+* Validate minimum balance
+
+{% hint style="info" %}
+Ensure your environment meets all the pre-requisites. Visit the [pre-requisites section of the readme](https://github.com/coti-io/coti-sdk-typescript-examples/blob/main/README.md).&#x20;
+{% endhint %}
+
+1.  Clone the Typescript examples repo along with its submodules into your desired location
+
+    ```bash
+    git clone --recurse-submodules git@github.com:coti-io/coti-sdk-typescript-examples.git
+    ```
+
+
+2.  Change directory to the newly create one
+
+    ```bash
+    cd coti-sdk-typescript-examples
+    ```
+
+
+3.  Install dependencies
+
+    ```bash
+    yarn
+    ```
+
+
+4.  Run `erc20.ts` script
+
+    ```bash
+    yarn erc20
+    ```
+
+    \
+    Running this test will automatically create an account and a key/value pair with name: `SIGNING_KEY` (visible in the .env file). The script will output something like this:\
+
+
+    ```bash
+    yarn run v1.22.22
+    $ ts-node src/main.ts erc20
+    ************* Created new account  0x87c13D0f5903a68bE8288E52b23A220CeC6b1aB6  and saved into .env file *************
+    /Users/user/projects/coti-sdk-typescript-examples/src/util/onboard.ts:13
+          throw new Error(`Please use faucet to fund account ${wallet.address}`)
+                ^
+    Error: Please use faucet to fund account 0x87c13D0f5903a68bE8288E52b23A220CeC6b1aB6
+    ```
+
+    \
+    It is normal to receive the exception `Error: Please use faucet to fund account` on the first run. This will be resolved once the account is funded. \
+
+5. Head to the faucet at [**https://faucet.coti.io**](https://faucet.coti.io) to get devnet funds. \
+   Send the following message to the BOT using your newly created account, visible in the fourth line of the response `Created new account  0x87c13D0f5903a68bE8288E52b23A220CeC6b1aB6 [...]`\
+   \
+   `devnet <account address>`\
+   \
+   The bot will reply with the message:\
+   \
+   `<username> faucet transferred 5 COTIv2 (devnet)` \
+   &#x20;
+6.  Run `erc20.ts` script once more
+
+    ```bash
+    yarn erc20
+    ```
+
+
+{% endtab %}
+
+{% tab title="Hardhat" %}
+## ERC20Example
+
+The following process will help you run the [**ERC20Example.sol**](https://github.com/coti-io/confidentiality-contracts/blob/main/contracts/examples/ERC20Example.sol) example from the [**COTI confidentiality-contracts**](https://github.com/coti-io/confidentiality-contracts) project. The contract defines a custom ERC20 token called `ERC20Example` that extends the functionality of the ConfidentialERC20 token. Additionally it will:
+
+* Create a EOA (Externally Owned Account)
+* Validate minimum balance
+
+The contract is compiled and deployed with Hardhat using the [`confidential-erc20.test.ts`](https://github.com/coti-io/confidentiality-contracts/blob/main/test-hardhat/confidential-erc20.test.ts) test suite contained in the [`test-hardhat`](https://github.com/coti-io/confidentiality-contracts/tree/main/test-hardhat) directory of the project.
+
+{% hint style="info" %}
+Ensure your environment meets all the pre-requisites. Visit the [pre-requisites section of the readme](https://github.com/coti-io/confidentiality-contracts/blob/main/README.md).&#x20;
+{% endhint %}
+
+1.  Clone the confidentiality-contracts  repo
+
+    ```bash
+    git clone git@github.com:coti-io/confidentiality-contracts.git
+    ```
+
+
+2.  Change directory to the newly create one
+
+    ```bash
+    cd confidentiality-contracts
+    ```
+
+
+3.  Install dependencies
+
+    ```bash
+    yarn
+    ```
+
+
+4.  Build and compile contracts
+
+    ```bash
+    yarn build
+    ```
+
+
+5.  Run the `test-erc20` test suite
+
+    ```bash
+    yarn test-erc20
+    ```
+
+    \
+    Running this test will automatically create an account and a key/value pair with name: `SIGNING_KEYS` (visible in the .env file). The script will output something like this:\
+
+
+    ```bash
+    yarn run v1.22.22
+
+      Confidential ERC20
+        1) "before all" hook in "Confidential ERC20"
+
+      0 passing (39ms)
+      1 failing
+
+      1) Confidential ERC20
+           "before all" hook in "Confidential ERC20":
+         Error: Created new random account 0x17EDB982c3569D29EbaF407F72aDD05722d5f179.
+         Please use faucet to fund it.
+    ```
+
+    \
+    It is normal to receive the exception `Error: Created new random account [...] Please use faucet to fund it.` on the first run. This will be resolved once the account is funded. \
+
+6. Head to the faucet at [**https://faucet.coti.io**](https://faucet.coti.io) to get devnet funds. \
+   Send the following message to the BOT using your newly created account, visible in the last part of the response.\
+   \
+   `devnet <account address>`\
+   \
+   The bot will reply with the message:\
+   \
+   `<username> faucet transferred 5 COTIv2 (devnet)` \
+   &#x20;
+7.  Run the `test-erc20` test suite once more.
+
+    ```bash
+    yarn test-erc20
+    ```
+
+    \
+    The script output will look like this:\
+
+
+    ```bash
+    Confidential ERC20
+    ************* Onboarding user  0x17EDB982c3569D29EbaF407F72aDD05722d5f179  *************
+    ************* Onboarding user  0xe1E7315F6970F353661fc84FFd9238133cED3677  *************
+    ************* Onboarded! created user key and saved into .env file *************
+    ************* Onboarded! created user key and saved into .env file *************
+        Deployment
+          ✔ Deployed address should not be undefined
+          ✔ Owner initial balance (123ms)
+          ✔ Function 'name' should be correct (130ms)
+          ✔ Function 'symbol' should be correct (123ms)
+          ✔ Function 'decimals' should be correct (119ms)
+          ✔ Function 'totalSupply' should be correct (117ms)
+        Transfer 5
+          ✔ Transfer - clear (9469ms)
+          ✔ Transfer - Confidential (5260ms)
+          ✔ TransferFrom - clear without giving allowance should fail (9905ms)
+          ✔ TransferFrom - clear (9770ms)
+          ✔ TransferFrom - Confidential (10265ms)
+          ✔ Approve/Allowance - Confidential (10255ms)
+
+      12 passing (1m)
+
+    ✨  Done in 69.69s.
+    ```
+
+
+
+Running the test suite does the following:
+
+* **Deploys the `ERC20Example` contract**: Sets up the token with specific details (name, symbol, initial supply).
+* **Tests the deployment**: Verifies the contract address, initial balance, and token details (name, symbol, decimals, total supply).
+* **Tests transfers**: Both clear and confidential transfers, including `transferFrom` functionality with and without prior allowance.
+* **Tests approvals and allowances**: Ensures that the contract correctly handles approvals and allowances, both clear and confidential.
+{% endtab %}
+{% endtabs %}
