@@ -50,7 +50,7 @@ Ensure your environment meets all the pre-requisites. Visit the [pre-requisites 
 1.  Clone the Python examples repo along with its submodules into your desired location
 
     ```bash
-    git clone --recurse-submodules git@github.com:coti-io/coti-sdk-python-examples.git
+    git clone --recurse-submodules https://github.com/coti-io/coti-sdk-python-examples.git
     ```
 
 
@@ -269,7 +269,7 @@ Ensure your environment meets all the pre-requisites. Visit the [pre-requisites 
 1.  Clone the Typescript examples repo along with its submodules into your desired location
 
     ```bash
-    git clone --recurse-submodules git@github.com:coti-io/coti-sdk-typescript-examples.git
+    git clone --recurse-submodules https://github.com/coti-io/coti-sdk-typescript-examples.git
     ```
 
 
@@ -345,7 +345,7 @@ Ensure your environment meets all the pre-requisites. Visit the [pre-requisites 
 1.  Clone the confidentiality-contracts  repo
 
     ```bash
-    git clone git@github.com:coti-io/confidentiality-contracts.git
+    git clone https://github.com/coti-io/confidentiality-contracts.git
     ```
 
 
