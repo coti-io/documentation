@@ -22,7 +22,7 @@ For questions & support [**join our Discord**](https://discord.com/invite/wfAQfb
 | [**Typescript SDK**](https://github.com/coti-io/coti-sdk-typescript)                                                  | [**Typescript SDK Examples**](https://github.com/coti-io/confidentiality-contracts?tab=readme-ov-file#hardhat-confidential-contracts) | [**Explorer**](https://explorer-devnet.coti.io/overview)           |
 | [**Hardhat**](https://github.com/coti-io/confidentiality-contracts?tab=readme-ov-file#hardhat-confidential-contracts) |                                                                                                                                       | [**Chainlist**](https://chainlist.org/?search=coti\&testnets=true) |
 
-If you'd like to learn more about COTI's progression, read [**COTI's evolution from V1 to V2**](https://medium.com/cotinetwork/how-coti-is-gearing-up-for-2024-and-beyond-e0d465794767#6e09)**.** To get familiar with some of the core concepts of blockchain privacy, get started with the [README (1).md](<README (1).md> "mention")  section.
+If you'd like to learn more about COTI's progression, read [**COTI's evolution from V1 to V2**](https://medium.com/cotinetwork/how-coti-is-gearing-up-for-2024-and-beyond-e0d465794767#6e09)**.** To get familiar with some of the core concepts of blockchain privacy, get started with the [readme-1](readme-1/ "mention")  section.
 
 ## Network Info
 
