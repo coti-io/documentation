@@ -60,8 +60,8 @@ The gcEVM employs AES keys unique to each user for the encryption and decryption
 
 To retrieve the AES key, a contract is provided that requests the system to return the key associated with the sending user. Further details regarding this process are outlined in the onboard user section:
 
-{% content-ref url="../../core-concepts/accounts/onboard-user.md" %}
-[onboard-user.md](../../core-concepts/accounts/onboard-user.md)
+{% content-ref url="../../../core-concepts/accounts/onboard-user.md" %}
+[onboard-user.md](../../../core-concepts/accounts/onboard-user.md)
 {% endcontent-ref %}
 
 The `getUserKey` function in Solidity takes a signed RSA public key as a parameter. It then verifies the signature to ensure the authenticity of the RSA public key. Once the signature is verified, the function proceeds to encrypt the AES key using the verified RSA public key.
