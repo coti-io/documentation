@@ -6,6 +6,10 @@ The COTI Remix plugin seamlessly integrates with the Remix IDE, enabling develop
 **NOTE:** The COTI Remix plugin currently works only with COTI Devnet. Support for COTI Testnet will be published in the coming days.
 {% endhint %}
 
+{% embed url="https://youtu.be/o59aENKhkAI?si=zckDPCC4vYFoRvRC" %}
+Remix Plugin Demo
+{% endembed %}
+
 ### Installation
 
 Until the plugin is published on the official Remix directory, it must be run as a local plugin. Follow these steps to install:
