@@ -1,5 +1,9 @@
 # 💻 SDKs
 
+{% hint style="info" %}
+**NOTE:** Only SDKs with version >= 1.0 support COTI Testnet. SDKs with version <= 1.0 support only Devnet.
+{% endhint %}
+
 The SDKs specified below, contain smart contracts examples that implement confidentiality features using the COTI V2 protocol.&#x20;
 
 The contracts provide examples for various use cases, such as Non-Fungible Tokens (NFTs), ERC20 tokens, Auctions, and Identity management.

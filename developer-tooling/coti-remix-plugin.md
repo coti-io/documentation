@@ -2,6 +2,10 @@
 
 The COTI Remix plugin seamlessly integrates with the Remix IDE, enabling developers to deploy and interact with contracts on the COTI network.
 
+{% hint style="info" %}
+**NOTE:** The COTI Remix plugin currently works only with COTI Devnet. Support for COTI Testnet will be published in the coming days.
+{% endhint %}
+
 ### Installation
 
 Until the plugin is published on the official Remix directory, it must be run as a local plugin. Follow these steps to install:
@@ -22,6 +26,12 @@ Until the plugin is published on the official Remix directory, it must be run as
     | Location in remix       | Side Panel                                       |
 
     Once the values are filled in, click ok. The plugin will appear on the left part of the panel.
+
+
+
+{% hint style="info" %}
+**IMPORTANT:** In order to use the privacy-preserving features of the COTI network with the Remix plugin, your workspace must include both [`MpcCore.sol`](https://github.com/coti-io/confidentiality-contracts/blob/main/contracts/lib/MpcCore.sol) and [`MpcInterface.sol`](https://github.com/coti-io/confidentiality-contracts/blob/main/contracts/lib/MpcInterface.sol) files.
+{% endhint %}
 
 ### Features
 

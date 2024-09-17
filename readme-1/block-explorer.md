@@ -5,7 +5,10 @@ The COTI blockchain explorer is a tool that allows you to search and view inform
 1. Look up transactions: See details about specific transactions, such as sender and receiver addresses and transaction status.
 2. Check balances: View the balance of a particular cryptocurrency address.
 3. Explore blocks: See information about blocks, such as their size, time of creation, and included transactions.
+4. Add the COTI network to your EOA wallet (i.e., MetaMask)
 
 Visit the explorer at:
 
-[**https://explorer-devnet.coti.io/**](https://explorer-devnet.coti.io/)
+| Devnet                                               | Testnet                                                | Mainnet      |
+| ---------------------------------------------------- | ------------------------------------------------------ | ------------ |
+| [**devnet.cotiscan.io**](https://devnet.cotiscan.io) | [**testnet.cotiscan.io**](https://testnet.cotiscan.io) | coming soon! |

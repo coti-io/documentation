@@ -16,11 +16,11 @@ For questions & support [**join our Discord**](https://discord.com/invite/wfAQfb
 
 ### Useful links
 
-| SDKs                                                                                                                  | Examples                                                                                                                              | Network Info                                                       |
-| --------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
-| [**Python SDK**](https://github.com/coti-io/coti-sdk-python)                                                          | [**Python SDK Examples**](https://github.com/coti-io/coti-sdk-python-examples)                                                        | [**Faucet**](https://faucet.coti.io)                               |
-| [**Typescript SDK**](https://github.com/coti-io/coti-sdk-typescript)                                                  | [**Typescript SDK Examples**](https://github.com/coti-io/confidentiality-contracts?tab=readme-ov-file#hardhat-confidential-contracts) | [**Explorer**](https://explorer-devnet.coti.io/overview)           |
-| [**Hardhat**](https://github.com/coti-io/confidentiality-contracts?tab=readme-ov-file#hardhat-confidential-contracts) |                                                                                                                                       | [**Chainlist**](https://chainlist.org/?search=coti\&testnets=true) |
+| SDKs                                                                                                                  | Examples                                                                                                                              | Network Info                                                                                                                                                      |
+| --------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [**Python SDK**](https://github.com/coti-io/coti-sdk-python)                                                          | [**Python SDK Examples**](https://github.com/coti-io/coti-sdk-python-examples)                                                        | [**Faucet**](https://faucet.coti.io)                                                                                                                              |
+| [**Typescript SDK**](https://github.com/coti-io/coti-sdk-typescript)                                                  | [**Typescript SDK Examples**](https://github.com/coti-io/confidentiality-contracts?tab=readme-ov-file#hardhat-confidential-contracts) | <p><a href="https://devnet.cotiscan.io/"><strong>Devnet Explorer</strong></a><br><a href="https://testnet.cotiscan.io/"><strong>Testnet Explorer</strong></a></p> |
+| [**Hardhat**](https://github.com/coti-io/confidentiality-contracts?tab=readme-ov-file#hardhat-confidential-contracts) |                                                                                                                                       | [**Chainlist**](https://chainlist.org/?search=coti\&testnets=true)                                                                                                |
 
 If you'd like to learn more about COTI's progression, read [**COTI's evolution from V1 to V2**](https://medium.com/cotinetwork/how-coti-is-gearing-up-for-2024-and-beyond-e0d465794767#6e09)**.** To get familiar with some of the core concepts of blockchain privacy, get started with the [readme-1](readme-1/ "mention")  section.
 
@@ -30,7 +30,15 @@ You can view COTI network information on the [networks.md](networks.md "mention"
 
 * [https://chainlist.org](https://chainlist.org)
 * [https://chainlist.wtf](https://chainlist.wtf)
-* [https://explorer-devnet.coti.io](https://explorer-devnet.coti.io)
+* [https://devnet.cotiscan.io](https://devnet.cotiscan.io/overview)
+* [https://testnet.cotiscan.io](https://testnet.cotiscan.io/overview)
+
+{% hint style="info" %}
+**NOTE**:&#x20;
+
+* EOA Wallets such as MetaMask may display a warning about COTI Testnet being a potential scam. This is due to the COTI token existing as an ERC-20 token on Ethereum and using the same token name on COTI Testnet. We're working with wallet providers to fix this issue.
+* The **COTI Testnet** is currently operating in review mode. As such, it may experience unplanned resets. Remember to back up your work regularly and avoid storing any sensitive or confidential data.
+{% endhint %}
 
 ***
 

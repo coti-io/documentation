@@ -48,6 +48,7 @@
       * [Prepare Private Inputs](developer-tooling/sdks/how-to-use-the-sdk/prepare-private-inputs.md)
       * [Decrypt Output](developer-tooling/sdks/how-to-use-the-sdk/decrypt-output.md)
   * [🔌 COTI Remix Plugin](developer-tooling/coti-remix-plugin.md)
+  * [🏖️ COTI Developer Sandbox](developer-tooling/coti-developer-sandbox.md)
 * [👥 Support and Community](support-and-community/README.md)
   * [Glossary](support-and-community/glossary.md)
   * [Telegram](https://t.me/COTInetwork)
