@@ -1,7 +1,7 @@
 # 💻 SDKs
 
 {% hint style="info" %}
-**NOTE:** Only SDKs with version >= 1.0 support COTI Testnet. SDKs with version <= 1.0 support only Devnet.
+**NOTE:** Only SDKs with version >= 1.0.0 support COTI Testnet. SDKs with version < 1.0.0 support only Devnet.
 {% endhint %}
 
 The SDKs specified below, contain smart contracts examples that implement confidentiality features using the COTI V2 protocol.&#x20;
