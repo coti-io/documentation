@@ -12,24 +12,13 @@ Remix Plugin Demo
 
 ### Installation
 
-Until the plugin is published on the official Remix directory, it must be run as a local plugin. Follow these steps to install:
-
-1. Click the "Plugin manager" button, located on the lower-left part of the screen in Remix.
-2. Select the "Connect to a Local Plugin" option atop the left panel.
-3.  On the "Local Plugin" dialog, use the following values:\
-
-
-    | FIELD                   | VALUE                                            |
-    | ----------------------- | ------------------------------------------------ |
-    | Plugin Name             | COTI                                             |
-    | Display Name            | COTI                                             |
-    | Api                     | (leave blank)                                    |
-    | Plugins it can activate | (leave blank)                                    |
-    | Url                     | [https://remix.coti.io/](https://remix.coti.io/) |
-    | Type of connection      | Iframe                                           |
-    | Location in remix       | Side Panel                                       |
-
-    Once the values are filled in, click ok. The plugin will appear on the left part of the panel.
+1. Head to the Remix website at [**remix.ethereum.org**](https://remix.ethereum.org/)
+2. Click the "Plugin manager" button, located on the lower-left part of the screen in Remix <img src="../.gitbook/assets/image (5).png" alt="" data-size="line">
+3. The plugins are organized alphabetically. Keep scrolling until you see the COTI plugin and click "**Activate**".\
+   ![](<../.gitbook/assets/image (6).png>)
+4. On the file manager permission dialog, tick the "**Remember this choice**" box so the plugin doesn't ask every time it runs. Click "**Accept**".\
+   ![](<../.gitbook/assets/image (7).png>)
+5. The COTI plugin button will appear on the left hand panel, below the Git button <img src="../.gitbook/assets/image (8).png" alt="" data-size="line">. Click on the plugin button.
 
 
 
@@ -62,7 +51,7 @@ The Onboard section of the plugin provides an easy way to generate an AES key. T
 
 If the account has already been onboarded and an AES key has already been created, the key will be displayed in this section.
 
-The Onboard action makes use of the [AccountOnboard.sol](https://github.com/coti-io/confidentiality-contracts/blob/main/contracts/AccountOnboard/AccountOnboard.sol) smart contract via the Typescript SDK [onboard.ts](https://github.com/coti-io/coti-sdk-typescript/blob/main/src/account/onboard.ts) script.
+The Onboard action makes use of the [**`AccountOnboard.sol`**](https://github.com/coti-io/confidentiality-contracts/blob/main/contracts/AccountOnboard/AccountOnboard.sol) smart contract via the Typescript SDK [**`onboard.ts`**](https://github.com/coti-io/coti-sdk-typescript/blob/main/src/account/onboard.ts) script.
 
 Once the `Onboard` button is clicked, the plugin will return data related to your AES key. You may clear this data by clicking on the `Clear AES Key` button.
 
