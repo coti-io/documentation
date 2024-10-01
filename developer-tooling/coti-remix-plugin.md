@@ -77,3 +77,9 @@ Four sub-sections are offered:
 #### 4. Interact
 
 The "Interact" section of the plugin serves a similar purpose to the native Remix "Interact" feature, with the key difference that it allows users to interact with contracts that are making use of the privacy-preserving features of the COTI network.
+
+### Working with Encrypted Data
+
+The COTI Remix plugin will automatically encrypt/decrypt values of type `IT` (input text) and `CT` (cipher text).
+
+For `IT` (input text) value types, only cleartext is required, the encryption is performed automatically by the plugin.
