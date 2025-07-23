@@ -20,7 +20,7 @@ contract AvoidContract {
     function addinGtReturnZeroOnOverFlow(gtUint16 lhs, gtUint16 rhs) public {
         gtUint16 tempAddResult = MpcCore.add(lhs, rhs);
         gtBool isOverflowed = MpcCore.lt(tempAddResult , lhs);
-        gtUint16 gtZero = MpcCore.setPublic16(0)
+        gtUint16 gtZero = MpcCore.setPublic16(0);
         addResult = MpcCore.mux(isOverflow, gtZero, tempAddResult);
         return addResult;
     }
