@@ -1,8 +1,30 @@
 # Conceptual Overview
 
+
+#### 1. What is Multi-Party Computation (MPC)?
+
+MPC is a subfield of cryptography with a powerful and general goal:
+
+> To enable a group of parties, each with their own private data, to jointly compute a function on that data without revealing their individual inputs to one another. The only thing that should be revealed is the final result of the computation.
+
+**Key Characteristics of MPC:**
+
+*   **The Problem:** It defines the security properties required.
+    *   **Privacy:** No party learns anything about other parties' inputs, beyond what can be inferred from the output itself.
+    *   **Correctness:** The output of the joint computation is guaranteed to be correct.
+*   **Generality:** It can, in theory, compute *any* function.
+*   **Multiple Techniques:** There are several different ways to achieve MPC. The two most famous families of protocols are:
+    1.  **Garbled Circuits:** (Which we will detail next).
+    2.  **Secret Sharing:** Protocols where inputs are split into "shares" and distributed among parties. Computations are then performed on these shares. (Examples: BGW, GMW, SPDZ).
+
+
 ### Garbled Circuits and how they preserve privacy <a href="#eca7" id="eca7"></a>
 
+Garbled Circuits is a specific protocol, pioneered by Andrew Yao, to solve the MPC problem. It is the canonical solution for **two-party computation (2PC)**. The core idea is to represent the function you want to compute as a **Boolean circuit** (made of AND, OR, XOR, NOT gates). Then, one party "garbles" (encrypts) this circuit, and the other party can evaluate it without learning any of the intermediate values.
+
+
 As a privacy-preserving cryptographic technique, garbled circuits were essentially designed to solve one problem: The Millionaires problem created by Andrew Yao. In this theoretical scenario, two millionaires, Alice and Bob, want to work out which one of them is richer without disclosing their actual net worth.
+
 
 To do this, they can use a garbled circuit which can be simplified into the following steps:
 
