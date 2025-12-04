@@ -24,6 +24,8 @@ struct itUint8
 struct itUint16
 struct itUint32
 struct itUint64
+struct itUint128
+struct itUint256
 struct itString
 ```
 
@@ -35,6 +37,8 @@ type gtUint8
 type gtUint16
 type gtUint32
 type gtUint64
+type gtUint128
+type gtUint256
 struct gtString
 ```
 
@@ -46,6 +50,8 @@ type ctUint8
 type ctUint16
 type ctUint32
 type ctUint64
+type ctUint128
+struct ctUint256
 struct ctString
 ```
 
@@ -57,13 +63,15 @@ struct utUint8
 struct utUint16
 struct utUint32
 struct utUint64
+struct utUint128
+struct utUint256
 struct utString
 ```
 
 ## Functions
 
 {% hint style="info" %}
-Since private data types mostly support the same functions, we have chosen to list only the functions pertaining to the itUint64, gtUint64 and ctUint64 types. See [**MpcCore.sol**](https://github.com/coti-io/coti-contracts/blob/main/contracts/utils/mpc/MpcCore.sol) for the full list of supported functions.
+Since private data types mostly support the same functions, we have chosen to list only the functions pertaining to the itUint64, gtUint64 and ctUint64 types. The same functions are available for itUint128/gtUint128/ctUint128 and itUint256/gtUint256/ctUint256 types. See [**MpcCore.sol**](https://github.com/coti-io/coti-contracts/blob/main/contracts/utils/mpc/MpcCore.sol) for the full list of supported functions.
 {% endhint %}
 
 ### Special Functions
@@ -118,6 +126,18 @@ function decrypt(gtUint64 ct) returns (uint64)
 
 ```solidity
 function setPublic64(uint64 pt) returns (gtUint64)
+```
+
+* Onboards the given clear input to the gcEVM, resulting in a Garbledtext™.
+
+```solidity
+function setPublic128(uint128 pt) returns (gtUint128)
+```
+
+* Onboards the given clear input to the gcEVM, resulting in a Garbledtext™.
+
+```solidity
+function setPublic256(uint256 pt) returns (gtUint256)
 ```
 
 * Onboards the given clear input to the gcEVM, resulting in a Garbledtext™.
@@ -257,7 +277,7 @@ function mux(gtBool bit, gtUint64 a, gtUint64 b) returns (gtUint64)
 ### Enums
 
 ```solidity
-enum MPC_TYPE { SBOOL_T, SUINT8_T, SUINT16_T, SUINT32_T, SUINT64_T }
+enum MPC_TYPE { SBOOL_T, SUINT8_T, SUINT16_T, SUINT32_T, SUINT64_T, SUINT128_T, SUINT256_T }
 ```
 
 * Represent different MPC data types

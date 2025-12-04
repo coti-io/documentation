@@ -43,11 +43,11 @@ function accountEncryptionAddress(address account) view returns (address)
 ```
 
 ```solidity
-function balanceOf(address account) view returns (ctUint64)
+function balanceOf(address account) view returns (ctUint256)
 ```
 
 ```solidity
-function balanceOf() returns (gtUint64)
+function balanceOf() returns (gtUint256)
 ```
 
 ```solidity
@@ -55,11 +55,11 @@ function setAccountEncryptionAddress(address addr) returns (bool)
 ```
 
 ```solidity
-function transfer(address to, itUint64 calldata value) returns (gtBool)
+function transfer(address to, itUint256 calldata value) returns (gtBool)
 ```
 
 ```solidity
-function transfer(address to, gtUint64 value) returns (gtBool)
+function transfer(address to, gtUint256 value) returns (gtBool)
 ```
 
 ```solidity
@@ -67,7 +67,7 @@ function allowance(address owner, address spender) view returns (Allowance memor
 ```
 
 ```solidity
-function allowance(address account, bool isSpender) returns (gtUint64)
+function allowance(address account, bool isSpender) returns (gtUint256)
 ```
 
 ```solidity
@@ -75,31 +75,31 @@ function reencryptAllowance(address account, bool isSpender) returns (bool)
 ```
 
 ```solidity
-function approve(address spender, itUint64 calldata value) returns (bool)
+function approve(address spender, itUint256 calldata value) returns (bool)
 ```
 
 ```solidity
-function approve(address spender, gtUint64 value) returns (bool)
+function approve(address spender, gtUint256 value) returns (bool)
 ```
 
 ```solidity
-function transferFrom(address from, address to, itUint64 calldata value) returns (gtBool)
+function transferFrom(address from, address to, itUint256 calldata value) returns (gtBool)
 ```
 
 ```solidity
-function transferFrom(address from, address to, gtUint64 value) returns (gtBool)
+function transferFrom(address from, address to, gtUint256 value) returns (gtBool)
 ```
 
 ```solidity
-function _transfer(address from, address to, gtUint64 value) returns (gtBool)
+function _transfer(address from, address to, gtUint256 value) returns (gtBool)
 ```
 
 ```solidity
-function _update(address from, address to, gtUint64 value) returns (gtBool)
+function _update(address from, address to, gtUint256 value) returns (gtBool)
 ```
 
 ```solidity
-function _getBalance(address account) returns (gtUint64)
+function _getBalance(address account) returns (gtUint256)
 ```
 
 ```solidity
@@ -107,35 +107,35 @@ function _getAccountEncryptionAddress(address account) view returns (address)
 ```
 
 ```solidity
-function _updateBalance(address account, gtUint64 balance)
+function _updateBalance(address account, gtUint256 balance)
 ```
 
 ```solidity
-function _mint(address account, gtUint64 value) returns (gtBool)
+function _mint(address account, gtUint256 value) returns (gtBool)
 ```
 
 ```solidity
-function _burn(address account, gtUint64 value) returns (gtBool)
+function _burn(address account, gtUint256 value) returns (gtBool)
 ```
 
 ```solidity
-function _approve(address owner, address spender, gtUint64 value)
+function _approve(address owner, address spender, gtUint256 value)
 ```
 
 ```solidity
-function _spendAllowance(address owner, address spender, gtUint64 value)
+function _spendAllowance(address owner, address spender, gtUint256 value)
 ```
 
 ```solidity
-function _safeOnboard(ctUint64 value) returns (gtUint64)
+function _safeOnboard(ctUint256 value) returns (gtUint256)
 ```
 
 ```solidity
-event Transfer(address indexed from, address indexed to, ctUint64 senderValue, ctUint64 receiverValue);
+event Transfer(address indexed from, address indexed to, ctUint256 senderValue, ctUint256 receiverValue);
 ```
 
 ```solidity
-event Approval(address indexed owner, address indexed spender, ctUint64 ownerValue, ctUint64 spenderValue);
+event Approval(address indexed owner, address indexed spender, ctUint256 ownerValue, ctUint256 spenderValue);
 ```
 
 ## Errors

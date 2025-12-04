@@ -148,11 +148,24 @@ async function encryptValue(plaintextValue: bigint | number | string, contractAd
 ```
 
 * **Parameters**:
-  * `plaintextValue`: The value to encrypt, which can be of type `bigint`, `number`, or `string`.
+  * `plaintextValue`: The value to encrypt, which can be of type `bigint`, `number`, or `string`. For numeric values, must be 128 bits or smaller.
   * `contractAddress`: The smart contract address to which the encryption is related.
   * `functionSelector`: The function identifier for the contract interaction.
 * **Returns**: A `Promise<itUint | itString>`, depending on the type of the plaintext value.
-* **Description**: Encrypts the provided plaintext using the user’s AES key. If the AES key is not available, it attempts to generate or recover it via onboarding. The function handles both integer and string values and returns the encrypted result accordingly.
+* **Description**: Encrypts the provided plaintext using the user's AES key. If the AES key is not available, it attempts to generate or recover it via onboarding. The function handles both integer (up to 128 bits) and string values and returns the encrypted result accordingly. For values larger than 128 bits, use `encryptValue256` instead.
+* **Throws**: `Error` if numeric values exceed 128 bits or if the AES key cannot be generated or recovered.
+
+```typescript
+async function encryptValue256(plaintextValue: bigint | number, contractAddress: string, functionSelector: string): Promise<itUint256>
+```
+
+* **Parameters**:
+  * `plaintextValue`: The value to encrypt, which can be of type `bigint` or `number` (must be 256 bits or smaller).
+  * `contractAddress`: The smart contract address to which the encryption is related.
+  * `functionSelector`: The function identifier for the contract interaction.
+* **Returns**: A `Promise<itUint256>`, containing the encrypted ciphertext with `ciphertextHigh` and `ciphertextLow` properties and signature.
+* **Description**: Encrypts the provided plaintext using the user's AES key for 256-bit encrypted values. If the AES key is not available, it attempts to generate or recover it via onboarding. This function only accepts numeric values (bigint or number); for string encryption, use `encryptValue` instead.
+* **Throws**: `Error` if the plaintext value exceeds 256 bits or if the AES key cannot be generated or recovered.
 
 ```typescript
 async function decryptValue(ciphertext: ctUint | ctString): Promise<bigint | string>
@@ -161,7 +174,16 @@ async function decryptValue(ciphertext: ctUint | ctString): Promise<bigint | str
 * **Parameters**:
   * `ciphertext`: The encrypted value, which can either be of type `ctUint` (for integers) or `ctString` (for strings).
 * **Returns**: A `Promise<bigint | string>`, depending on the ciphertext type.
-* **Description**: Decrypts the provided ciphertext using the AES key stored in the user’s onboarding information. If the AES key is missing, it attempts to onboard the user or recover the key. The method supports decryption for both integers and strings.
+* **Description**: Decrypts the provided ciphertext using the AES key stored in the user's onboarding information. If the AES key is missing, it attempts to onboard the user or recover the key. The method supports decryption for both integers and strings.
+
+```typescript
+async function decryptValue256(ciphertext: ctUint256): Promise<bigint>
+```
+
+* **Parameters**:
+  * `ciphertext`: The encrypted value of type `ctUint256` (an object with `ciphertextHigh` and `ciphertextLow` properties, both bigint).
+* **Returns**: A `Promise<bigint>`, the decrypted plaintext value.
+* **Description**: Decrypts the provided 256-bit ciphertext using the AES key stored in the user's onboarding information. If the AES key is missing, it attempts to onboard the user or recover the key. This method only accepts `ctUint256` type ciphertexts; for string decryption, use `decryptValue` instead.
 
 ```typescript
 async function generateOrRecoverAes(onboardContractAddress: string = ONBOARD_CONTRACT_ADDRESS): Promise<void>
@@ -238,11 +260,24 @@ async function encryptValue(plaintextValue: bigint | number | string, contractAd
 ```
 
 * **Parameters**:
-  * `plaintextValue`: The value to encrypt, which can be of type `bigint`, `number`, or `string`.
+  * `plaintextValue`: The value to encrypt, which can be of type `bigint`, `number`, or `string`. For numeric values, must be 128 bits or smaller.
   * `contractAddress`: The address of the smart contract involved in the encryption.
   * `functionSelector`: A string that identifies the specific contract function to which this encryption pertains.
 * **Returns**: A promise that resolves to either `itUint` or `itString`, depending on the type of the value.
-* **Description**: Encrypts the provided `plaintextValue` using the user’s AES key. If the AES key is missing, it attempts to generate or recover it. It handles both `bigint` and `string` values.
+* **Description**: Encrypts the provided `plaintextValue` using the user's AES key. If the AES key is missing, it attempts to generate or recover it. It handles both `bigint` (up to 128 bits) and `string` values. For values larger than 128 bits, use `encryptValue256` instead.
+* **Throws**: `Error` if numeric values exceed 128 bits or if the AES key cannot be generated or recovered.
+
+```typescript
+async function encryptValue256(plaintextValue: bigint | number, contractAddress: string, functionSelector: string): Promise<itUint256>
+```
+
+* **Parameters**:
+  * `plaintextValue`: The value to encrypt, which can be of type `bigint` or `number` (must be 256 bits or smaller).
+  * `contractAddress`: The address of the smart contract involved in the encryption.
+  * `functionSelector`: A string that identifies the specific contract function to which this encryption pertains.
+* **Returns**: A promise that resolves to `itUint256`, containing the encrypted ciphertext with `ciphertextHigh` and `ciphertextLow` properties and signature.
+* **Description**: Encrypts the provided `plaintextValue` using the user's AES key for 256-bit encrypted values. If the AES key is missing, it attempts to generate or recover it. This function only accepts numeric values (bigint or number); for string encryption, use `encryptValue` instead.
+* **Throws**: `Error` if the plaintext value exceeds 256 bits or if the AES key cannot be generated or recovered.
 
 ```typescript
 async function decryptValue(ciphertext: ctUint | ctString): Promise<string | bigint>
@@ -251,7 +286,16 @@ async function decryptValue(ciphertext: ctUint | ctString): Promise<string | big
 * **Parameters**:
   * `ciphertext`: The encrypted value, either a `ctUint` (for integers) or a `ctString` (for strings).
 * **Returns**: A promise that resolves to either a `string` or `bigint`, depending on the ciphertext type.
-* **Description**: Decrypts the given ciphertext using the user’s AES key. If the AES key is not available, it attempts to generate or recover it. Handles both integer and string decryption.
+* **Description**: Decrypts the given ciphertext using the user's AES key. If the AES key is not available, it attempts to generate or recover it. Handles both integer and string decryption.
+
+```typescript
+async function decryptValue256(ciphertext: ctUint256): Promise<bigint>
+```
+
+* **Parameters**:
+  * `ciphertext`: The encrypted value of type `ctUint256` (an object with `ciphertextHigh` and `ciphertextLow` properties, both bigint).
+* **Returns**: A promise that resolves to `bigint`, the decrypted plaintext value.
+* **Description**: Decrypts the given 256-bit ciphertext using the user's AES key. If the AES key is not available, it attempts to generate or recover it. This method only accepts `ctUint256` type ciphertexts; for string decryption, use `decryptValue` instead.
 
 ```typescript
 function enableAutoOnboard()
@@ -272,11 +316,11 @@ function clearUserOnboardInfo()
 * **Description**: Clears the stored user onboarding information by setting `_userOnboardInfo` to `undefined`.
 
 ```typescript
-async function generateOrRecoverAes(onboardContractAddress: string = DEVNET_ONBOARD_CONTRACT_ADDRESS)
+async function generateOrRecoverAes(onboardContractAddress: string = ONBOARD_CONTRACT_ADDRESS)
 ```
 
 * **Parameters**:
-  * `onboardContractAddress`: The contract address for onboarding purposes. Defaults to `DEVNET_ONBOARD_CONTRACT_ADDRESS`.
+  * `onboardContractAddress`: The contract address for onboarding purposes. Defaults to `ONBOARD_CONTRACT_ADDRESS`.
 * **Description**: Attempts to generate or recover the user’s AES key:
   * If the AES key exists in the user’s onboarding info, it returns immediately.
   * If the user’s RSA key and transaction hash are available, the AES key is recovered from the blockchain transaction using `recoverAesFromTx`.

@@ -105,11 +105,39 @@ function buildInputText(plaintext: bigint, sender, contractAddress, functionSele
 Encrypts a plaintext (up to 64 bits) and generates a signed transaction payload.
 
 * **Parameters:**
-  * `plaintext`: The data to be encrypted (must be smaller than 64 bits).
+  * `plaintext`: The data to be encrypted (must be smaller than 2^64, i.e., 64 bits or smaller).
   * `sender`: The sender's information containing their wallet and user key.
   * `contractAddress`: The Ethereum contract address.
   * `functionSelector`: The function selector for the contract function.
 * **Returns:** An `itUint` object containing the encrypted ciphertext and signature.
+
+```typescript
+function prepareIT(plaintext: bigint, sender, contractAddress, functionSelector): itUint
+```
+
+Encrypts a plaintext (up to 128 bits) and generates a signed transaction payload.
+
+* **Parameters:**
+  * `plaintext`: The data to be encrypted (must be 128 bits or smaller).
+  * `sender`: The sender's information containing their wallet and user key.
+  * `contractAddress`: The Ethereum contract address.
+  * `functionSelector`: The function selector for the contract function.
+* **Returns:** An `itUint` object containing the encrypted ciphertext and signature.
+* **Throws:** `RangeError` if plaintext size exceeds 128 bits. For 256-bit plaintexts, use `prepareIT256` instead.
+
+```typescript
+function prepareIT256(plaintext: bigint, sender, contractAddress, functionSelector): itUint256
+```
+
+Encrypts a plaintext (up to 256 bits) and generates a signed transaction payload.
+
+* **Parameters:**
+  * `plaintext`: The data to be encrypted (must be 256 bits or smaller).
+  * `sender`: The sender's information containing their wallet and user key.
+  * `contractAddress`: The Ethereum contract address.
+  * `functionSelector`: The function selector for the contract function.
+* **Returns:** An `itUint256` object containing the encrypted ciphertext (with `ciphertextHigh` and `ciphertextLow` properties) and signature.
+* **Throws:** `RangeError` if plaintext size exceeds 256 bits.
 
 ```typescript
 function buildStringInputText(plaintext: string, sender, contractAddress, functionSelector): itString
@@ -136,6 +164,17 @@ Decrypts an AES-encrypted ciphertext and returns the original plaintext as a `bi
 * **Returns:** The decrypted plaintext as a `bigint`.
 
 ```typescript
+function decryptUint256(ciphertext: ctUint256, userKey: string): bigint
+```
+
+Decrypts an AES-encrypted 256-bit ciphertext and returns the original plaintext as a `bigint`.
+
+* **Parameters:**
+  * `ciphertext`: The encrypted 256-bit ciphertext object with `ciphertextHigh` and `ciphertextLow` properties (type `ctUint256`).
+  * `userKey`: The user key for AES decryption (hex string, 32 characters).
+* **Returns:** The decrypted plaintext as a `bigint`.
+
+```typescript
 function decryptString(ciphertext: { value: bigint[] }, userKey: string): string
 ```
 
@@ -152,3 +191,4 @@ Decrypts an AES-encrypted ciphertext representing a string.
 Generates a random 128-bit AES key.
 
 * **Returns:** A string containing the random bytes.
+
