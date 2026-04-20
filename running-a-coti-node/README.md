@@ -283,3 +283,8 @@ Congratulations on setting up your COTI Node! By running a node, you’re contri
 The following related sections may provide helpful information:
 
 * [coti-node-ecosystem-litepaper.md](coti-node-ecosystem-litepaper.md "mention")
+* [**Node Ecosystem**](../node-ecosystem/README.md) — the managed product experience at [dev.nodes.coti.io](https://dev.nodes.coti.io), including the guided [installer](../node-ecosystem/installation.md), a [UI walkthrough](../node-ecosystem/ui-guide.md) of the spin-up flow, and a [glossary](../node-ecosystem/glossary.md) of thermal states and warm-up windows.
+
+{% hint style="warning" %}
+**Running a node without a valid FQDN means no rewards.** The ecosystem measures uptime by calling your node's JSON-RPC endpoint through your domain name. A node that is fully synced but not publicly reachable over a valid FQDN will not accrue uptime and will not be eligible for rewards. See [Node Ecosystem → Installation](../node-ecosystem/installation.md).
+{% endhint %}
