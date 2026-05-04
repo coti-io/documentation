@@ -8,7 +8,7 @@ While managing public assets is straightforward, the true power of the COTI Priv
 {% step %}
 ### Connecting Your Wallet
 
-* Open the [COTI Privacy Portal](https://privacy.coti.io/) (production) or [dev Privacy Portal](https://dev.privacy.coti.io/) (testnet/staging) in a secure browser. Make sure you completed the [Prerequisites](prerequisites.md) and have the MetaMask extension installed.
+* Open the [COTI Privacy Portal](https://privacy.coti.io/) (production) or [testnet Privacy Portal](https://testnet.privacy.coti.io/) in a secure browser. Make sure you completed the [Prerequisites](prerequisites.md) and have the MetaMask extension installed.
 * Click **Connect Wallet** in the top-left area of the portal. MetaMask will ask you to authorize the connection. Review the request and approve it.\
     <br>
 
