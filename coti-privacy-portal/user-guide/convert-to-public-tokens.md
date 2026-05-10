@@ -27,7 +27,15 @@ Native **p.COTI** withdrawals also use an approval step for the native privacy b
 #### Confirm Portal Out (withdraw)
 
 * Click **Portal Out** (or the button shown to complete the withdrawal) and confirm the transaction in MetaMask.
-*   The private tokens are burned on the private side and the corresponding **public** tokens return to your wallet.
+* Private tokens are **burned** for the amount you withdraw. Your wallet then receives **public** tokens matching that flow (**native COTI** or the **ERC‑20** for that asset), subject to bridge rules below.
+
+{% hint style="info" %}
+**Native p.COTI → public COTI:** On-chain you burn the **full** private amount you approved. The bridge takes the **protocol fee** in native COTI from that withdrawal, so **public COTI you receive ≈ burnt amount − fee** (the fee stays with the bridge until collected by the protocol). The Portal should quote the fee from the oracle before you sign.
+
+**Private ERC‑20 → public ERC‑20:** You receive the **full** public token amount shown for the withdrawal. The bridge **protocol fee** is charged **separately in native COTI** (`msg.value` in the transaction), not withheld from the token amount—have enough native COTI balance for gas and that fee.
+
+**Smart contract wallets:** If your wallet rejects **unsolicited ETH** from the bridge, any **refunded** native COTI may be credited for you to **claim** yourself later via the bridge helper (same **`msg.sender` only** — use an address or flow that accepts native transfers).
+{% endhint %}
 
     <div data-with-frame="true"><figure><img src="../../.gitbook/assets/Screenshot 2026-03-24 at 3.42.27 PM.png" alt="Transaction Approval"><figcaption><p>Confirm withdrawal in the wallet</p></figcaption></figure></div>
 

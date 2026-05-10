@@ -1,6 +1,8 @@
 # Contract Addresses
 
-Addresses for **COTI Testnet (7082400)** below match the Privacy Portal source of truth: `coti-privacy-portal/src/contracts/config.ts`. They may change after contract redeploys; always verify against that file or your deployed environment.
+**Published source of truth:** This page and the Privacy Portal app config (`coti-privacy-portal/src/contracts/config.ts`) must stay **in lockstep** for addresses users see in production. After each **mainnet / testnet deploy**, update **both** and tag the **documentation** repo (or release branch) so **“which bytecode + which addresses”** pairs with **audit reports** and internal runbooks.
+
+Addresses for **COTI Testnet (7082400)** below match the Privacy Portal source of truth. They may change after contract redeploys; always verify against this file **and** `config.ts` for your environment.
 
 #### COTI Testnet (Chain ID: 7082400)
 
