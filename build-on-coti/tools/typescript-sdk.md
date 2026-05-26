@@ -152,3 +152,44 @@ Decrypts an AES-encrypted ciphertext representing a string.
 Generates a random 128-bit AES key.
 
 * **Returns:** A string containing the random bytes.
+
+## High-Level DApp Utilities
+
+The SDK also includes high-level utilities commonly needed by front-end applications and wallet integrations.
+
+```typescript
+function normalizeAesKey(aesKey: string): string
+```
+
+Normalizes an AES key string by removing the `0x` prefix, lowering its case, and ensuring it holds valid hexadecimal characters representation (for exactly 128 bits or 256 bits).
+
+* **Parameters:**
+  * `aesKey`: The user's AES key as a hex string.
+* **Returns:** The normalized AES key.
+* **Throws:** An HTTP error or RangeError when the AES key is invalid.
+
+```typescript
+function decryptCtUint64(ciphertext: ctUint, aesKey: string, options?: DecryptionOptions): bigint | null
+```
+
+A robust wrapper around `decryptUint` that cleanly handles zero balances and applies a sanity check (`isInsaneDecryptedValue`) to prevent garbage output when a wrong AES key is accidentally supplied.
+
+* **Parameters:**
+  * `ciphertext`: The encrypted 64-bit ciphertext.
+  * `aesKey`: The user key for decryption.
+  * `options`: Optional arguments like `decimals` and `insaneThresholdBase` to tune the sanity boundary limits. 
+* **Returns:** The decrypted big integer, or `null` if the decryption breached sanity threshold limits.
+
+```typescript
+function buildItSignature(signerAddress: string, contractAddress: string, functionSelector: string, ciphertext: bigint, privateKey: string): string
+```
+
+Builds the standardized COTI IT signature required by encrypted parameters in COTI L2 smart contracts, computing `solidityPackedKeccak256` and constructing the final properly padded EVM verification signature mapping 27/28 to 0/1.
+
+* **Parameters:**
+  * `signerAddress`: The signer's wallet public address.
+  * `contractAddress`: Target COTI L2 smart-contract address.
+  * `functionSelector`: The EVM 4-byte selector.
+  * `ciphertext`: The resulting input-text encoded `bigint`.
+  * `privateKey`: Signer's private key string.
+* **Returns:** A properly normalized 65-byte hex string (including the v-byte mapping padding) ready to be embedded as the IT signature.
