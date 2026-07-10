@@ -1,5 +1,9 @@
 # Snap Integration
 
+{% hint style="info" %}
+**Building a React/wagmi dApp?** Use the [COTI Wallet Plugin](../../coti-wallet-plugin/README.md) instead. It handles Snap RPC wiring, AES onboarding, and private balance decryption through a provider + hooks model. This guide is for low-level Snap integration without the wallet plugin.
+{% endhint %}
+
 ### Integrating your dApp with the COTI MetaMask Snap
 
 If you are building a dApp on the COTI network and want it to interact with the COTI MetaMask snap, follow these steps:

@@ -1,5 +1,9 @@
 # Frontend Integration
 
+{% hint style="info" %}
+**Building a React/wagmi dApp?** Use the [COTI Wallet Plugin](../../build-on-coti/tools/coti-wallet-plugin/README.md) as the recommended integration path. It handles AES onboarding, unlock, balance decryption, and private operations through `PrivacyBridgeProvider` and hooks — without your dApp handling raw AES keys. The manual examples below remain useful for non-React stacks.
+{% endhint %}
+
 ## Wallet Onboarding (AES Key)
 
 Before any encrypted operation, the user must be onboarded to get their AES key. **COTI MetaMask Snap** provides key management.
