@@ -194,7 +194,7 @@ See [Configuration](configuration.md) for all `CotiPluginConfig` options.
 | `CHAIN_CONFIGS` | All supported chain configurations |
 | `getChainConfig(chainId)` | Lookup chain config |
 | `getTokensForChain(chainId)` | Token list for a chain |
-| `getUnlockStrategyForChain(chainId)` | Unlock strategy (`snap` or `manual-aes-key`) |
+| `getUnlockStrategyForChain(chainId)` | Chain-config metadata (`snap` or `manual-aes-key`); not the runtime unlock order — see [AES Key Onboarding](aes-key-onboarding.md) |
 | `cotiMainnet`, `cotiTestnet`, `sepolia` | viem chain definitions |
 | `COTI_MAINNET_CHAIN_ID`, `COTI_TESTNET_CHAIN_ID`, `SEPOLIA_CHAIN_ID` | Chain ID constants |
 

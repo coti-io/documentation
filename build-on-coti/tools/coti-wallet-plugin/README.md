@@ -34,12 +34,21 @@ If you are building without React or wagmi, use the lower-level [TypeScript SDK]
 
 ## Supported chains
 
-| Chain | Chain ID | Portal strategy | Unlock strategy |
-| --- | --- | --- | --- |
-| COTI Testnet | 7082400 | COTI native bridge | MetaMask Snap |
-| COTI Mainnet | 2632500 | COTI native bridge | MetaMask Snap |
-| Sepolia | 11155111 | PoD Privacy Portal | Manual AES key |
-| Avalanche Fuji | 43113 | PoD Privacy Portal | Manual AES key |
+| Chain | Chain ID | Portal strategy |
+| --- | --- | --- |
+| COTI Testnet | 7082400 | COTI native bridge |
+| COTI Mainnet | 2632500 | COTI native bridge |
+| Sepolia | 11155111 | PoD Privacy Portal |
+| Avalanche Fuji | 43113 | PoD Privacy Portal |
+
+Unlock is wallet-based (same on every supported chain), in preferred order:
+
+1. MetaMask Snap (when MetaMask + Snap is available)
+2. Encrypted backup restore
+3. Contract onboarding (on COTI)
+4. Manual AES key input (if the host enables it)
+
+See [AES Key Onboarding](aes-key-onboarding.md) for routes and fallbacks.
 
 ## Relationship to other COTI tools
 
