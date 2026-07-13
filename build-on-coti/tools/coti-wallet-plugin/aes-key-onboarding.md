@@ -30,8 +30,18 @@ Then call `usePrivateUnlock().unlock()`, `usePrivateUnlock().lock()`, or `usePri
 7. `signer.generateOrRecoverAes()` runs the onboarding flow. The wallet sees the message signature and, for first-time onboarding, the on-chain transaction.
 8. The plugin reads and validates the AES key, then switches the wallet back to the original chain when applicable.
 9. For MetaMask, the plugin attempts to persist the key into the Snap if the origin is allowed.
-10. If backup save callbacks are configured, the plugin encrypts the AES key and calls `saveEncryptedAesBackup` or `replaceEncryptedAesBackup`.
-11. The flow completes and returns the AES key.
+10. If **Save Locally** is enabled and backup save callbacks are configured, the plugin encrypts the AES key and calls `saveEncryptedAesBackup` or `replaceEncryptedAesBackup`. When Snap storage is used for onboarding, encrypted backup save is skipped (the Snap already holds the key).
+11. The flow completes and returns the AES key. Unlock is only treated as successful after private balances refresh with the session key.
+
+## Save Locally and progress UI
+
+Non-Snap wallets show a **Save Locally** switch card in `OnboardModal` (encrypted backup blob; restore still needs a wallet signature). MetaMask Snap onboarding hides that switch because the Snap persists the key.
+
+| Situation | Persist step in progress UI | Encrypted backup save |
+| --- | --- | --- |
+| Non-Snap, **Save Locally** on | Shown (`persisting-key` / `saving-backup`) | Runs when backup services are configured |
+| Non-Snap, **Save Locally** off | Hidden | Skipped |
+| Snap onboarding | Shown (Snap always persists the key) | Skipped; key goes to Snap |
 
 ## Example app services
 
@@ -48,14 +58,14 @@ The [example app](example-app.md) configures `onboardingServices` with `mode: 'c
 
 The example keeps the active AES key in memory. LocalStorage is only a sample backing store for the encrypted backup blob, not the live session key.
 
-Manual AES key input uses the same encrypted backup helper as contract onboarding when **Save encrypted backup** is checked: the user signs the backup context, the key is encrypted, and the encrypted blob is saved through the configured API or localStorage path.
+Manual AES key input uses the same encrypted backup helper as contract onboarding when **Save Locally** is on: the user signs the backup context, the key is encrypted, and the encrypted blob is saved through the configured API or localStorage path. If the user rejects that backup signature, the plugin cancels local save, skips the AES key success screen, and still completes unlock with the session key when balance refresh succeeds.
 
 ## Security properties
 
 1. The active AES key is session-only React state and is wallet-bound to prevent cross-account leakage.
-2. Encrypted backups are optional and host-defined through `configureCotiPlugin`.
+2. Encrypted backups are optional and host-defined through `configureCotiPlugin`. The user can turn **Save Locally** off for non-Snap flows.
 3. Backup restore requires a wallet signature, so a stored blob alone is not enough to recover the AES key.
-4. Manual AES key input is session-only unless the host separately persists it.
+4. Manual AES key input is session-only unless **Save Locally** (or Snap persistence) stores it.
 5. Locking private balances clears plaintext session AES state and hides balances. Snap keys and encrypted backups remain intact for the next unlock.
 
 ## Error handling
@@ -63,6 +73,8 @@ Manual AES key input uses the same encrypted backup helper as contract onboardin
 * User rejection during Snap, restore signature, chain switch, or onboarding returns without storing a key.
 * Backup restore failures fall through to contract onboarding and set a non-blocking warning.
 * Backup save failures do not block a successful onboarding; the user receives a warning.
+* Rejecting the manual **Save Locally** backup signature cancels local save and skips the success screen; unlock can still finish if private balances refresh.
+* Unlock does not succeed if private balances fail to refresh after the AES key is available.
 * Grant API HTTP errors are treated as skipped grants. The onboarding transaction still needs native COTI gas, so an unfunded wallet fails through the normal insufficient-balance path.
 * Invalid AES key format sets an onboarding error state.
 

@@ -45,9 +45,9 @@ High-level unlock controller. Preferred API for app UI.
 
 | Property / method | Type | Description |
 | --- | --- | --- |
-| `isUnlocked` | `boolean` | Private balances are visible |
+| `isUnlocked` | `boolean` | Private balances are visible (requires successful balance refresh, not only an AES key) |
 | `isUnlocking` | `boolean` | Unlock/onboarding in progress |
-| `unlock()` | `() => Promise<void>` | Start unlock flow |
+| `unlock()` | `() => Promise<void>` | Start unlock flow; succeeds only after private balances refresh |
 | `lock()` | `() => void` | Hide private balances |
 | `toggleLock()` | `() => void` | Toggle lock state |
 | `requireUnlock(action)` | `(action?) => Promise<boolean>` | Ensure unlock, then run action |
@@ -164,7 +164,7 @@ Flat union of all slices. Existing consumers may continue using this; new code s
 
 Onboarding UI component. **Do not render directly** for unlock — `PrivateUnlockProvider` mounts it.
 
-Exports `onboardModalDefaultStyles` and `ONBOARD_MODAL_STYLE_KEYS` for theming. See [Onboard Modal Theming](onboard-modal-theme.md).
+Non-Snap flows show a **Save Locally** switch for optional encrypted backup; Snap onboarding hides it and still shows the persist progress step. Exports `onboardModalDefaultStyles` and `ONBOARD_MODAL_STYLE_KEYS` for theming. See [Onboard Modal Theming](onboard-modal-theme.md) and [AES Key Onboarding](aes-key-onboarding.md).
 
 ### `NetworkGuard`
 

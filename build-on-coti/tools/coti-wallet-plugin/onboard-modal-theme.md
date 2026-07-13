@@ -21,7 +21,8 @@ const lightOnboardTheme: OnboardModalTheme = {
   },
   title: { color: '#0f172a' },
   description: { color: '#64748b' },
-  checkboxText: { color: '#0f172a' },
+  saveOptionTitle: { color: '#0f172a' },
+  saveOptionDescription: { color: '#64748b' },
   tooltipButton: { color: '#64748b' },
   primaryButton: { backgroundColor: '#1E29F6', color: '#ffffff' },
   cancelButton: { color: '#64748b' },
@@ -44,7 +45,8 @@ Do **not** render `<OnboardModal />` yourself for the unlock flow — the provid
 
 1. `OnboardModal` starts from `onboardModalDefaultStyles` (dark palette).
 2. Your `OnboardModalTheme` partial overrides are shallow-merged per style target.
-3. When a theme is provided, the plugin fills common text targets (`checkboxText`, `tooltipButton`, icon buttons, etc.) from your `title` / `modal` / `description` tokens if you did not set them explicitly.
+3. When a theme is provided, the plugin fills common text targets (`saveOptionTitle`, `saveOptionDescription`, `tooltipButton`, icon buttons, etc.) from your `title` / `modal` / `description` tokens if you did not set them explicitly.
+4. On light modal backgrounds, the plugin also fills interactive surfaces that still use dark defaults (including the **Save Locally** card and switch tracks) so controls stay visible.
 
 ## Style targets
 
@@ -56,7 +58,11 @@ Import `ONBOARD_MODAL_STYLE_KEYS` or `onboardModalDefaultStyles` from the packag
 | `modal` | Dialog panel (`backgroundColor`, `color`, `border`) |
 | `title` | Headings on every screen |
 | `description` | Body copy under the title |
-| `checkboxText` | "Save encrypted backup" label |
+| `saveOptionCard` / `saveOptionCardActive` | **Save Locally** option card (idle / enabled) |
+| `saveOptionIconWrap` | Icon badge on the Save Locally card |
+| `saveOptionTitle` / `saveOptionDescription` | Save Locally title and helper text |
+| `saveOptionSwitchTrack` / `saveOptionSwitchTrackOn` / `saveOptionSwitchTrackOff` | Switch track base / on / off states |
+| `saveOptionSwitchKnob` | Switch knob |
 | `tooltipButton` / `tooltipBubble` | `?` help control and tooltip |
 | `primaryButton` / `primaryButtonDisabled` | Main CTA |
 | `cancelButton` | Secondary dismiss action |
@@ -67,9 +73,15 @@ Import `ONBOARD_MODAL_STYLE_KEYS` or `onboardModalDefaultStyles` from the packag
 
 Each value is a `React.CSSProperties` object (same as inline `style`).
 
+{% hint style="info" %}
+The **Save Locally** control is a switch card, not a checkbox. Theme the `saveOption*` keys (or rely on palette gap-filling from `title` / `description` / `modal`).
+{% endhint %}
+
 ## Minimum for light mode
 
-Set at least `modal`, `title`, and `description`. The plugin fills other text targets from those tokens when they still use the built-in dark defaults.
+Set at least `modal`, `title`, and `description`. The plugin fills other text and light-mode surface targets from those tokens when they still use the built-in dark defaults.
+
+For fuller light-mode control of Save Locally, also set `saveOptionCard`, `saveOptionSwitchTrackOff`, and `saveOptionSwitchTrackOn` (see the [example app](example-app.md) `onboardTheme.ts`).
 
 ## Light / dark toggle
 
@@ -125,3 +137,4 @@ Show a non-blocking warning in the modal:
 
 * [Integration Guide](integration-guide.md)
 * [Configuration](configuration.md)
+* [AES Key Onboarding](aes-key-onboarding.md)

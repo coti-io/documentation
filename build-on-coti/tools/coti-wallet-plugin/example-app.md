@@ -32,7 +32,7 @@ This installs dependencies in the plugin root and examples, rebuilds the wallet 
 
 Opens at http://localhost:5173
 
-Use the **Light mode / Dark mode** button in the header to preview onboard-modal theming. The example passes `privateUnlock.theme` built from `src/onboardTheme.ts` — the same pattern host apps should use.
+Use the **Light mode / Dark mode** button in the header to preview onboard-modal theming, including the **Save Locally** switch card. The example passes `privateUnlock.theme` built from `src/onboardTheme.ts` — the same pattern host apps should use.
 
 ### Local Snap development
 

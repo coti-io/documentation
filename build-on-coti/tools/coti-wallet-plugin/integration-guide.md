@@ -20,7 +20,8 @@ const onboardTheme: OnboardModalTheme = {
   title: { color: '#0f172a' },
   description: { color: '#64748b' },
   primaryButton: { backgroundColor: '#1E29F6', color: '#ffffff' },
-  checkboxText: { color: '#0f172a' },
+  saveOptionTitle: { color: '#0f172a' },
+  saveOptionDescription: { color: '#64748b' },
   tooltipButton: { color: '#64748b' },
 };
 
@@ -108,7 +109,7 @@ export function HeaderUnlockButton() {
 | --- | --- |
 | `isUnlocked` | `true` when private balances are visible |
 | `isUnlocking` | `true` while unlock/onboarding is in progress |
-| `unlock()` | Start the unlock flow |
+| `unlock()` | Start the unlock flow (succeeds only after private balances refresh) |
 | `lock()` | Hide private balances |
 | `toggleLock()` | Toggle between locked and unlocked |
 | `requireUnlock(action)` | Run `action` after ensuring unlock; returns `true` if unlocked |
@@ -233,13 +234,16 @@ unlock()
   → try cached session key
   → try restore backup / Snap
   → open onboarding modal only if restore fails
+  → succeed only after private balances refresh
 ```
 
 {% hint style="warning" %}
-`isUnlocked` (or `isPrivateUnlocked`) means **private balances are visible** — it does not guarantee a key exists in Snap or backup storage. Do not use it to infer onboarding state.
+`isUnlocked` (or `isPrivateUnlocked`) means **private balances are visible** — it does not guarantee a key exists in Snap or backup storage. Do not use it to infer onboarding state. Having an AES key alone is not enough; unlock requires a successful private balance refresh.
 {% endhint %}
 
-Contract onboarding always ends on the plugin success screen. The user can reveal/copy the raw AES key, then click Done. Any pending action passed to `requireUnlock` runs after Done.
+Contract onboarding normally ends on the plugin success screen. The user can reveal/copy the raw AES key, then click Done. Any pending action passed to `requireUnlock` runs after Done.
+
+Non-Snap flows show a **Save Locally** switch for optional encrypted backup. Snap onboarding hides that switch and still shows the persist step because the Snap always stores the key. If the user rejects the manual backup signature while Save Locally is on, the plugin skips the success screen and completes unlock when balance refresh succeeds. See [AES Key Onboarding](aes-key-onboarding.md).
 
 ## Onboarding routes
 
