@@ -10,6 +10,7 @@ Privacy on Demand lets applications use **strong privacy for data and computatio
 
 - **[Tutorials: PoD dApps (choose your integration model)](tutorials-privacy-on-demand.md)** — Primitive-only vs custom COTI logic, then links to step-by-step guides.
 - **[Architecture and design](architecture-and-components.md)** — Inbox, MPC executor, PodUser, PodLib, and how they connect.
+- **[Networks](networks/README.md)** — COTI Testnet and Avalanche Fuji parameters plus PoD contract addresses.
 - **[Interactive PoD architecture (pod.coti.io)](https://pod.coti.io/)** — Live demo: play the MpcAdder journey across Sepolia, relayer, and COTI, with GitHub source links and gas/fee visualization.
 - **[Learn about fees](how-poa-fees-work.md)** — How PoA/PoD fees split across COTI and your host chain.
 - **[Millionaires demo](https://millionaire.demo.coti.io)** — Live demo (external).
@@ -42,21 +43,22 @@ This section explains **what PoD is**, **how it feels to users and operators**, 
 1. [What is Privacy on Demand?](what-is-privacy-on-demand.md) — Problem, promise, and constraints in everyday language.
 2. [How a private request travels end to end](how-a-private-request-travels-end-to-end.md) — Timeline from user action to decrypted result.
 3. [Architecture and main components](architecture-and-components.md) — Where **Inbox**, **MPC executor**, **PodUser**, and **PodLib** sit, with diagrams.
-4. [Glossary](glossary.md) — Short definitions of terms you will see in PoD and SDK docs.
+4. [Networks](networks/README.md) — Supported PoD test networks and contract addresses ([COTI Testnet](networks/coti-testnet.md), [Avalanche Fuji](networks/fuji.md)).
+5. [Glossary](glossary.md) — Short definitions of terms you will see in PoD and SDK docs.
 
 ### Deeper context
 
-5. [Async private operations (why it is not instant)](async-private-operations.md) — What “pending” means and why UX must reflect it.
-6. [How do PoA fees work?](how-poa-fees-work.md) — Two-way Inbox budgets, oracle conversion, and step-by-step gas-unit consumption (worked example).
-7. [For developers: mapping concepts to the SDK](for-developers-mapping-to-the-sdk.md) — Checklists and links to the [PoD SDK documentation on GitHub](https://github.com/cotitech-io/coti-pod-sdk/tree/main/docs).
+6. [Async private operations (why it is not instant)](async-private-operations.md) — What “pending” means and why UX must reflect it.
+7. [How do PoA fees work?](how-poa-fees-work.md) — Two-way Inbox budgets, oracle conversion, and step-by-step gas-unit consumption (worked example).
+8. [For developers: mapping concepts to the SDK](for-developers-mapping-to-the-sdk.md) — Checklists and links to the [PoD SDK documentation on GitHub](https://github.com/cotitech-io/coti-pod-sdk/tree/main/docs).
 
 ### Tutorials (hands-on)
 
-8. [Tutorials: building PoD dApps](tutorials-privacy-on-demand.md) — When to use **MpcLib / PodLib** primitives vs **custom COTI + host** contracts, with links to focused walkthroughs.
-9. [TypeScript PoD SDK (`CotiPodCrypto`, `PodContract`)](typescript-pod-sdk.md) — Encryption/decryption, fee estimation, method calls, and request ID extraction.
-10. [Cookbook: private investor allocations with PoD](cookbook-private-investor-allocations.md) — Start from a familiar public Sepolia allocation dApp, then make allocation reads and withdrawals private with PoD.
-11. [Tutorial: private Adder on Sepolia](tutorial-private-adder-sepolia.md) — Minimal primitive-only adder: `PodUserSepolia`, fees, TypeScript crypto.
-12. [Tutorial: custom privacy logic with PoD](tutorial-custom-logic.md) — Encrypted messaging shape: `DirectMessageCotiSide` + Sepolia orchestrator.
+9. [Tutorials: building PoD dApps](tutorials-privacy-on-demand.md) — When to use **MpcLib / PodLib** primitives vs **custom COTI + host** contracts, with links to focused walkthroughs.
+10. [TypeScript PoD SDK (`CotiPodCrypto`, `PodContract`)](typescript-pod-sdk.md) — Encryption/decryption, fee estimation, method calls, and request ID extraction.
+11. [Cookbook: private investor allocations with PoD](cookbook-private-investor-allocations.md) — Start from a familiar public Sepolia allocation dApp, then make allocation reads and withdrawals private with PoD.
+12. [Tutorial: private Adder on Sepolia](tutorial-private-adder-sepolia.md) — Minimal primitive-only adder: `PodUserSepolia`, fees, TypeScript crypto.
+13. [Tutorial: custom privacy logic with PoD](tutorial-custom-logic.md) — Encrypted messaging shape: `DirectMessageCotiSide` + Sepolia orchestrator.
 
 ## Official technical reference
 
