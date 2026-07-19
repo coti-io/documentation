@@ -25,6 +25,7 @@ This helps keep your financial data confidential.
 This guide will walk you through how to:
 
 * connect your wallet to the Privacy Portal
+* [onboard](../../build-on-coti/core-concepts/what-is-onboarding.md) so private features can unlock
 * bridge public tokens into private tokens
 * send and receive private transactions
 * view your balances securely

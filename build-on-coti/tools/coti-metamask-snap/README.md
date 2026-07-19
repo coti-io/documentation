@@ -30,6 +30,8 @@ Once the snap is installed, the MetaMask site will offer to continue to COTI's c
 
 #### **2. Onboard Account (Retrieve AES Key)**
 
+For a plain-language overview, see [What Is Onboarding?](../../core-concepts/what-is-onboarding.md).
+
 Once you are in the companion dApp site ([metamask.coti.io](https://metamask.coti.io)):
 
 1. Click on the "**Connect Wallet**" button, follow the prompts on MetaMask.

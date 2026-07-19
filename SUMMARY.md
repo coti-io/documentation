@@ -26,6 +26,7 @@
     * [COTI vs others](how-coti-works/advanced-topics/coti-vs-others.md)
 * [Build on COTI](build-on-coti/README.md)
   * [Core Concepts](build-on-coti/core-concepts/README.md)
+    * [What Is Onboarding?](build-on-coti/core-concepts/what-is-onboarding.md)
     * [Account Onboarding Procedure](build-on-coti/core-concepts/onboard-user.md)
     * [Private Data Types](build-on-coti/core-concepts/secure-data-types.md)
     * [Supported Operations on Private Data Types](build-on-coti/core-concepts/secure-operations-and-gas.md)
