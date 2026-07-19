@@ -20,6 +20,21 @@ Private execution happens **outside** your chain’s normal synchronous EVM fram
 
 The SDK’s [Async execution](https://github.com/cotitech-io/coti-pod-sdk/blob/main/docs/05a-async-execution.md) page lists the canonical lifecycle and common mistakes (wrong decode shape, missing `onlyInbox`, expecting same-block completion).
 
+### System errors vs application `raise`
+
+Both are delivered to the **same** source `errorSelector(bytes data)` (same path as `inbox.raise`). Branch with `inbox.inboxErrorType()` (`SystemError` vs `Exception`).
+
+| Kind | When | COTI target ran? | `data` layout | Retryable via `retryFailedRequest`? |
+| --- | --- | --- | --- | --- |
+| **System error** | Encode / `validateCiphertext` fails before the COTI app runs | No | Inbox `{ErrorData}`: `abi.encode(uint64 code, bytes message)` (code `2`). Sender is `SYSTEM_SENDER` | **No** |
+| **App `raise`** | COTI app calls `inbox.raise(...)` | Yes (started) | **dApp-defined** (e.g. `abi.encode(from, to, reason)`) | Submit a **new** request after pending clears |
+| **Execution failure** | Target reverts without `raise` (code `1`) | Yes | No automatic source callback | **Yes** on COTI |
+
+**Handler pattern** (see PodERC20 error callbacks):
+
+1. `onlyInbox`; `_errorCallbackContext()` **reverts** unless `inboxErrorType()` is `SystemError`/`Exception`, `sourceRequestId` is linked, and status is Pending.
+2. Branch on type: `SystemError` → decode Inbox `{ErrorData}`; `Exception` → decode your app `raise` layout.
+
 ## What product and support teams should plan for
 
 | Topic | Recommendation |

@@ -24,6 +24,16 @@ This page describes **one full cycle** of Privacy on Demand **without assuming S
 6. **The MPC Executor returns through Inbox (COTI) and Inbox (EVM)**, delivering an **ABI-encoded payload** of **`ct*` ciphertext**: encrypted outputs suitable to store on your chain.
 7. **Your contract records the result** keyed by a **request ID**. The **user reads ciphertext from chain or API**, then **decrypts locally** with their **account AES key** (after proper onboarding).
 
+### Encode / `validateCiphertext` failure (system error)
+
+If Inbox encoding fails **before** the MPC Executor runs (most commonly a bad `it*` signature), COTI never calls your target contract. Instead the Inbox:
+
+1. Records error code `2` (`ERROR_CODE_ENCODE_FAILED`) and emits `ErrorReceived`.
+2. Automatically sends a return leg to your source `errorSelector` with Inbox `{ErrorData}` (`abi.encode(uint64 code, bytes message)`, code `2`) attributed to `SYSTEM_SENDER` — see [Async private operations](async-private-operations.md).
+3. Marks the incoming request executed so it is **not** eligible for `retryFailedRequest`.
+
+Your source error callback must clear pending state and surface failure to the UI. Users submit a **new** request after pending clears.
+
 ## Sequence diagram (conceptual)
 
 **Colors:** the **cool charcoal** panel is **contracts on your host chain (Ethereum)**—**Your dApp contract** and **Inbox (EVM)**. The **warm charcoal** panel is **contracts on COTI**—**Inbox (COTI)** and **MPC Executor**. **User** and **Client app** are off-chain (default styling). Arrows **between** the two dark panels are **cross-chain / cross-domain** handoffs. The diagram uses a **dark theme** so labels stay light-on-dark and readable.
