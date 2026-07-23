@@ -20,6 +20,42 @@ Private execution happens **outside** your chain’s normal synchronous EVM fram
 
 The SDK’s [Async execution](https://github.com/cotitech-io/coti-pod-sdk/blob/main/docs/05a-async-execution.md) page lists the canonical lifecycle and common mistakes (wrong decode shape, missing `onlyInbox`, expecting same-block completion).
 
+### System errors vs application `raise`
+
+Both are delivered to the **same** source `errorSelector(bytes data)` (same path as `inbox.raise`). Branch with `inbox.inboxErrorType()` (`SystemError` vs `Exception`).
+
+| Kind | When | COTI target ran? | `data` layout | Retryable via `retryFailedRequest`? |
+| --- | --- | --- | --- | --- |
+| **System error** | Encode / `validateCiphertext` fails before the COTI app runs | No | Inbox `{ErrorData}`: `abi.encode(uint64 code, bytes message)` (code `2`). Sender is `SYSTEM_SENDER` | **No** |
+| **App `raise`** | COTI app calls `inbox.raise(...)` | Yes (started) | **dApp-defined** (e.g. `abi.encode(from, to, reason)`) | Submit a **new** request after pending clears |
+| **Execution failure** | Target reverts without `raise` (code `1`) | Yes | No automatic source callback; error stored on COTI Inbox | **Yes** on COTI (permissionless) |
+
+**Handler pattern** (see PodERC20 error callbacks):
+
+1. `onlyInbox`; `_errorCallbackContext()` **reverts** unless `inboxErrorType()` is `SystemError`/`Exception`, `sourceRequestId` is linked, and status is Pending.
+2. Branch on type: `SystemError` → decode Inbox `{ErrorData}`; `Exception` → decode your app `raise` layout.
+
+### One-way vs two-way error handling
+
+- **`sendOneWayMessage` rejects a non-zero `errorSelector`.** One-way jobs have no return / error callback leg. If you need an `errorSelector` handler, use a **two-way** message.
+- System-error and app-`raise` callbacks therefore apply to **two-way** flows that registered an `errorSelector`.
+
+### Execution failure, capped returndata, and `getOutboxError`
+
+When the COTI target reverts without `raise`, the miner records **error code `1`** and stores the first ≤**256** bytes of returndata in `errors[requestId].errorMessage`.
+
+- **`getOutboxError(requestId)`** returns `(code, data)` where `data` is those same raw bytes. Decode `Error(string)` / custom errors in your client (JS/TS).
+- If `data.length == 256`, the original returndata may have been longer (cap truncated it).
+
+Anyone may call permissionless **`retryFailedRequest(requestId)`** on COTI while the stored code is still `1`. A retry that fails to **re-encode** the call **reverts** and **keeps** code `1`.
+
+### What `executed` and response events mean
+
+Inbox flags such as **`executed`** on an incoming request, and compact events such as **`IncomingResponseReceived`**, mean the **return / error leg was ingested** by the Inbox—not that your application callback **committed** successfully.
+
+- A return leg can still leave a **retryable** execution error (`errors[id]` with code `1`) if the callback reverted.
+- Product and indexers should treat **application events / request status** as the source of truth for user-visible success or failure—not Inbox `executed` alone.
+
 ## What product and support teams should plan for
 
 | Topic | Recommendation |

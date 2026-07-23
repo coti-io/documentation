@@ -73,7 +73,9 @@ A fuller table lives in the SDK’s [data types](https://github.com/cotitech-io/
 ## Trust and security highlights (for architects)
 
 - **Callback authentication**: Your contract should only accept **Inbox-originated** callbacks for private results—otherwise anyone could try to spoof answers. The SDK’s `onlyInbox` pattern exists for this boundary ([features](https://github.com/cotitech-io/coti-pod-sdk/blob/main/docs/03-features.md)).
-- **Request correlation**: Private work completes **later**; your system must track **request IDs** and statuses honestly in UX and backends ([Async private operations](async-private-operations.md)).
+- **Trusted miner / relayer**: Cross-domain delivery is operated by **registered Inbox miners**. Payload authenticity for private results still rests on **`onlyInbox` callbacks** and your application’s request-status accounting—not on an on-chain proof of the remote execution transcript. Treat miner set ownership (multisig / timelock) as part of the threat model.
+- **Request correlation**: Private work completes **later**; your system must track **request IDs** and statuses honestly in UX and backends ([Async private operations](async-private-operations.md)). Do **not** treat Inbox `executed` / compact response events alone as proof that your callback committed.
+- **Failure surfaces**: Distinguish **system error** (code `2`, not retryable), **app `raise`**, and **execution failure** (code `1`, permissionless `retryFailedRequest`). Use **`getOutboxError`** for the capped returndata bytes (decode in the client).
 - **Key stewardship**: Client-side AES material is powerful; treat it like **credentials**, not analytics metadata ([TypeScript integration](https://github.com/cotitech-io/coti-pod-sdk/blob/main/docs/06-typescript-integration-ux-development.md)).
 
 ## Next steps

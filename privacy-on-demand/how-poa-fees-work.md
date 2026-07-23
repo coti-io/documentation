@@ -21,7 +21,7 @@ Solidity shape (conceptually):
 
 | Stage | Amounts |
 | --- | --- |
-| **User-provided gas** | <ul><li><strong>0.007 ETH</strong> (<code>msg.value</code>)</li><li><strong>0.0035 ETH</strong> (<code>callbackFeeLocalWei</code>, Sepolia)</li><li><strong>0.0035 ETH</strong> (COTI-side)</li><li><strong>5 gwei</strong> (reference)</li></ul> |
+| **User-provided gas** | <ul><li><strong>0.007 ETH</strong> (<code>msg.value</code>)</li><li><strong>0.0035 ETH</strong> (<code>callbackFeeLocalWei</code>, Sepolia)</li><li><strong>0.0035 ETH</strong> (COTI-side)</li><li><strong>Bounded reference gas price</strong> (see below)—not the caller’s raw tip</li></ul> |
 | **Price at oracle** (same quote, e.g. USD) | <ul><li><strong>COTI:</strong> <strong>0.017</strong> per 1 COTI.</li><li><strong>ETH:</strong> <strong>2,170</strong> per 1 ETH.</li></ul> |
 | **Converted to the chain gas (COTI — ETH)** | <ul><li><strong>COTI:</strong> <strong>446.76 COTI</strong></li><li><strong>ETH:</strong> <strong>0.0035 ETH</strong></li></ul> |
 | **Convert to gas units (COTI — ETH)** | <ul><li><strong>COTI:</strong> <strong>16,029,096</strong></li><li><strong>ETH:</strong> <strong>615,701</strong></li></ul> |
@@ -39,6 +39,18 @@ Solidity shape (conceptually):
 ## Walkthrough
 
 Read the **first table top to bottom:** user ETH is split by leg, oracles supply **COTI** and **ETH** prices, the COTI leg is expressed as **quote → COTI tokens**, then policy turns each leg into **gas-unit budgets**. The **second table** spends **COTI** first, then **Sepolia** after the result exists. Underspend remains are illustrative; production behavior depends on **InboxMiner** / **InboxFeeManager** and operator policy (see the SDK [Fees, gas, and oracle](https://github.com/cotitech-io/coti-pod-sdk/blob/main/docs/contracts/04-fees-gas-and-oracle.md) doc).
+
+### Reference gas price and bounds
+
+When the Inbox converts fee wei into **gas-unit** budgets, it uses a **bounded reference gas price**—not an unbounded reading of the caller’s tip:
+
+- Operators configure **`setGasPriceBounds`** (min priority fee, min gas price, optional max).
+- On EIP-1559 chains the reference is typically derived from **`basefee` + min priority** (and clamped by the configured floor / ceiling).
+- Clients should still pass a realistic `gasPrice` into **off-chain** fee estimates so the UI matches what users will pay; on-chain conversion remains **bounded** so tip inflation cannot shrink budgets arbitrarily.
+
+### Oracle cache refresh
+
+Inbox fee math reads **cached** USD prices for the configured local / remote legs. Operators (or keepers) call **`refreshCache()`**, which refreshes **both** inbox legs together. Configure legs with **`setInboxTokens`**. Uniswap-based oracles derive those leg addresses from the configured pairs at construction; spot Uniswap prices remain manipulable—prefer trusted feeds or TWAP for production.
 
 ## Why this matters for `add(a, b) → ctUint64 c`
 

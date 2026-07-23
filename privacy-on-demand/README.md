@@ -2,7 +2,7 @@
 
 Privacy on Demand lets applications use **strong privacy for data and computation** while still using **ordinary EVM chains** (Ethereum, L2s, and other compatible networks) for accounts, assets, and business workflows.
 
-> **Development status:** This Privacy on Demand material and the **COTI PoD SDK** it describes are **under active development**. Treat them accordingly: on-chain and client code **may not yet be fully audited**, and **breaking changes** (APIs, ABIs, addresses, presets, or documentation) can occur as the stack matures. Pin versions, follow release notes, and perform your own review before relying on anything in production.
+> **Development status:** This Privacy on Demand material and the **COTI PoD SDK** it describes are **under active development**. Treat them accordingly: pin versions, follow release notes, and perform your own review before relying on anything in production. External audits for related COTI components are listed under [Audit Reports](../security/audit-reports.md); the PoD Inbox and Privacy Portal stacks also received an **internal security review** with documented hardening (see that page). **Breaking changes** (APIs, ABIs, addresses, presets, or documentation) can still occur as the stack matures.
 
 <div style="font-size: 1.45rem; line-height: 1.72; margin-bottom: 2rem;">
 

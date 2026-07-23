@@ -19,6 +19,12 @@ Short definitions for **Privacy on Demand** readers. Precise Solidity definition
 | **System error** | Pre-execution Inbox failure (encode / `validateCiphertext`). Delivered on the same `errorSelector(bytes)` as app `raise`. Attributed to `SYSTEM_SENDER`. Detect via `inboxErrorType() == SystemError`. **Not** eligible for `retryFailedRequest`. |
 | **`SYSTEM_SENDER`** | Placeholder `originalSender` / `inboxMsgSender()` for system-error return legs. Not a real contract; do not require it to equal your COTI peer. |
 | **`inboxErrorType()`** | Inbox view returning `NotErrorContext`, `SystemError`, or `Exception` for the active execution — preferred way for error handlers to branch. |
+| **Execution failure (code `1`)** | Target ran and reverted without `raise`. Stored on COTI with capped returndata; **permissionless** `retryFailedRequest` while code remains `1`. |
+| **`getOutboxError`** | View that returns `(code, data)` — for execution failures, the **raw capped returndata** (≤256 bytes). Decode in the client. |
+| **`executed` / `IncomingResponseReceived`** | Mean the **return or error leg was ingested** by the Inbox—not that the application callback committed. Confirm UX success via app status / events. |
+| **One-way message** | Outbound-only Inbox send. **Cannot** register a non-zero `errorSelector` (use two-way if you need error callbacks). |
+| **`retryFailedRequest`** | Permissionless COTI Inbox call that re-executes a request still marked execution-failed (code `1`). Encode failure on retry **reverts** and preserves code `1`. |
+| **Gas-price bounds** | Operator-configured floor / ceiling / min priority used when converting fee wei into gas-unit budgets (bounded reference price—not raw tip manipulation). |
 | **Account AES key** | 32-hex-character user secret for decrypting `ct*` outputs after onboarding; must be handled like credentials. See [Account Onboard](../build-on-coti/guides/account-onboard.md). |
 | **PodRequest** | TypeScript helper (`@coti/pod-sdk`) that polls inbox state across chains for async UX. |
 | **PodSdkConfig** | JSON config (chains, inbox addresses, RPCs, encryption network) shared by `PodContract` and `PodRequest`. |

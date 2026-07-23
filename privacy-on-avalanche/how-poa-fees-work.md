@@ -26,7 +26,7 @@ The Inbox fee manager (conceptually) does this when you call `sendTwoWayMessage`
 | \(V\) | `msg.value` in AVAX subunits |
 | \(C\) | `callbackFeeLocalWei` (Fuji / callback slice), \(C \le V\) |
 | \(R\) | Remote slice \(R = V - C\) (funds COTI via oracle) |
-| \(G\) | Effective gas price of the Fuji tx (subunits per gas), typically tens of **nAVAX** |
+| \(G\) | **Bounded reference** gas price used on-chain when converting AVAX fees into gas-unit budgets (floor / ceiling / min priority via `setGasPriceBounds`)—**not** an unbounded raw `tx.gasprice` tip |
 
 **Fuji callback budget (gas units):**
 
@@ -108,11 +108,15 @@ COTI runs first; Fuji callback runs only after the encrypted result exists.
 
 Remainders are illustrative. Production refunds / keep policies depend on **InboxMiner** / **InboxFeeManager** configuration.
 
+### Oracle cache refresh (Fuji)
+
+Inbox fee math reads **cached** USD prices for the configured local (AVAX) / remote (COTI) legs. Operators call **`refreshCache()`** (both legs). Configure legs with **`setInboxTokens`** (Uniswap oracles may set them from pair token0/token1 at construction). Prefer trusted Chainlink/Band feeds over spot Uniswap for production.
+
 ## Why underfunding fails differently on each leg
 
 - **Too little `msg.value` overall** (or too little remote slice) → COTI relay / private execution may not clear minima → outbound path fails.
 - **`callbackFeeLocalWei` too small** → COTI may finish, but Fuji never successfully writes **`c`** → UI stays **pending**.
-- **Gas price matters:** budgets are \({\approx}\,\mathrm{fee}/G\). A higher Fuji `tx.gasprice` for the same AVAX payment yields a **smaller** gas-unit budget. Estimate with the gas price you will actually use.
+- **Gas price matters:** budgets are \({\approx}\,\mathrm{fee}/G\). On-chain, \(G\) is a **bounded reference** (see `setGasPriceBounds`), so tip inflation cannot arbitrarily shrink gas-unit budgets. Off-chain estimators should still use a realistic gas price so UI quotes match what users will pay.
 
 ## How to budget fees in practice on Fuji
 
