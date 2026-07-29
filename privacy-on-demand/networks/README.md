@@ -14,6 +14,6 @@ The pages below list network parameters and deployed contract addresses for curr
 
 The shared CREATE3 **Inbox** address is the same on every supported chain:
 
-`0xAb625bE229F603f6BBF964474AFf6d5487e364De`
+`0x3b8B70819f27e0438cBcE7f31894f799da52648F`
 
 For general COTI chain RPC and faucet details (not PoD-specific), see the top-level [Networks](../../networks/README.md) section.

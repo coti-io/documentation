@@ -68,6 +68,8 @@
       * [Configuration](build-on-coti/tools/coti-wallet-plugin/configuration.md)
       * [API Reference](build-on-coti/tools/coti-wallet-plugin/api-reference.md)
       * [AES Key Onboarding](build-on-coti/tools/coti-wallet-plugin/aes-key-onboarding.md)
+      * [AES Backup Security](build-on-coti/tools/coti-wallet-plugin/aes-backup-security.md)
+      * [Secure Remote AES Backup Storage (deprecated)](build-on-coti/tools/coti-wallet-plugin/aes-backup-remote-storage.md)
       * [Onboard Modal Theming](build-on-coti/tools/coti-wallet-plugin/onboard-modal-theme.md)
       * [Example App](build-on-coti/tools/coti-wallet-plugin/example-app.md)
     * [Developer Sandbox](build-on-coti/tools/developer-sandbox.md)

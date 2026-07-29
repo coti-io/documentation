@@ -22,10 +22,10 @@ Also see the general COTI [TestNet](../../networks/testnet/README.md) page for M
 
 | Contract | Address | Description |
 | --- | --- | --- |
-| Inbox | [`0xAb625bE229F603f6BBF964474AFf6d5487e364De`](https://testnet.cotiscan.io/address/0xAb625bE229F603f6BBF964474AFf6d5487e364De) | Cross-chain message router (CREATE3; same address on every PoD chain) |
-| MPC executor | [`0x68e151b78d51cea01eef6ee354579e044606a739`](https://testnet.cotiscan.io/address/0x68e151b78d51cea01eef6ee354579e044606a739) | Entry point for library-style private operations (`configureCoti` target on host dApps) |
-| Price oracle | [`0xe1afeda542d1b9003df0e133187f845dea8b1ba8`](https://testnet.cotiscan.io/address/0xe1afeda542d1b9003df0e133187f845dea8b1ba8) | Local/remote token prices used by Inbox fee conversion |
-| Pod ERC20 mother | [`0x293daf267bf657b0bae870a0ce8cd59f1e5eb32a`](https://testnet.cotiscan.io/address/0x293daf267bf657b0bae870a0ce8cd59f1e5eb32a) | COTI-side registry for Privacy Portal / pToken flows |
+| Inbox | [`0x3b8B70819f27e0438cBcE7f31894f799da52648F`](https://testnet.cotiscan.io/address/0x3b8B70819f27e0438cBcE7f31894f799da52648F) | Cross-chain message router (CREATE3; same address on every PoD chain) |
+| MPC executor | [`0x6804961167c3c8ef2bf6839ddcf51ec1fbe800c3`](https://testnet.cotiscan.io/address/0x6804961167c3c8ef2bf6839ddcf51ec1fbe800c3) | Entry point for library-style private operations (`configureCoti` target on host dApps) |
+| Price oracle | [`0xb471e172876ba9bb24a43528779ea31e0b0bda2f`](https://testnet.cotiscan.io/address/0xb471e172876ba9bb24a43528779ea31e0b0bda2f) | Local/remote token prices used by Inbox fee conversion |
+| Pod ERC20 mother | [`0xaeb2271959031b65cba63302cff5d970b49d4a7b`](https://testnet.cotiscan.io/address/0xaeb2271959031b65cba63302cff5d970b49d4a7b) | COTI-side registry for Privacy Portal / pToken flows |
 
 ## Protocol helpers (COTI Testnet)
 
@@ -58,6 +58,6 @@ In `@coti-io/pod-sdk` and `@coti-io/coti-contracts`:
 | Constant | Value |
 | --- | --- |
 | Chain ID | `7082400` |
-| Inbox | `0xAb625bE229F603f6BBF964474AFf6d5487e364De` (`COTI_TESTNET_DEFAULT_INBOX_ADDRESS`) |
+| Inbox | `0x3b8B70819f27e0438cBcE7f31894f799da52648F` (`COTI_TESTNET_DEFAULT_INBOX_ADDRESS`) |
 
 Confirm the MPC executor against your deployed release — presets in `PodNetworkConstants` can lag a redeploy; wire the address from the table above (or your env) in `configureCoti`.

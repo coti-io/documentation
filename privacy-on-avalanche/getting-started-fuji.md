@@ -136,7 +136,7 @@ Expected result hex: `0xa869` (= decimal **`43113`**).
 
 On Fuji your dApp talks to the shared Inbox:
 
-`0xAb625bE229F603f6BBF964474AFf6d5487e364De`
+`0x3b8B70819f27e0438cBcE7f31894f799da52648F`
 
 Private compute still runs on **COTI Testnet** (`7082400`). Solidity preset: **`PodUserFuji`**.
 

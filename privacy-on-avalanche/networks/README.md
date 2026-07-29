@@ -14,7 +14,7 @@ The pages below list network parameters and deployed contract addresses for the 
 
 The shared CREATE3 **Inbox** address is the same on every supported PoD chain:
 
-`0xAb625bE229F603f6BBF964474AFf6d5487e364De`
+`0x3b8B70819f27e0438cBcE7f31894f799da52648F`
 
 **Quick links for Fuji builders**
 

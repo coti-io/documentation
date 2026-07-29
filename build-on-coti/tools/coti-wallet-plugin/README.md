@@ -126,5 +126,7 @@ See [Example App](example-app.md) for setup and run instructions. Source code li
 * [Configuration](configuration.md) — `configureCotiPlugin()` and onboarding services
 * [API Reference](api-reference.md) — hooks, providers, types, and error codes
 * [AES Key Onboarding](aes-key-onboarding.md) — onboarding routes, contract flow, security
+* [AES Backup Security](aes-backup-security.md) — signature-derived backup threat model, localStorage persistence, and wallet support
+* [Secure Remote AES Backup Storage](aes-backup-remote-storage.md) — deprecated (do not use for new work)
 * [Onboard Modal Theming](onboard-modal-theme.md) — customize the onboarding UI
 * [Example App](example-app.md) — runnable reference dApp

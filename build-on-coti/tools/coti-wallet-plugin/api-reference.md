@@ -209,6 +209,19 @@ See [Configuration](configuration.md) for all `CotiPluginConfig` options.
 | `TOKEN_ABI`, `BRIDGE_ABI`, `ERC20_ABI` | Contract ABIs |
 | `LIMITS` | Bridge amount limits |
 
+### PoD Privacy Portal
+
+| Export | Description |
+| --- | --- |
+| `PRIVACY_PORTAL_ABI` | User deposit / withdraw surface |
+| `POD_PTOKEN_ABI` | PoD private token (pToken) surface |
+| `POD_PORTAL_ADMIN_ABI` | Per-portal admin/operator surface (fees, limits, pause, deposit enable, rescue) |
+| `POD_PORTAL_FACTORY_ABI` | Factory admin/operator roles (`isAdmin` / `isOperator`, `grantRole` / `revokeRole`) |
+| `fetchPodBridgeData(chainId)` | Backoffice row data: fees, collateral balance, pause/deposit flags, min/max deposit and withdraw limits |
+| `simulatePodPortalFee(...)` | Fee simulation helper for portal admin UIs |
+
+`fetchPodBridgeData` maps uncapped max limits (`uint128.max` sentinels) to `"0"` (no-cap convention). Collateral balance read failures fail the row instead of returning a false zero balance. Factory and portal addresses live on each PoD chain config (`PrivacyPortalFactory`, `PrivacyPortal*`).
+
 ## Error handling
 
 ### `CotiPluginError`
@@ -294,6 +307,12 @@ Logging is silent by default. Enable via `configureCotiPlugin({ debug: true })`.
 | --- | --- |
 | `formatTokenBalanceDisplay` | Format token balance for display |
 | `truncateDecimalValue` | Truncate decimal values |
+| `formatBalanceWithNotation` | Compact balance display with K/M notation for large values |
+| `addThousandsSeparators` | Insert thousands separators into a decimal string |
+| `expandExponentialNumber` | Expand JS scientific notation (e.g. `1e-18`) to a plain decimal string |
+| `formatPlainDecimal` | String/number → plain decimal (never scientific notation) |
+| `formatAmountLimitDisplay` | Human label for portal/bridge min/max limits (`N/A`, dust → `—`, uncapped max → `0`) |
+| `isDustAmount` / `DUST_AMOUNT_THRESHOLD` | Detect near-zero on-chain dust floors for UI |
 | `getEthereumProvider()` | Resolve EIP-1193 provider |
 | `muteChainUpdates()` / `unmuteChainUpdates()` | Suppress UI during cross-chain onboarding |
 | `isMultipleWalletsError(error)` | Detect multiple-wallet conflict |

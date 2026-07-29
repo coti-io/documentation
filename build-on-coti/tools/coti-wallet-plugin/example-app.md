@@ -58,6 +58,8 @@ Override the snap checkout path with `COTI_SNAP_ROOT` if needed.
 3. **Native COTI** — Displays native COTI balance via wagmi
 4. **Private Balances** — Click **Unlock Private Balances** to derive the AES key, then decrypted private token balances appear
 
+Encrypted AES backups use `onboardingServices` with `mode: 'custom'`. The example implements those callbacks with browser `localStorage` (`coti-example:aes-backup:<chainId>:<address>`) — the supported encrypted-backup path. The plugin does not write backups itself.
+
 ## Network
 
 The app targets **COTI Testnet** (chain ID 7082400) by default. Switch your wallet to COTI Testnet to see token balances.

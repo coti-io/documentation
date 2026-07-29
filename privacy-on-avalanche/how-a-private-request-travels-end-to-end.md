@@ -24,28 +24,6 @@ This page describes **one full cycle** of Privacy on Demand **without assuming S
 6. **The MPC Executor returns through Inbox (COTI) and Inbox (EVM)**, delivering an **ABI-encoded payload** of **`ct*` ciphertext**: encrypted outputs suitable to store on your chain.
 7. **Your contract records the result** keyed by a **request ID**. The **user reads ciphertext from chain or API**, then **decrypts locally** with their **account AES key** (after proper onboarding).
 
-### Encode / `validateCiphertext` failure (system error)
-
-If Inbox encoding fails **before** the MPC Executor runs (most commonly a bad `it*` signature), COTI never calls your target contract. Instead the Inbox:
-
-1. Records error code `2` (`ERROR_CODE_ENCODE_FAILED`) and emits `ErrorReceived`.
-2. Automatically sends a return leg to your source `errorSelector` with Inbox `{ErrorData}` (`abi.encode(uint64 code, bytes message)`, code `2`) attributed to `SYSTEM_SENDER` — see [Async private operations](async-private-operations.md).
-3. Marks the incoming request executed so it is **not** eligible for `retryFailedRequest`.
-
-Your source error callback must clear pending state and surface failure to the UI. Users submit a **new** request after pending clears.
-
-### Execution failure (retryable) and reading errors
-
-If the COTI target **runs** and **reverts** without `raise`:
-
-1. The Inbox stores error code `1` with a **capped** returndata blob (see [Async private operations](async-private-operations.md)).
-2. There is **no** automatic source callback for this path—operators or anyone may call **`retryFailedRequest`** on COTI while the code remains `1`.
-3. Use **`getOutboxError(requestId)`** for the capped returndata bytes (same as `errors[requestId].errorMessage`); decode in the client.
-
-### Completion signals
-
-When the diagram says “Callback with result bytes,” that is the **application** success path. Inbox-level `executed` / compact response events only mean the **return leg was received**—confirm success via your contract’s status / events (see [Async private operations](async-private-operations.md)).
-
 ## Sequence diagram (conceptual)
 
 **Colors:** the **cool charcoal** panel is **contracts on your host chain (Avalanche Fuji)**—**Your dApp contract** and **Inbox (EVM)**. The **warm charcoal** panel is **contracts on COTI**—**Inbox (COTI)** and **MPC Executor**. **User** and **Client app** are off-chain (default styling). Arrows **between** the two dark panels are **cross-chain / cross-domain** handoffs. The diagram uses a **dark theme** so labels stay light-on-dark and readable.
@@ -101,7 +79,7 @@ sequenceDiagram
 
 ## Fees and gas
 
-Private jobs that cross from your chain to COTI and back incur **network and execution costs**. Integrations typically attach **native token value** on the request and split it between **remote execution** and the **callback** leg. Operators configure **fee parameters**, **gas-price bounds**, and **oracle** behavior on supporting contracts (see the SDK’s [Fees, gas, and oracle](https://github.com/cotitech-io/coti-pod-sdk/blob/main/docs/contracts/04-fees-gas-and-oracle.md) page and [How do PoA fees work?](how-poa-fees-work.md)).
+Private jobs that cross from your chain to COTI and back incur **network and execution costs**. Integrations typically attach **native token value** on the request and split it between **remote execution** and the **callback** leg. Operators configure **fee parameters** and **oracle** behavior on supporting contracts (see the SDK’s [Fees, gas, and oracle](https://github.com/cotitech-io/coti-pod-sdk/blob/main/docs/contracts/04-fees-gas-and-oracle.md) page).
 
 ## Next steps
 

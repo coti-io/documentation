@@ -16,13 +16,4 @@ Short definitions for **Privacy on Demand** readers. Precise Solidity definition
 | **PoA fees** | In this book, **Privacy on Demand (PoD) fees** for **two-way Inbox** traffic: native token on your chain that funds **COTI-side** and **callback** execution budgets. See [How do PoA fees work?](how-poa-fees-work.md). |
 | **Two-way message** | Inbox flow: **outbound** request to COTI plus **inbound callback** to your contract; typically needs **fee** planning for both legs. |
 | **Request ID** | Correlator tying a **submission** to a **callback**; essential for **async** UX and troubleshooting. |
-| **System error** | Pre-execution Inbox failure (encode / `validateCiphertext`). Delivered on the same `errorSelector(bytes)` as app `raise`. Attributed to `SYSTEM_SENDER`. Detect via `inboxErrorType() == SystemError`. **Not** eligible for `retryFailedRequest`. |
-| **`SYSTEM_SENDER`** | Placeholder `originalSender` / `inboxMsgSender()` for system-error return legs. Not a real contract; do not require it to equal your COTI peer. |
-| **`inboxErrorType()`** | Inbox view returning `NotErrorContext`, `SystemError`, or `Exception` for the active execution — preferred way for error handlers to branch. |
-| **Execution failure (code `1`)** | Target ran and reverted without `raise`. Stored on COTI with capped returndata; **permissionless** `retryFailedRequest` while code remains `1`. |
-| **`getOutboxError`** | View that returns `(code, data)` — for execution failures, the **raw capped returndata** (≤256 bytes). Decode in the client. |
-| **`executed` / `IncomingResponseReceived`** | Mean the **return or error leg was ingested**—not that the application callback committed. |
-| **One-way message** | Outbound-only Inbox send. **Cannot** register a non-zero `errorSelector` (use two-way if you need error callbacks). |
-| **`retryFailedRequest`** | Permissionless COTI Inbox call that re-executes a request still marked execution-failed (code `1`). Encode failure on retry **reverts** and preserves code `1`. |
-| **Gas-price bounds** | Operator-configured floor / ceiling / min priority used when converting fee AVAX into gas-unit budgets (bounded reference price—not raw tip manipulation). |
 | **Account AES key** | User-side secret material used to **decrypt** many `ct*` outputs after onboarding; must be **handled like credentials**. |

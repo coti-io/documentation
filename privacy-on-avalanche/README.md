@@ -4,7 +4,7 @@
 
 Fees on the host side are paid in **AVAX**. Private execution still happens on COTI; results return as ciphertext to your Fuji contracts for client-side decryption.
 
-> **Development status:** This Privacy on Avalanche material and the **COTI PoD SDK** it describes are **under active development**. Treat them accordingly: pin versions, follow release notes, and perform your own review before relying on anything in production. External audits for related COTI components are listed under [Audit Reports](../security/audit-reports.md); the PoD Inbox and Privacy Portal stacks also received an **internal security review** with documented hardening (see that page). **Breaking changes** (APIs, ABIs, addresses, presets, or documentation) can still occur as the stack matures.
+> **Development status:** This Privacy on Avalanche material and the **COTI PoD SDK** it describes are **under active development**. Treat them accordingly: on-chain and client code **may not yet be fully audited**, and **breaking changes** (APIs, ABIs, addresses, presets, or documentation) can occur as the stack matures. Pin versions, follow release notes, and perform your own review before relying on anything in production.
 
 <div style="font-size: 1.45rem; line-height: 1.72; margin-bottom: 2rem;">
 
@@ -40,7 +40,7 @@ This section is the **Avalanche Fuji–first** companion to Privacy on Demand: s
 | Native token | AVAX |
 | RPC | `https://api.avax-test.network/ext/bc/C/rpc` |
 | Explorer | [testnet.snowscan.xyz](https://testnet.snowscan.xyz) |
-| Inbox | `0xAb625bE229F603f6BBF964474AFf6d5487e364De` |
+| Inbox | `0x3b8B70819f27e0438cBcE7f31894f799da52648F` |
 | Private execution | COTI Testnet (`7082400`) |
 | Solidity preset | `PodUserFuji` |
 
