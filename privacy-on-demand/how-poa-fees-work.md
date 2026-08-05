@@ -26,6 +26,17 @@ For portal flows: `msg.value ≈ portalFee + podInboxFee` (plus the deposited na
 
 Prefer live on-chain views for production; do not copy pedagogical ETH/AVAX numbers from the tables below.
 
+## Miner sizing (`estimateExecutionGasForMiner`)
+
+When **mining** inbound requests (`batchProcessRequests`), operators should size gas with:
+
+1. `estimateExecutionGasForMiner` (always-reverts with `ExecutionGasEstimate`) for real user-subcall gas
+2. A configurable buffer on that user gas (batch packing)
+3. `eth_estimateGas` on the full mine tx
+4. `gasLimit = max(projected, eth_estimateGas)`
+
+See [`ESTIMATE_EXECUTION_GAS.md`](https://github.com/coti-io/coti-pod-inbox-contracts/blob/main/docs/ESTIMATE_EXECUTION_GAS.md). FeeConfig also includes **`gasPriceMul` / `gasPriceDiv`** for cross-chain gas-price skew (do not double-apply when reading prepaid `targetFee`).
+
 ## Example call
 
 Solidity shape (conceptually):
