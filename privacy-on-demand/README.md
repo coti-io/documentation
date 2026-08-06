@@ -12,7 +12,7 @@ Privacy on Demand lets applications use **strong privacy for data and computatio
 - **[Architecture and design](architecture-and-components.md)** — Inbox, MPC executor, PodUser, PodLib, and how they connect.
 - **[Networks](networks/README.md)** — COTI Testnet, Avalanche Fuji, and Ethereum Sepolia parameters plus PoD contract addresses.
 - **[Interactive PoD architecture (pod.coti.io)](https://pod.coti.io/)** — Live demo: play the MpcAdder journey across Sepolia, relayer, and COTI, with GitHub source links and gas/fee visualization.
-- **[Learn about fees](how-poa-fees-work.md)** — How PoA/PoD fees split across COTI and your host chain.
+- **[Learn about fees](how-poa-fees-work.md)** — How PoA/PoD fees split across COTI and your host chain, plus **maximum method-call size** (payload-weight caps).
 - **[Millionaires demo](https://millionaire.demo.coti.io)** — Live demo (external).
 
 <h2 style="font-size: 2.35rem; font-weight: 600; margin-top: 1.75rem; margin-bottom: 1rem; line-height: 1.2;">Further resources</h2>
@@ -49,7 +49,7 @@ This section explains **what PoD is**, **how it feels to users and operators**, 
 ### Deeper context
 
 6. [Async private operations (why it is not instant)](async-private-operations.md) — What “pending” means and why UX must reflect it.
-7. [How do PoA fees work?](how-poa-fees-work.md) — Two-way Inbox budgets, oracle conversion, and step-by-step gas-unit consumption (worked example).
+7. [How do PoA fees work?](how-poa-fees-work.md) — Two-way Inbox budgets, oracle conversion, **maximum method-call size**, and step-by-step gas-unit consumption (worked example).
 8. [For developers: mapping concepts to the SDK](for-developers-mapping-to-the-sdk.md) — Checklists and links to the [PoD SDK documentation on GitHub](https://github.com/coti-io/coti-sdk-pod/tree/main/site).
 
 ### Tutorials (hands-on)

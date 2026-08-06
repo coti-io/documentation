@@ -35,6 +35,16 @@ Addresses: [Avalanche Fuji](networks/fuji.md). For Sepolia host-chain portals se
 | **SDK per-call** | `@coti-io/pod-sdk` `estimateFee` | Per-tx gas/data sizes for this call |
 | **Fixed heuristics + pad** | Payroll / some dApp ports | Large fixed budgets + safety pad so fees stay stable across call shapes |
 
+## Maximum method-call size
+
+The Inbox enforces **payload-weight** caps (not `abi.encode` length). Default create/ingest and reply caps are typically **8192** bytes of:
+
+```text
+weight = data.length + datatypes.length × 32 + datalens.length × 32
+```
+
+Oversized creates revert with `MethodCallTooLarge`; oversized replies with `ResponseOutOfBounds`. Read live caps from the Inbox before sending large encrypted or dynamic arguments. Full details: [How PoA fees work (PoD)](../privacy-on-demand/how-poa-fees-work.md#maximum-method-call-size-apps-must-respect-this).
+
 ## How Fuji AVAX becomes gas-unit budgets
 
 The Inbox fee manager (conceptually) does this when you call `sendTwoWayMessage` / a `PodLib` helper:

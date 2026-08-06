@@ -26,6 +26,30 @@ For portal flows: `msg.value ≈ portalFee + podInboxFee` (plus the deposited na
 
 Prefer live on-chain views for production; do not copy pedagogical ETH/AVAX numbers from the tables below.
 
+## Maximum method-call size (apps must respect this)
+
+The Inbox **rejects oversized messages** at create/ingest time. Size is measured as **payload weight**, not `abi.encode(methodCall).length` and not raw calldata:
+
+```text
+weight = data.length + datatypes.length × 32 + datalens.length × 32
+```
+
+| Cap | What it limits | Typical default |
+| --- | --- | --- |
+| `FeeConfig.maxMethodCallBytes` | Outbound create (`sendTwoWay` / `sendOneWay`) and destination ingest | **8192** bytes of weight |
+| `maxReplyMethodCallBytes` | Return legs from `respond()` / `raise()` / system-error callbacks | **8192** bytes of weight |
+| `FeeConfig.maxExecutionGas` | Max gas-unit budget allowed on `targetFee` / `callerFee` | Network policy (often millions) |
+
+**Why it matters:** a private call with large encrypted args, long `bytes` / `string` / arrays, or many typed MPC arguments can exceed the weight cap even when the fee quote looks fine. Oversized creates revert with **`MethodCallTooLarge`**; oversized replies revert with **`ResponseOutOfBounds`**.
+
+**What to do in your dApp / SDK:**
+
+1. Prefer compact argument encodings (fixed-width `itUint*` over huge dynamic blobs when possible).
+2. Before send, compute the weight of your `MpcMethodCall` (or use a small helper) and keep it **under the live Inbox caps** for that chain — read `localMinFeeConfig` / `remoteMinFeeConfig` and `maxReplyMethodCallBytes` on the deployed Inbox.
+3. Keep **callback / error payloads** small so return legs stay under `maxReplyMethodCallBytes` on the destination.
+
+Operator write-up (defaults, peer invariants): [`SIZE_CAPS_AND_MINER_REJECT.md`](https://github.com/coti-io/coti-pod-inbox-contracts/blob/main/docs/SIZE_CAPS_AND_MINER_REJECT.md).
+
 ## Miner sizing (`estimateExecutionGasForMiner`)
 
 When **mining** inbound requests (`batchProcessRequests`), operators should size gas with:
