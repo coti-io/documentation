@@ -92,7 +92,7 @@ contract PrivateAdder is PodLib, PodUserFuji {
         emit AddRequested(requestId, msg.sender);
     }
 
-    function addCallback(bytes memory data) external onlyInbox {
+    function addCallback(bytes memory data) external onlyInboxPeer {
         bytes32 requestId = inbox.inboxSourceRequestId();
         if (requestId == bytes32(0)) {
             requestId = inbox.inboxRequestId();
@@ -109,7 +109,7 @@ contract PrivateAdder is PodLib, PodUserFuji {
 **Notes:**
 
 - **`onDefaultMpcError`** is implemented on `PodLibBase` and forwards failures to **`ErrorRemoteCall`** on `PodUser`. Your UI can listen for that event to mark a request failed.
-- **`addCallback`** must stay **`onlyInbox`** so random accounts cannot forge results.
+- **`addCallback`** must use **`onlyInboxPeer`** (after registering the COTI executor as `trustedRemote`) so random accounts and untrusted remotes cannot forge results. Bare `onlyInbox` is transport-only.
 
 ## Step 3: Compile and deploy on Avalanche Fuji
 
