@@ -52,6 +52,11 @@ On **constant-fee** legs, the flat minimum is still valid once size and executio
 
 Operator write-up (defaults, peer invariants): [`SIZE_CAPS_AND_MINER_REJECT.md`](https://github.com/coti-io/coti-pod-inbox-contracts/blob/main/docs/SIZE_CAPS_AND_MINER_REJECT.md).
 
+## Delivery timing and chain ids (integrators)
+
+- **`retryFailedRequest` is permissionless** and uses uncapped destination gas (`gasleft()`), not the prepaid `targetFee`. Treat first-mine timing and retries as adversarial; do not rely on wall-clock delivery. Spot-sensitive handlers need app-level protections. `targetFee` is miner best-effort for the initial mine only.
+- **`targetChainId` is not allowlisted.** Pass only supported PoD lane ids; a wrong id strands fees on an unroutable lane (user/integrator footgun).
+
 ## Miner sizing (`estimateExecutionGasForMiner`)
 
 When **mining** inbound requests (`batchProcessRequests`), operators should size gas with:
