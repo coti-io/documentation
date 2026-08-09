@@ -42,6 +42,8 @@ weight = data.length + datatypes.length × 32 + datalens.length × 32
 
 **Why it matters:** a private call with large encrypted args, long `bytes` / `string` / arrays, or many typed MPC arguments can exceed the weight cap even when the fee quote looks fine. Oversized creates revert with **`MethodCallTooLarge`**; oversized replies revert with **`ResponseOutOfBounds`**.
 
+On **constant-fee** legs, the flat minimum is still valid once size and execution are capped: operators set `constantFee` to cover priced max-execution work plus max-size ingest (deploy assert / checklist), and keep `maxExecutionGas ≥ constantFee`. See [`SIZE_CAPS_AND_MINER_REJECT.md`](https://github.com/coti-io/coti-pod-inbox-contracts/blob/main/docs/SIZE_CAPS_AND_MINER_REJECT.md#constant-fee-worst-case-floor-deploy-checklist).
+
 **What to do in your dApp / SDK:**
 
 1. Prefer compact argument encodings (fixed-width `itUint*` over huge dynamic blobs when possible).

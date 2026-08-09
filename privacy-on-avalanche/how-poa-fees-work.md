@@ -43,7 +43,7 @@ The Inbox enforces **payload-weight** caps (not `abi.encode` length). Default cr
 weight = data.length + datatypes.length × 32 + datalens.length × 32
 ```
 
-Oversized creates revert with `MethodCallTooLarge`; oversized replies with `ResponseOutOfBounds`. Read live caps from the Inbox before sending large encrypted or dynamic arguments. Full details: [How PoA fees work (PoD)](../privacy-on-demand/how-poa-fees-work.md#maximum-method-call-size-apps-must-respect-this).
+Oversized creates revert with `MethodCallTooLarge`; oversized replies with `ResponseOutOfBounds`. Read live caps from the Inbox before sending large encrypted or dynamic arguments. Constant-fee legs still require `constantFee` to cover priced max-execution work plus max-size ingest (deploy assert). Full details: [How PoA fees work (PoD)](../privacy-on-demand/how-poa-fees-work.md#maximum-method-call-size-apps-must-respect-this).
 
 ## How Fuji AVAX becomes gas-unit budgets
 
