@@ -5,7 +5,7 @@ Privacy on Demand spans **two domains**:
 1. **Host chain** — where your dApp contracts, assets, and the local **Inbox** live (for example Avalanche Fuji or Ethereum Sepolia).
 2. **COTI** — where private computation runs via the **MPC executor** and the COTI-side **Inbox**.
 
-The pages below list network parameters and deployed contract addresses for current test environments. Addresses can change after redeploys; treat [`deployConfig.json`](https://github.com/coti-io/pod-ecosystem-integration) (or your environment config), [`@coti-io/pod-sdk`](https://github.com/coti-io/coti-sdk-pod), and [`@coti-io/coti-contracts`](https://github.com/coti-io/coti-contracts) as the live source of truth when building against a specific release.
+The pages below list network parameters and deployed contract addresses for current test environments. Addresses can change after redeploys; treat **`pod-ecosystem-integration` deployConfig** ([`deployConfig.json`](https://github.com/coti-io/pod-ecosystem-integration) / `deployConfig.testnet.yaml` / `deployConfig.mainnet.yaml` — `inboxSalt` + `chains.<id>.inbox`) as the operator source of truth, and [`@coti-io/pod-sdk`](https://github.com/coti-io/coti-sdk-pod) / [`@coti-io/coti-contracts`](https://github.com/coti-io/coti-contracts) and your environment config when building against a specific release.
 
 | Network | Chain ID | Role in PoD |
 | --- | --- | --- |
@@ -13,7 +13,7 @@ The pages below list network parameters and deployed contract addresses for curr
 | [Avalanche Fuji](fuji.md) | `43113` | Host chain (dApp + Inbox paired with COTI Testnet) |
 | [Ethereum Sepolia](sepolia.md) | `11155111` | Host chain (dApp + Inbox paired with COTI Testnet) |
 
-The shared CREATE3 **Inbox** address (`pod.inbox.v2.2`) is the same on every supported chain:
+The shared CREATE3 **Inbox** address is the same on every supported chain (from deployConfig `inboxSalt` family `pod.inbox.v2.2`):
 
 `0x3b8B70819f27e0438cBcE7f31894f799da52648F`
 
