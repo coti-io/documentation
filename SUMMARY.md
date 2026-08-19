@@ -109,6 +109,7 @@
     * [Transfer Private Tokens](coti-privacy-portal/user-guide/transfer-private-tokens.md)
   * [Developer Guide](coti-privacy-portal/developer-guide/README.md)
     * [PrivateERC20.sol](coti-privacy-portal/developer-guide/privateerc20.sol.md)
+    * [PoD pERC20 vs ERC-7984](coti-privacy-portal/developer-guide/privateERC20-ERC7984.md)
     * [Architecture](coti-privacy-portal/developer-guide/architecture.md)
     * [Creating a New PrivateERC20 Token](coti-privacy-portal/developer-guide/creating-a-new-privateerc20-token.md)
     * [Minting Tokens](coti-privacy-portal/developer-guide/minting-tokens.md)
