@@ -14,7 +14,6 @@ This section compares that implementation against FHE-based implementations of t
 * [**Host-chain deployment**](host-chain-deployment.md) — what the token requires of the chain it runs on, and what it requires of the user.
 * [**Transaction economics**](transaction-economics.md) — encrypted-input size, on-chain footprint, and where the cryptographic work happens.
 * [**Transfer semantics**](transfer-semantics.md) — encrypted allowances with standard `approve` / `transferFrom`, and failures that reveal nothing.
-* [**Security model**](security-model.md) — garbled circuits with non-colluding parties, and why there is no master key to compromise.
 * [**Concurrency**](concurrency.md) — multiple in-flight requests per account, ordered by a monotonic nonce.
 * [**Deployed contracts**](deployed-contracts.md) — the six pTokens live on Avalanche Fuji and Ethereum Sepolia, and how new ones are listed.
 
@@ -28,5 +27,4 @@ This section compares that implementation against FHE-based implementations of t
 | **Small on-chain footprint** | ~192-byte inputs, 2-slot balances                                         |
 | **Instant for users**        | No client-side proof generation                                           |
 | **Private allowances**       | Exact encrypted amounts, not public blanket authority                     |
-| **No master key**            | Session-scoped security, no retroactive exposure                          |
 | **Ship fast**                | Factory-deployed portal + token pair per asset                            |

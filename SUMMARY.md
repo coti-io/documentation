@@ -157,7 +157,6 @@
   * [Host-chain deployment](coti-erc7984/host-chain-deployment.md)
   * [Transaction economics](coti-erc7984/transaction-economics.md)
   * [Transfer semantics](coti-erc7984/transfer-semantics.md)
-  * [Security model](coti-erc7984/security-model.md)
   * [Concurrency](coti-erc7984/concurrency.md)
   * [Deployed contracts](coti-erc7984/deployed-contracts.md)
 

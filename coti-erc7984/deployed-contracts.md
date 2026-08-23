@@ -6,6 +6,7 @@ Six confidential tokens, deployed and operating.
 
 **Avalanche Fuji**
 
+
 | Token    | Address                                      | Decimals |
 | :------- | :------------------------------------------- | :------: |
 | `p.MTT`  | `0x02f284a1968160E1d3e4bC2BA3261be49725E765` |    18    |
@@ -14,6 +15,7 @@ Six confidential tokens, deployed and operating.
 
 **Ethereum Sepolia**
 
+
 | Token    | Address                                      | Decimals |
 | :------- | :------------------------------------------- | :------: |
 | `p.MTT`  | `0x0510F0b32828D5fB472dE5A5bE30b370c5D1a056` |    18    |
@@ -21,7 +23,3 @@ Six confidential tokens, deployed and operating.
 | `p.ETH`  | `0xd33A363459c6Ee0C4F8504E380E8D3Aa4F209116` |    18    |
 
 Each pair is deployed by `PrivacyPortalFactory` as a minimal-proxy clone — **one portal and one pToken per asset**, so listing a new confidential token is a factory call, not an engineering project.
-
-## Explorer-native from day one
-
-PoD pTokens emit `ConfidentialTransfer` events and expose ERC-7984 metadata, so Blockscout and compatible explorers classify them as confidential tokens and index their activity automatically. Your users see a first-class token page, not an unrecognised contract.
