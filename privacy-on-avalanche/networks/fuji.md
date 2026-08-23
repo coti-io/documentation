@@ -4,7 +4,7 @@ Avalanche Fuji C-Chain is the **primary host chain** for this Privacy on Avalanc
 
 Use the Solidity preset **`PodUserFuji`** (or configure the Inbox + COTI executor manually) so Fuji dApps route to COTI Testnet chain ID `7082400`.
 
-> **Note:** Addresses below reflect the current PoD test deployment. They may change after contract redeploys. Confirm against your SDK release or environment before production use.
+> **Note:** Addresses below match `pod-ecosystem-integration/deployConfig.json` (Inbox salt `pod.inbox.v2.2`). They may change after contract redeploys. Confirm against that file or your SDK release before production use.
 
 ## Network details
 
@@ -23,26 +23,26 @@ Private execution for Fuji dApps targets **COTI Testnet** (`7082400`). See [COTI
 | Contract | Address | Description |
 | --- | --- | --- |
 | Inbox | [`0x3b8B70819f27e0438cBcE7f31894f799da52648F`](https://testnet.snowscan.xyz/address/0x3b8B70819f27e0438cBcE7f31894f799da52648F) | Cross-chain message router (CREATE3; same address on every PoD chain) |
-| Price oracle | [`0xf2283ca93a6747c547a961c50d0393d549c57268`](https://testnet.snowscan.xyz/address/0xf2283ca93a6747c547a961c50d0393d549c57268) | Local/remote token prices used by Inbox and Privacy Portal fee conversion |
-| MpcAdder (example) | [`0xf51c789e4c60d33a2abcfd656e607724f56aaf0d`](https://testnet.snowscan.xyz/address/0xf51c789e4c60d33a2abcfd656e607724f56aaf0d) | Reference primitive-only adder dApp on Fuji |
+| Price oracle | [`0x95ce33378c88734f3d86b51a4c6dc588722995fd`](https://testnet.snowscan.xyz/address/0x95ce33378c88734f3d86b51a4c6dc588722995fd) | Local/remote token prices used by Inbox fee conversion |
+| MpcAdder (example) | [`0x8b7d9e70477aabe68500b72acb7f367993edde39`](https://testnet.snowscan.xyz/address/0x8b7d9e70477aabe68500b72acb7f367993edde39) | Reference primitive-only adder dApp on Fuji |
 
-## Privacy Portal (Fuji)
+## PoD cross-chain Privacy Portal (Fuji)
 
-Deployed factory and implementations for private-token flows on Fuji (aligned with `@coti-io/coti-wallet-plugin` / PEI `deployConfig.json`):
+This is the **PoD host-chain Privacy Portal** (factory + pTokens on Fuji, private compute via COTI Inbox). It is **not** the [native COTI Privacy Portal / PrivateERC20](../../coti-privacy-portal/README.md) that runs entirely on COTI.
 
 | Contract | Address |
 | --- | --- |
-| Privacy Portal factory | [`0xf3cf653e1baee7b4e4001067780dee38991b1cbd`](https://testnet.snowscan.xyz/address/0xf3cf653e1baee7b4e4001067780dee38991b1cbd) |
-| Portal implementation | [`0x63e97937e42c153cdeb25e9aca9d3d0373aec0a5`](https://testnet.snowscan.xyz/address/0x63e97937e42c153cdeb25e9aca9d3d0373aec0a5) |
-| Pod token implementation | [`0xa7e4838327317f4ce6cc8b5ab07a57fdba842c77`](https://testnet.snowscan.xyz/address/0xa7e4838327317f4ce6cc8b5ab07a57fdba842c77) |
+| Privacy Portal factory | [`0xaf9327277cb370d536d2c8a9e15a0a7ff6c42c15`](https://testnet.snowscan.xyz/address/0xaf9327277cb370d536d2c8a9e15a0a7ff6c42c15) |
+| Portal implementation | [`0xf4fb32758e41c1b465049c5c967a6604b6c28dce`](https://testnet.snowscan.xyz/address/0xf4fb32758e41c1b465049c5c967a6604b6c28dce) |
+| Pod token implementation | [`0x1c0b982e084451e0b272cddcce902b04c679317d`](https://testnet.snowscan.xyz/address/0x1c0b982e084451e0b272cddcce902b04c679317d) |
 
 ### Privacy Portal tokens
 
 | Token | Underlying | Portal | pToken |
 | --- | --- | --- | --- |
-| pMTT | `0x328e70e1c52662cd5f19f824fcb8b463d77a6686` | `0xf4100d21eB4B1a66aDde58A01D1E32356F268b3F` | `0xFC6283a9000d7D5Cf8A058A04A9ED90265Af1634` |
-| pUSDC | `0x5425890298aed601595a70AB815c96711a31Bc65` | `0x090D2dc8C38275939b9381Ff2aa53012Ff412E34` | `0xe2235E064a3CEB5F1765c3b095855549d3c8A8a4` |
-| pWAVAX | `0xd00ae08403B9bbb9124bB305C09058E32C39A48c` | `0x20e7239cd78BDf2E8f34c52947e54fE68D7b536F` | `0x0c58954d91392794A50F610dF8c84228D63BE9D4` |
+| p.MTT | `0x328e70e1c52662cd5f19f824fcb8b463d77a6686` | `0x758a8F9a216A95773DDf6F73004B85d59f224518` | `0x02f284a1968160E1d3e4bC2BA3261be49725E765` |
+| p.USDC | `0x5425890298aed601595a70AB815c96711a31Bc65` | `0xE75373ADb4AD1A5634a10f4644822943830b18c5` | `0x21576D8CCE47d044C5815bd59eca1F6DA94c65A5` |
+| p.WAVAX | `0xd00ae08403B9bbb9124bB305C09058E32C39A48c` | `0xe6932f6Ab846bf389f7ef355dd5830594623B8E5` | `0x74d47cD68203066c97BA99787Fe1e0c68Ce42b04` |
 
 ## How this network fits PoD
 

@@ -16,6 +16,8 @@ The Privacy Portal is the primary web interface for interacting with this system
 
 ## 🧭 What is the Privacy Portal?
 
+> **Native COTI Privacy Portal** — This section covers the **on-COTI** Privacy Portal and `PrivateERC20` flows (mint/burn/transfer entirely on COTI). It is **not** the **PoD cross-chain Privacy Portal** (factory + pTokens on Fuji/Sepolia that route private compute through the Inbox). For host-chain PoD portal addresses, see [Avalanche Fuji](../privacy-on-demand/networks/fuji.md) and [Ethereum Sepolia](../privacy-on-demand/networks/sepolia.md).
+
 The Privacy Portal is COTI V2's dApp for interacting with privacy-enabled tokens. It lets users bridge supported ERC20 tokens into private tokens, view and use encrypted balances, and submit confidential transfers while balances and transfer amounts remain encrypted on-chain, with decryption handled locally through the COTI MetaMask Snap.
 
 ## ✨ What you can do with the Privacy Portal?

@@ -29,13 +29,18 @@ What PoD does **not** automatically guarantee by itself:
 
 ## What ships in the SDK versus what your team builds
 
-The **COTI PoD SDK** ([GitHub](https://github.com/cotitech-io/coti-pod-sdk), [npm](https://www.npmjs.com/package/@coti/pod-sdk)) provides **contracts and TypeScript helpers** for the PoD pattern. Your project still typically supplies:
+The **COTI PoD stack** splits cleanly:
+
+- **TypeScript:** [`@coti-io/pod-sdk`](https://www.npmjs.com/package/@coti-io/pod-sdk) ([GitHub](https://github.com/coti-io/coti-sdk-pod)) — encrypt/decrypt helpers, fee estimation, and `PodContract` send helpers. The npm package publishes **`dist` only** (no Solidity).
+- **Solidity:** [`@coti-io/coti-contracts`](https://github.com/coti-io/coti-contracts) — `PodLib`, `PodUser*` presets, Inbox interfaces, and `MpcCore` types.
+
+Your project still typically supplies:
 
 - **Application-specific** EVM contracts and state machines.
 - **User experience** for onboarding, showing **pending / completed / failed** private operations, and **safe key handling**.
 - **Operations**: monitoring, indexing, or internal tools for stuck requests and fee configuration, as appropriate for your deployment.
 
-The SDK’s own [documentation README](https://github.com/cotitech-io/coti-pod-sdk/blob/main/docs/README.md) states scope clearly: it does not replace deployment scripts, indexers, or backend services for you.
+Upstream [Getting started](https://github.com/coti-io/coti-sdk-pod/tree/main/site/04-getting-started) states scope clearly: the helpers do not replace deployment scripts, indexers, or backend services for you.
 
 ## Next steps
 

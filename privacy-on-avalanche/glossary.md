@@ -1,6 +1,6 @@
 # Glossary
 
-Short definitions for **Privacy on Demand** readers. Precise Solidity definitions and type tables are in the [PoD SDK contract types](https://github.com/cotitech-io/coti-pod-sdk/blob/main/docs/contracts/01-it-ct-gt-data-types.md) document.
+Short definitions for **Privacy on Demand** readers. Precise Solidity definitions and type tables are in the [PoD SDK contract types](https://github.com/coti-io/coti-sdk-pod/tree/main/site/contracts/01-it-ct-gt-data-types) document.
 
 | Term | Meaning |
 | --- | --- |

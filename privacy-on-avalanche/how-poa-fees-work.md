@@ -17,6 +17,24 @@ If either leg is underfunded, the job can stall as **pending** even when the oth
 
 `callbackFeeLocalWei` is a **slice of** `msg.value`, not an extra payment on top.
 
+## Dual fee layers (Inbox vs Privacy Portal)
+
+On Fuji, **primitive `PodLib` calls** pay the **Inbox** layer in AVAX. **PoD cross-chain Privacy Portal** deposits/withdrawals also pay a separate **portal protocol fee**.
+
+| Layer | What it covers | How to quote (Fuji) |
+| --- | --- | --- |
+| **Inbox / PoD messaging** | Cross-chain relay + private execution + Fuji callback budgets | Fuji Inbox `calculateTwoWayFeeRequiredInLocalToken`, or `@coti-io/pod-sdk` `PodContract.estimateFee` |
+| **Portal protocol fee** | Factory/portal fee config (optionally oracle-priced via the Fuji price oracle) | Portal `estimateDepositFees` / `estimateWithdrawFees` → `portalFee` + PoD totals |
+
+Addresses: [Avalanche Fuji](networks/fuji.md). For Sepolia host-chain portals see [Ethereum Sepolia](../privacy-on-demand/networks/sepolia.md).
+
+### Two quoting strategies (both intentional)
+
+| Strategy | Used by | Behavior |
+| --- | --- | --- |
+| **SDK per-call** | `@coti-io/pod-sdk` `estimateFee` | Per-tx gas/data sizes for this call |
+| **Fixed heuristics + pad** | Payroll / some dApp ports | Large fixed budgets + safety pad so fees stay stable across call shapes |
+
 ## How Fuji AVAX becomes gas-unit budgets
 
 The Inbox fee manager (conceptually) does this when you call `sendTwoWayMessage` / a `PodLib` helper:
@@ -141,7 +159,7 @@ const fee = await pod.estimateFee("add", podArgs, {
 
 - Payable **`add`** (or other `PodLib` helpers) with **`msg.value`** and **`callbackFeeLocalWei`** — see [Tutorial: private Adder on Avalanche Fuji](tutorial-private-adder-fuji.md).
 - Integration model context: [Tutorials overview](tutorials-privacy-on-avalanche.md).
-- Contract-level detail: SDK [Fees, gas, and oracle](https://github.com/cotitech-io/coti-pod-sdk/blob/main/docs/contracts/04-fees-gas-and-oracle.md).
+- Contract-level detail: SDK [Fees, gas, and oracle](https://github.com/coti-io/coti-sdk-pod/tree/main/site/contracts/04-fees-gas-and-oracle).
 
 ## Disclaimer
 

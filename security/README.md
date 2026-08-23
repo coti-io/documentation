@@ -1,10 +1,8 @@
-# Audit Roports
+# Audit Reports
 
-Security is a top priority for the COTI network. Below you’ll find a list of independent security audits conducted on different components of the COTI ecosystem. Each report outlines the scope, focus areas, and includes a link to the full audit documentation.
+Security is a top priority for the COTI network. Below you’ll find a list of independent security audits conducted on different components of the COTI ecosystem.
 
-These audits play a critical role in ensuring that the COTI protocol remains secure, reliable, and ready for real-world adoption.
-
-You can find all published audit reports here:
+> **Canonical page:** Prefer [Audit Reports](audit-reports.md) for the full table (including Privacy Portal) and the **PoD Inbox / Privacy Portal internal hardening** notes.
 
 
 

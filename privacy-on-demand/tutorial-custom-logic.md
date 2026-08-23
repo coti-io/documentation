@@ -58,10 +58,10 @@ Paths like `../InboxUser.sol` assume you follow the SDK’s example layout; adju
 
 The Sepolia contract **inherits `PodUserSepolia`** (or your network’s `PodUser` preset), tracks the **COTI peer address**, and:
 
-1. **`sendMessage`** — Wraps encrypted input (`itString`) and public addresses in an **`IInbox.MpcMethodCall`** built with **`MpcAbiCodec`** (see the SDK’s [Request builder and remote calls](https://github.com/cotitech-io/coti-pod-sdk/blob/main/docs/contracts/03-request-builder-and-remote-calls.md)). It sends a **two-way** message so the result comes back asynchronously.
+1. **`sendMessage`** — Wraps encrypted input (`itString`) and public addresses in an **`IInbox.MpcMethodCall`** built with **`MpcAbiCodec`** (see the SDK’s [Request builder and remote calls](https://github.com/coti-io/coti-sdk-pod/tree/main/site/contracts/03-request-builder-and-remote-calls)). It sends a **two-way** message so the result comes back asynchronously.
 2. **`onMessageReceived`** — Decodes the tuple produced on COTI, **re-checks `inboxMsgSender()`**, and stores **`ctString`** keyed by conversation participants (or whatever your product needs).
 
-The Solidity below is **structurally** correct; wire **`MpcAbiCodec`**’s `create` / `addArgument` / `build` steps exactly as in your installed `@coti/pod-sdk` version (argument order and `gt`/`it` interface types **must** match the COTI method signature).
+The Solidity below is **structurally** correct; wire **`MpcAbiCodec`**’s `create` / `addArgument` / `build` steps exactly as in your installed `@coti-io/pod-sdk` version (argument order and `gt`/`it` interface types **must** match the COTI method signature).
 
 ```solidity
 // SPDX-License-Identifier: MIT
@@ -134,9 +134,9 @@ contract DirectMessageEvm is PodUserSepolia {
 This chapter stops at **Solidity** to highlight the **chain split**. For **encryption**, **Inbox fee estimation**, and **client-side decryption** of `ctString`, continue with:
 
 - [Tutorial: private Adder on Sepolia](tutorial-private-adder-sepolia.md) — includes **`PodContract`**, **`encryptAndCallMethod`**, **`estimateFee`**, and **`extractRequestIds`** so you can copy the same client pattern to **`sendMessage`** (build **`PodMethodArgument[]`** with types that match your ABI: **`itString`** for the ciphertext argument, plain types for addresses and the callback-fee slot, **`isCallBackFee: true`** on the fee parameter).
-- [TypeScript PoD SDK (`CotiPodCrypto`, `PodContract`)](typescript-pod-sdk.md) — short reference for **`CotiPodCrypto`** and **`PodContract`** with links to [`coti-pod-crypto.ts`](https://github.com/cotitech-io/coti-pod-sdk/blob/main/src/coti-pod-crypto.ts) and [`pod-method-call.ts`](https://github.com/cotitech-io/coti-pod-sdk/blob/main/src/pod-method-call.ts).
-- [TypeScript integration — SDK](https://github.com/cotitech-io/coti-pod-sdk/blob/main/docs/06-typescript-integration-ux-development.md)
-- [Writing privacy contracts on Ethereum — SDK](https://github.com/cotitech-io/coti-pod-sdk/blob/main/docs/05-writing-privacy-contracts-on-ethereum.md) (custom mode)
+- [TypeScript PoD SDK (`CotiPodCrypto`, `PodContract`)](typescript-pod-sdk.md) — short reference for **`CotiPodCrypto`** and **`PodContract`** with links to [`coti-pod-crypto.ts`](https://github.com/coti-io/coti-sdk-pod/blob/main/src/coti-pod-crypto.ts) and [`pod-method-call.ts`](https://github.com/coti-io/coti-sdk-pod/blob/main/src/pod-method-call.ts).
+- [TypeScript integration — SDK](https://github.com/coti-io/coti-sdk-pod/tree/main/site/06-typescript-integration-ux-development)
+- [Writing privacy contracts on Ethereum — SDK](https://github.com/coti-io/coti-sdk-pod/tree/main/site/05-writing-privacy-contracts-on-ethereum) (custom mode)
 
 After **`encryptAndCallMethod("sendMessage", args, feeCfg)`** (or a raw **`ethers.Contract`** send), use **`await pod.extractRequestIds(receipt.hash)`** on the same **`PodContract`** instance so your UI stores the **`requestId`** emitted in the Inbox **`MessageSent`** logs—same helper as in the adder walkthrough.
 
