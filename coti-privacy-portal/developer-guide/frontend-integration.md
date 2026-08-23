@@ -253,3 +253,15 @@ async function encryptedApprove(
     return txHash;
 }
 ```
+
+## Polling failed PoD / Privacy Portal requests
+
+When a pToken request leaves `Pending`, read `requests(requestId).status` and decode `failedRequests(requestId)`:
+
+1. If status is `SystemFailed` (or `failedRequests` ABI-decodes to Inbox `{ErrorData}` with `errorCode == 2`), show a system-error message. Do not retry the same request on COTI.
+2. For portal deposits, call `refundFailedDeposit(mintRequestId)` **only** after `SystemFailed`. App `raise` / `Failed` is not refundable.
+3. For portal withdrawals, call `cancelFailedWithdrawal(withdrawalId)` after the transfer request is `Failed` or `SystemFailed`.
+4. If the mint is still `Pending` but COTI Inbox `errors[id].errorCode == 1`, show an **execution failure** and offer / await **`retryFailedRequest`** (permissionless). Use **`getOutboxError(id)`** for the capped returndata and decode in the client. Do **not** refund while a retry can still mint.
+5. After `createPortal`, poll mother `isRegistered(sourceChainId, pToken)` before enabling deposits. A prior `FactoryNotAllowed` registration is recovered with allowlist + `retryFailedRequest`, not by assuming the portal is ready.
+
+For offline fee accounting, index `PrivacyPortal.OperationFeesPaid`: `portalFee` (protocol, retained), `podFee` (forwarded to inbox), and `podCallbackFee` (callback slice). `isDeposit` / `isNativeWrap` distinguish the operation.

@@ -12,4 +12,4 @@ Our developer documentation serves as a comprehensive guide to understanding and
 
 * [**Technology Overview**](how-coti-works/): Dive into the technical foundations of the COTI network, including the cryptographic principles and innovative solutions behind its operation.
 * [**Quickstart Guide**](build-on-coti/quickstart.md): Get up and running with the COTI network quickly, using step-by-step instructions and practical examples.
-* [**Developer Tools**](build-on-coti/tools/): Check out the innovative tools and resources to empower developers and organizations.
+* [Privacy on Demand](privacy-on-demand/README.md) — Private computation on COTI with EVM orchestration (PoD)

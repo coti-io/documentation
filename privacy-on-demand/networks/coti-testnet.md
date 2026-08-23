@@ -1,8 +1,8 @@
 # COTI Testnet
 
-COTI Testnet is the **private execution** side of Privacy on Demand. Host-chain dApps (for example on [Avalanche Fuji](fuji.md)) send encrypted work through the cross-chain Inbox; COTI runs the private computation and returns encrypted results.
+COTI Testnet is the **private execution** side of Privacy on Demand. Host-chain dApps (for example on [Avalanche Fuji](fuji.md) or [Ethereum Sepolia](sepolia.md)) send encrypted work through the cross-chain Inbox; COTI runs the private computation and returns encrypted results.
 
-> **Note:** Addresses below reflect the current PoD test deployment. They may change after contract redeploys. Confirm against your SDK release or environment before production use.
+> **Note:** Addresses below match `pod-ecosystem-integration/deployConfig.json` (Inbox salt `pod.inbox.v2.2`). They may change after contract redeploys. Confirm against that file or your SDK release before production use.
 
 ## Network details
 
@@ -25,7 +25,9 @@ Also see the general COTI [TestNet](../../networks/testnet/README.md) page for M
 | Inbox | [`0x3b8B70819f27e0438cBcE7f31894f799da52648F`](https://testnet.cotiscan.io/address/0x3b8B70819f27e0438cBcE7f31894f799da52648F) | Cross-chain message router (CREATE3; same address on every PoD chain) |
 | MPC executor | [`0x6804961167c3c8ef2bf6839ddcf51ec1fbe800c3`](https://testnet.cotiscan.io/address/0x6804961167c3c8ef2bf6839ddcf51ec1fbe800c3) | Entry point for library-style private operations (`configureCoti` target on host dApps) |
 | Price oracle | [`0xb471e172876ba9bb24a43528779ea31e0b0bda2f`](https://testnet.cotiscan.io/address/0xb471e172876ba9bb24a43528779ea31e0b0bda2f) | Local/remote token prices used by Inbox fee conversion |
-| Pod ERC20 mother | [`0xaeb2271959031b65cba63302cff5d970b49d4a7b`](https://testnet.cotiscan.io/address/0xaeb2271959031b65cba63302cff5d970b49d4a7b) | COTI-side registry for Privacy Portal / pToken flows |
+| Pod ERC20 mother | [`0xaeb2271959031b65cba63302cff5d970b49d4a7b`](https://testnet.cotiscan.io/address/0xaeb2271959031b65cba63302cff5d970b49d4a7b) | COTI-side registry for **PoD cross-chain** Privacy Portal / pToken flows |
+
+> **Portal labeling:** The mother / pToken path above is for **PoD cross-chain Privacy Portal** (host chains Fuji/Sepolia ↔ COTI). For the **native COTI Privacy Portal** (PrivateERC20 on COTI only), see [COTI Privacy Portal — contract addresses](../../coti-privacy-portal/developer-guide/contract-addresses.md).
 
 ## Protocol helpers (COTI Testnet)
 
@@ -49,7 +51,7 @@ Full COTI Testnet protocol addresses: [Contracts Addresses](../../networks/testn
 Typical pairings today:
 
 - **Host:** [Avalanche Fuji](fuji.md) · **Execution:** COTI Testnet
-- **Host:** Ethereum Sepolia · **Execution:** COTI Testnet (see the [private Adder tutorial](../tutorial-private-adder-sepolia.md))
+- **Host:** [Ethereum Sepolia](sepolia.md) · **Execution:** COTI Testnet (see the [private Adder tutorial](../tutorial-private-adder-sepolia.md))
 
 ## SDK constants
 

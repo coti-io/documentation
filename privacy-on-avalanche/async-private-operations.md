@@ -18,7 +18,7 @@ So the user’s mental model should be closer to **“I submitted a job”** tha
 
 Private execution happens **outside** your chain’s normal synchronous EVM frame. The **Inbox** pattern exists precisely to **carry a message out** and **bring a response back** through a **controlled channel**.
 
-The SDK’s [Async execution](https://github.com/cotitech-io/coti-pod-sdk/blob/main/docs/05a-async-execution.md) page lists the canonical lifecycle and common mistakes (wrong decode shape, missing `onlyInbox`, expecting same-block completion).
+The SDK’s [Async execution](https://github.com/coti-io/coti-sdk-pod/tree/main/site/05a-async-execution) page lists the canonical lifecycle and common mistakes (wrong decode shape, missing `onlyInbox`, expecting same-block completion).
 
 ## What product and support teams should plan for
 
