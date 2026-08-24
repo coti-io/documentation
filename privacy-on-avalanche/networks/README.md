@@ -5,14 +5,14 @@ Privacy on Avalanche spans **two domains**:
 1. **Avalanche Fuji C-Chain** — where your dApp contracts, assets (paid in **AVAX**), and the local **Inbox** live.
 2. **COTI Testnet** — where private computation runs via the **MPC executor** and the COTI-side **Inbox**.
 
-The pages below list network parameters and deployed contract addresses for the current Fuji ↔ COTI Testnet pairing. Addresses can change after redeploys; treat [`deployConfig.json`](https://github.com/coti-io/pod-ecosystem-integration), [`@coti-io/pod-sdk`](https://github.com/coti-io/coti-sdk-pod) / [`@coti-io/coti-contracts`](https://github.com/coti-io/coti-contracts) and your environment config as the live source of truth when building against a specific release.
+The pages below list network parameters and deployed contract addresses for the current Fuji ↔ COTI Testnet pairing. Addresses can change after redeploys; treat **`pod-ecosystem-integration` deployConfig** ([`deployConfig.json`](https://github.com/coti-io/pod-ecosystem-integration) — `inboxSalt` + `chains.<id>.inbox`) as the operator source of truth, and [`@coti-io/pod-sdk`](https://github.com/coti-io/coti-sdk-pod) / [`@coti-io/coti-contracts`](https://github.com/coti-io/coti-contracts) and your environment config when building against a specific release.
 
 | Network | Chain ID | Role |
 | --- | --- | --- |
 | [Avalanche Fuji](fuji.md) | `43113` | **Host chain** — dApp + Inbox (native token: AVAX) |
 | [COTI Testnet](coti-testnet.md) | `7082400` | **Private execution** — MPC executor + COTI Inbox |
 
-The shared CREATE3 **Inbox** address (`pod.inbox.v2.2`) is the same on every supported PoD chain:
+The shared CREATE3 **Inbox** address is the same on every supported PoD chain (from deployConfig `inboxSalt` family `pod.inbox.v2.2`):
 
 `0x3b8B70819f27e0438cBcE7f31894f799da52648F`
 

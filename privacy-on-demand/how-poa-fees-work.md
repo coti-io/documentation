@@ -26,6 +26,48 @@ For portal flows: `msg.value ≈ portalFee + podInboxFee` (plus the deposited na
 
 Prefer live on-chain views for production; do not copy pedagogical ETH/AVAX numbers from the tables below.
 
+## Maximum method-call size (apps must respect this)
+
+The Inbox **rejects oversized messages** at create/ingest time. Size is measured as **payload weight**, not `abi.encode(methodCall).length` and not raw calldata:
+
+```text
+weight = data.length + datatypes.length × 32 + datalens.length × 32
+```
+
+| Cap | What it limits | Typical default |
+| --- | --- | --- |
+| `FeeConfig.maxMethodCallBytes` | Outbound create (`sendTwoWay` / `sendOneWay`) and destination ingest | **8192** bytes of weight |
+| `maxReplyMethodCallBytes` | Return legs from `respond()` / `raise()` / system-error callbacks | **8192** bytes of weight |
+| `FeeConfig.maxExecutionGas` | Max gas-unit budget allowed on `targetFee` / `callerFee` | Network policy (often millions) |
+
+**Why it matters:** a private call with large encrypted args, long `bytes` / `string` / arrays, or many typed MPC arguments can exceed the weight cap even when the fee quote looks fine. Oversized creates revert with **`MethodCallTooLarge`**; oversized replies revert with **`ResponseOutOfBounds`**.
+
+On **constant-fee** legs, the flat minimum is still valid once size and execution are capped: operators set `constantFee` to cover priced max-execution work plus max-size ingest (deploy assert / checklist), and keep `maxExecutionGas ≥ constantFee`. See [`SIZE_CAPS_AND_MINER_REJECT.md`](https://github.com/coti-io/coti-pod-inbox-contracts/blob/main/docs/SIZE_CAPS_AND_MINER_REJECT.md#constant-fee-worst-case-floor-deploy-checklist).
+
+**What to do in your dApp / SDK:**
+
+1. Prefer compact argument encodings (fixed-width `itUint*` over huge dynamic blobs when possible).
+2. Before send, compute the weight of your `MpcMethodCall` (or use a small helper) and keep it **under the live Inbox caps** for that chain — read `localMinFeeConfig` / `remoteMinFeeConfig` and `maxReplyMethodCallBytes` on the deployed Inbox.
+3. Keep **callback / error payloads** small so return legs stay under `maxReplyMethodCallBytes` on the destination.
+
+Operator write-up (defaults, peer invariants): [`SIZE_CAPS_AND_MINER_REJECT.md`](https://github.com/coti-io/coti-pod-inbox-contracts/blob/main/docs/SIZE_CAPS_AND_MINER_REJECT.md).
+
+## Delivery timing and chain ids (integrators)
+
+- **`retryFailedRequest` is permissionless** and uses uncapped destination gas (`gasleft()`), not the prepaid `targetFee`. Treat first-mine timing and retries as adversarial; do not rely on wall-clock delivery. Spot-sensitive handlers need app-level protections. `targetFee` is miner best-effort for the initial mine only.
+- **`targetChainId` is not allowlisted.** Pass only supported PoD lane ids; a wrong id strands fees on an unroutable lane (user/integrator footgun).
+
+## Miner sizing (`estimateExecutionGasForMiner`)
+
+When **mining** inbound requests (`batchProcessRequests`), operators should size gas with:
+
+1. `estimateExecutionGasForMiner` (always-reverts with `ExecutionGasEstimate`) for real user-subcall gas
+2. A configurable buffer on that user gas (batch packing)
+3. `eth_estimateGas` on the full mine tx
+4. `gasLimit = max(projected, eth_estimateGas)`
+
+See [`ESTIMATE_EXECUTION_GAS.md`](https://github.com/coti-io/coti-pod-inbox-contracts/blob/main/docs/ESTIMATE_EXECUTION_GAS.md). FeeConfig also includes **`gasPriceMul` / `gasPriceDiv`** for cross-chain gas-price skew (do not double-apply when reading prepaid `targetFee`).
+
 ## Example call
 
 Solidity shape (conceptually):

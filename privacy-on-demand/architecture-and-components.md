@@ -72,7 +72,7 @@ A fuller table lives in the SDK’s [data types](https://github.com/coti-io/coti
 
 ## Trust and security highlights (for architects)
 
-- **Callback authentication**: Your contract should only accept **Inbox-originated** callbacks for private results—otherwise anyone could try to spoof answers. The SDK’s `onlyInbox` pattern exists for this boundary ([features](https://github.com/coti-io/coti-sdk-pod/tree/main/site/03-features)).
+- **Callback authentication**: State-changing callbacks must authenticate the **Inbox** and the **remote origin**. Prefer `onlyInboxPeer` (registered peer) for inbound peer delivery and `onlyInboxReturnLeg` for linked respond/raise/system-error callbacks. Bare `onlyInbox` is transport-only and is not sufficient origin auth. Value-holding bridges should keep inbox handlers on the pToken and let the Privacy Portal react to pToken callbacks (portal indirection).
 - **Request correlation**: Private work completes **later**; your system must track **request IDs** and statuses honestly in UX and backends ([Async private operations](async-private-operations.md)).
 - **Key stewardship**: Client-side AES material is powerful; treat it like **credentials**, not analytics metadata ([TypeScript integration](https://github.com/coti-io/coti-sdk-pod/tree/main/site/06-typescript-integration-ux-development)).
 

@@ -92,7 +92,7 @@ contract PrivateAdder is PodLib, PodUserSepolia {
         emit AddRequested(requestId, msg.sender);
     }
 
-    function addCallback(bytes memory data) external onlyInbox {
+    function addCallback(bytes memory data) external onlyInboxPeer {
         bytes32 requestId = inbox.inboxSourceRequestId();
         if (requestId == bytes32(0)) {
             requestId = inbox.inboxRequestId();
@@ -109,7 +109,7 @@ contract PrivateAdder is PodLib, PodUserSepolia {
 **Notes:**
 
 - **`onDefaultMpcError`** is implemented on `PodLibBase` and forwards failures to **`ErrorRemoteCall`** on `PodUser`. Your UI can listen for that event to mark a request failed.
-- **`addCallback`** must stay **`onlyInbox`** so random accounts cannot forge results.
+- **`addCallback`** must use **`onlyInboxPeer`** (after registering the COTI executor as `trustedRemote`) so random accounts and untrusted remotes cannot forge results. Bare `onlyInbox` is transport-only.
 - **`ctUint256`** is a Solidity **struct** `{ ctUint128 ciphertextHigh; ctUint128 ciphertextLow; }`, so the decoded local must use a `memory` location and the storage mapping holds the two‑limb tuple. The narrower garbled / ciphertext types (`gtUint8…gtUint256`, `gtBool`, and `ctUint8…ctUint128`) are **user‑defined value types** — pass and assign them like `uint256` (no `memory` / `calldata`). Encrypted-input wrappers such as **`itUint256`** stay structs and keep their `calldata` / `memory` location as before.
 
 ## Step 3: Compile and deploy on Sepolia
