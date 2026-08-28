@@ -159,6 +159,9 @@
   * [Cookbook: private investor allocations with PoD](privacy-on-avalanche/cookbook-private-investor-allocations.md)
   * [Tutorial: private Adder on Avalanche Fuji](privacy-on-avalanche/tutorial-private-adder-fuji.md)
   * [Tutorial: custom privacy logic with PoD](privacy-on-avalanche/tutorial-custom-logic.md)
+* [Private RWA](private-rwa/README.md)
+  * [COTI Private RWA Implementation](private-rwa/coti_rwa.md)
+  * [COTI Private RWA Deployed Contracts](private-rwa/coti_rwa_deployments.md)
 
 ## Security
 
