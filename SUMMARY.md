@@ -30,6 +30,7 @@
     * [Account Onboarding Procedure](build-on-coti/core-concepts/onboard-user.md)
     * [Private Data Types](build-on-coti/core-concepts/secure-data-types.md)
     * [Supported Operations on Private Data Types](build-on-coti/core-concepts/secure-operations-and-gas.md)
+    * [Gas Estimation Limitation](build-on-coti/core-concepts/gas-estimation-limitation.md)
   * [Quickstart](build-on-coti/quickstart.md)
   * [Guides](build-on-coti/guides/README.md)
     * [Setting up COTI Snap with your MetaMask wallet](build-on-coti/guides/setting-up-coti-snap-with-your-metamask-wallet.md)
