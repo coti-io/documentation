@@ -2,7 +2,7 @@
 
 ## Live on two public testnets
 
-Six confidential tokens, deployed and operating.
+Six confidential tokens (PoD pTokens), deployed and operating.
 
 **Avalanche Fuji**
 
@@ -23,3 +23,5 @@ Six confidential tokens, deployed and operating.
 | `p.ETH`  | `0xd33A363459c6Ee0C4F8504E380E8D3Aa4F209116` |    18    |
 
 Each pair is deployed by `PrivacyPortalFactory` as a minimal-proxy clone — **one portal and one pToken per asset**, so listing a new confidential token is a factory call, not an engineering project.
+
+These are COTI confidential wrappers on the host chain — not ERC-7984 deployments. See [Compatibility and divergence](compatibility-and-divergence.md).
