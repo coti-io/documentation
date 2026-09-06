@@ -1,68 +1,69 @@
 # Decryption trust model
 
-Who can see plaintext when a user “decrypts” a confidential balance or result?
+Who can see plaintext, and which services sit on the path?
 
-On **COTI**, user-facing ciphertexts (`ct*`) are bound to the account AES key. Decryption happens **on the client**. No single server in the path holds the user’s decrypted value.
+**Decrypt of user `ct*` on COTI is local:** the client reads ciphertext from chain and AES-decrypts with the account key. That step does not send ciphertext to a server for plaintext recovery.
 
-On **Zama today**, user decrypt goes through a **Relayer over HTTPS** to the Gateway / threshold KMS. The KMS decrypts under the FHE network key and **re-encrypts** to the user’s transport public key; the app then recovers plaintext locally. The Relayer is documented as untrusted for plaintext, but a **networked decrypt/re-encrypt service still sits in the path**. That is an implementation architecture choice, not necessarily a permanent protocol law — document it as how the stack works today.
+**Encrypt is a separate path.** Native COTI SDKs can encrypt locally with the same AES key. PoD dApps that call `CotiPodCrypto.encrypt` **POST the plaintext** to the PoD encryption HTTP service (`buildEncryptedInputs`). That helper **does receive plaintext**. Do not treat “client-side decrypt” as “no server ever sees the value.”
+
+Zama user decrypt goes Relayer HTTPS → Gateway / threshold KMS (re-encrypt to the user’s transport key) → client. The Relayer is documented as untrusted for plaintext; the KMS and coprocessors are the cryptographic trust base.
+
+## Trust assumptions
+
+| | COTI | Zama / FHEVM (pinned stack, 6 Sep 2026) |
+| :- | :--- | :-------------------------------------- |
+| Who holds the network key | MPC / garbled-circuit nodes hold **threshold shares** of the network AES key. No single node is documented as able to reconstruct it ([AES keys](../how-coti-works/advanced-topics/aes-keys.md)). | Threshold **coprocessors** attest inputs (`InputVerifier` signatures). Threshold **KMS** decrypts under the FHE network key. |
+| User key | Account AES key from onboarding (`GetUserKey` / wallet plugin). The client must store it; loss means those `ct*` values cannot be decrypted. | User transport key for KMS re-encrypt. ACL on handles controls who may request decrypt. |
+| Encrypt-time plaintext | **PoD:** encryption HTTP service reads the plaintext. **Native COTI:** `encryptValue` can stay on the client. | Client WASM encrypts under the FHE public key. Relayer sees packed ciphertext + ZKPoK, not the plaintext. |
+| Decrypt-time plaintext | Client AES on `ct*`. No Relayer decrypt hop. | Client recovers plaintext after KMS re-encrypt. Relayer/Gateway are on the path (liveness). |
+| Liveness | PoD also depends on Inbox / relayer for **request and callback**. Native COTI decrypt does not. | Relayer + Gateway for **input registration and decrypt**. Failure can happen before a host tx exists ([Input validation](input-validation.md)). |
 
 ## COTI: local AES decrypt
 
-Flow in short:
-
-1. Onboard → account AES key (e.g. `GetUserKey` / wallet plugin).
-2. Contract returns or stores `ct*` for that user (`offBoardToUser`).
-3. Client reads the ciphertext from chain and decrypts locally (AES + XOR; see [AES keys](../how-coti-works/advanced-topics/aes-keys.md)).
+1. Onboard → account AES key.
+2. Contract returns or stores `ct*` for that user (`offBoardToUser` / PoD callback).
+3. Client reads the ciphertext from chain and decrypts locally (AES + XOR).
 
 ```typescript
-import { CotiPodCrypto, DataType } from "@coti/pod-sdk";
+import { CotiPodCrypto, DataType } from "@coti-io/pod-sdk";
 
 // Ciphertext already on-chain (e.g. from balanceOf / offBoardToUser).
-const ciphertextHex = await token.balanceOf(userAddress); // ct* as returned by the contract
+const ciphertextHex = await token.balanceOf(userAddress);
 
-// Decrypt happens entirely in-process with the user's AES key.
-// No HTTPS decrypt service is required to obtain plaintext.
+// Decrypt is in-process with the user's AES key.
 const plain = CotiPodCrypto.decrypt(
   ciphertextHex.toString(),
-  accountAesKey, // from onboarding — never leave the client
+  accountAesKey,
   DataType.Uint256
 );
-
-console.log("balance", plain);
 ```
 
-**Implementation note:** encryption of inputs may still use a PoD encryption helper over HTTP to produce `it*` + signature; **decrypt of user `ct*` does not** send ciphertext to a server for plaintext recovery.
+```typescript
+// PoD encrypt: plaintext is in the HTTP body. The encryption service reads it.
+const enc = await CotiPodCrypto.encrypt(
+  "1000",
+  "testnet",
+  DataType.itUint256
+);
+```
 
 ## Zama: Relayer HTTPS → KMS re-encrypt → client
 
-Typical TypeScript shape with the current Zama SDK ([encrypt & decrypt guide](https://docs.zama.org/protocol/sdk/guides/encrypt-decrypt)):
+Typical TypeScript ([Zama encrypt & decrypt](https://docs.zama.org/protocol/sdk/guides/encrypt-decrypt)):
 
 ```typescript
 import { ZamaSDK } from "@zama-fhe/sdk";
 
-// Encrypt (client WASM also builds a ZK input proof — see Input validation).
 const { encryptedValues, inputProof } = await sdk.encrypt({
   values: [{ value: 1000n, type: "euint64" }],
   contractAddress,
   userAddress,
 });
 
-// User decrypt of a handle returned by the contract:
-// This call goes Relayer HTTPS → Gateway / KMS.
-// KMS decrypts under the FHE key and re-encrypts to the user's transport key;
-// plaintext is recovered on the client only after that round trip.
+// User decrypt of a handle: Relayer HTTPS → Gateway / KMS re-encrypt.
 const decrypted = await sdk.decryption.decryptValues([
   { encryptedValue: handleFromChain, contractAddress },
 ]);
 ```
 
-Legacy Relayer SDK examples use `userDecrypt` / `createEncryptedInput(...).encrypt()` with the same architectural split: **proof + encrypt on the client**, **decrypt coordination over the Relayer**.
-
-| | COTI | Zama (today) |
-| :- | :--- | :----------- |
-| Where user plaintext is recovered | Client, from on-chain `ct*` | Client, after Relayer/KMS re-encrypt hop |
-| Server sees user plaintext? | No — AES key stays with the user | Relayer should not; KMS operates on FHE key material then re-encrypts |
-| Dependency for decrypt | Chain read + local AES | HTTPS Relayer (API key / proxy on mainnet) + KMS |
-| Protocol vs implementation | Local decrypt is the product model | Path can evolve; today’s apps depend on the Relayer |
-
-For input proving cost (separate from decrypt), see [Input validation](input-validation.md).
+**Public** decrypt (plaintext that a contract can `require` on) is a different flow: off-chain KMS signatures, then a **later** host transaction. See [On-chain data availability](on-chain-data-availability.md) and COTI native [synchronous decrypt](../how-coti-works/advanced-topics/coti-vs-others.md#advantages-over-fhe).

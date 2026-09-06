@@ -1,6 +1,6 @@
 # Glossary
 
-Short definitions for **Privacy on Demand** readers. Precise Solidity definitions and type tables are in the [PoD SDK contract types](https://github.com/cotitech-io/coti-pod-sdk/blob/main/docs/contracts/01-it-ct-gt-data-types.md) document.
+Short definitions for **Privacy on Demand** readers. Type roles (`it*`, `gt*`, `ct*`) are summarized in [Architecture and main components](architecture-and-components.md). Solidity structs live in [MpcCore.sol](https://github.com/coti-io/coti-contracts/blob/main/contracts/utils/mpc/MpcCore.sol).
 
 | Term | Meaning |
 | --- | --- |

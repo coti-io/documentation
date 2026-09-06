@@ -4,7 +4,7 @@
 
 This page explains how that payment is **split**, converted (via **oracles**) into **execution budgets** on each side—often described as **gas units**—and **consumed** step by step.
 
-The numbers below are a **single worked example** so you can follow the arithmetic. Live networks use **oracle and Inbox policy** to set conversion rates and minimums; use your deployment’s **views** (for example `calculateTwoWayFeeRequiredInLocalToken`) and the SDK’s [Fees, gas, and oracle](https://github.com/cotitech-io/coti-pod-sdk/blob/main/docs/contracts/04-fees-gas-and-oracle.md) reference for production.
+The numbers below are a **single worked example** so you can follow the arithmetic. Live networks use **oracle and Inbox policy** to set conversion rates and minimums; use your deployment’s **views** (for example `calculateTwoWayFeeRequiredInLocalToken`) for production.
 
 ## Example call
 
@@ -38,7 +38,7 @@ Solidity shape (conceptually):
 
 ## Walkthrough
 
-Read the **first table top to bottom:** user ETH is split by leg, oracles supply **COTI** and **ETH** prices, the COTI leg is expressed as **quote → COTI tokens**, then policy turns each leg into **gas-unit budgets**. The **second table** spends **COTI** first, then **Sepolia** after the result exists. Underspend remains are illustrative; production behavior depends on **InboxMiner** / **InboxFeeManager** and operator policy (see the SDK [Fees, gas, and oracle](https://github.com/cotitech-io/coti-pod-sdk/blob/main/docs/contracts/04-fees-gas-and-oracle.md) doc).
+Read the **first table top to bottom:** user ETH is split by leg, oracles supply **COTI** and **ETH** prices, the COTI leg is expressed as **quote → COTI tokens**, then policy turns each leg into **gas-unit budgets**. The **second table** spends **COTI** first, then **Sepolia** after the result exists. Underspend remains are illustrative; production behavior depends on **InboxMiner** / **InboxFeeManager** and operator policy.
 
 ## Why this matters for `add(a, b) → ctUint64 c`
 
@@ -49,7 +49,7 @@ Read the **first table top to bottom:** user ETH is split by leg, oracles supply
 ## Where to implement this in code
 
 - Solidity: payable **`add`** with **`msg.value`** and **`callbackFeeLocalWei`**, as in [Tutorial: private Adder on Sepolia](tutorial-private-adder-sepolia.md) (see [Tutorials overview](tutorials-privacy-on-demand.md) for how this fits the **primitive-only** model).  
-- Estimation: Inbox **`calculateTwoWayFeeRequiredInLocalToken`** and the [Fees, gas, and oracle](https://github.com/cotitech-io/coti-pod-sdk/blob/main/docs/contracts/04-fees-gas-and-oracle.md) document in the PoD SDK repo.
+- Estimation: Inbox **`calculateTwoWayFeeRequiredInLocalToken`**.
 
 ## Disclaimer
 

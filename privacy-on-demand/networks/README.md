@@ -5,7 +5,7 @@ Privacy on Demand spans **two domains**:
 1. **Host chain** — where your dApp contracts, assets, and the local **Inbox** live (for example Avalanche Fuji).
 2. **COTI** — where private computation runs via the **MPC executor** and the COTI-side **Inbox**.
 
-The pages below list network parameters and deployed contract addresses for current test environments. Addresses can change after redeploys; treat the [PoD SDK](https://github.com/cotitech-io/coti-pod-sdk) and your environment config as the live source of truth when building against a specific release.
+The pages below list network parameters and deployed contract addresses for current test environments. Addresses can change after redeploys; treat [`@coti-io/pod-sdk`](https://github.com/coti-io/coti-sdk-pod), [`@coti-io/coti-contracts`](https://github.com/coti-io/coti-contracts), and your environment config as the live source of truth when building against a specific release.
 
 | Network | Chain ID | Role in PoD |
 | --- | --- | --- |

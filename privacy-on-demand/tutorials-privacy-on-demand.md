@@ -26,7 +26,7 @@ For **64-, 128-, and 256-bit** lanes, the library surface includes (names may be
 
 **Randomness:** `randBoundedBits`  
 
-For the authoritative list, signatures, and gas notes, use the SDK’s **[MPC library (PodLib)](https://github.com/cotitech-io/coti-pod-sdk/blob/main/docs/05b-multi-party-computing-library-mpclib.md)** and **[PodLib.sol](https://github.com/cotitech-io/coti-pod-sdk/blob/main/contracts/mpc/PodLib.sol)** in your installed `@coti/pod-sdk` version.
+For the authoritative list, signatures, and gas notes, use **[PodLib.sol](https://github.com/coti-io/coti-contracts/blob/main/contracts/pod/mpc/PodLib.sol)** in your installed `@coti-io/coti-contracts` package.
 
 ### Example tutorial (simple PoD dApp)
 
@@ -138,9 +138,9 @@ flowchart LR
 
 | Your situation | Start here |
 | --- | --- |
-| Logic fits the primitive list and a small number of MPC steps | [Tutorial: private Adder on Sepolia](tutorial-private-adder-sepolia.md), [TypeScript PoD SDK (`CotiPodCrypto`, `PodContract`)](typescript-pod-sdk.md), then [MPC library (PodLib) — SDK](https://github.com/cotitech-io/coti-pod-sdk/blob/main/docs/05b-multi-party-computing-library-mpclib.md) |
+| Logic fits the primitive list and a small number of MPC steps | [Tutorial: private Adder on Sepolia](tutorial-private-adder-sepolia.md), [TypeScript PoD SDK](typescript-pod-sdk.md), [PodLib](architecture-and-components.md) |
 | You want a business-oriented public-to-private migration | [Cookbook: private investor allocations with PoD](cookbook-private-investor-allocations.md), then [Tutorial: custom privacy logic with PoD](tutorial-custom-logic.md) |
-| Logic needs custom COTI processing, `gt*` handling, or richer state | [Tutorial: custom privacy logic with PoD](tutorial-custom-logic.md), then [Writing privacy contracts on Ethereum — SDK](https://github.com/cotitech-io/coti-pod-sdk/blob/main/docs/05-writing-privacy-contracts-on-ethereum.md) and [Request builder and remote calls — SDK](https://github.com/cotitech-io/coti-pod-sdk/blob/main/docs/contracts/03-request-builder-and-remote-calls.md) |
+| Logic needs custom COTI processing, `gt*` handling, or richer state | [Tutorial: custom privacy logic with PoD](tutorial-custom-logic.md), [How a private request travels end to end](how-a-private-request-travels-end-to-end.md) |
 | Fees, async UX, and components | [How do PoA fees work?](how-poa-fees-work.md), [Async private operations](async-private-operations.md), [Architecture and main components](architecture-and-components.md) |
 
 Return to the [Privacy on Demand section index](README.md).

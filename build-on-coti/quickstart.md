@@ -172,7 +172,7 @@ This guide will help you explore the basics of interacting with the COTI network
     ```
 
 
-2.  Navigate to the [**coti-ethers**](https://github.com/coti-io/coti-typescript-examples/blob/main/coti-ethers/server/README.md) examples subdirectory in the newly cloned repository directory\
+2.  Navigate to the [**coti-ethers**](https://github.com/coti-io/coti-typescript-examples/tree/main/coti-ethers/server) examples subdirectory in the newly cloned repository directory\
 
 
     ```bash
@@ -264,7 +264,7 @@ This guide will help you explore the basics of interacting with the COTI network
     ```
 
 
-2.  Navigate to the [**coti-web3**](https://github.com/coti-io/coti-python-examples/blob/main/coti-web3/README.md) examples subdirectory in the newly cloned repository directory\
+2.  Navigate to the [**coti-web3**](https://github.com/coti-io/coti-python-examples/tree/main/coti-web3) examples subdirectory in the newly cloned repository directory\
 
 
     ```bash

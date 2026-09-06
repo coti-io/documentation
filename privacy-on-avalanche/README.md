@@ -22,7 +22,7 @@ Fees on the host side are paid in **AVAX**. Private execution still happens on C
 <h2 style="font-size: 2.35rem; font-weight: 600; margin-top: 1.75rem; margin-bottom: 1rem; line-height: 1.2;">Further resources</h2>
 
 - **[Examples](https://github.com/coti-io/coti-contracts/tree/main/contracts/pod/examples)** — Contract examples in `@coti-io/coti-contracts`.
-- **[PoD SDK documentation](https://github.com/cotitech-io/coti-pod-sdk/tree/main/docs)** — Full SDK docs on GitHub.
+- **[`@coti-io/pod-sdk`](https://github.com/coti-io/coti-sdk-pod)** — TypeScript SDK.
 - **[General Privacy on Demand section](../privacy-on-demand/README.md)** — Multi-host PoD overview (not Avalanche-only).
 
 </div>
@@ -72,7 +72,7 @@ Full tables: [Avalanche Fuji](networks/fuji.md).
 
 7. [Async private operations (why it is not instant)](async-private-operations.md) — What “pending” means and why UX must reflect it.
 8. [How do PoA fees work?](how-poa-fees-work.md) — Two-way Inbox budgets in AVAX, oracle conversion, and a worked gas-unit example.
-9. [For developers: mapping concepts to the SDK](for-developers-mapping-to-the-sdk.md) — Checklists and links to the [PoD SDK documentation on GitHub](https://github.com/cotitech-io/coti-pod-sdk/tree/main/docs).
+9. [For developers: mapping concepts to the SDK](for-developers-mapping-to-the-sdk.md) — Checklists and links to source files.
 
 ### Tutorials (hands-on)
 
@@ -84,6 +84,7 @@ Full tables: [Avalanche Fuji](networks/fuji.md).
 
 ## Official technical reference
 
-The machine-readable contracts, types, and APIs live in the open-source SDK. Treat this book chapter as the **human-oriented companion**; treat the repository as the **source of truth** for signatures, fees, and network constants:
+Machine-readable contracts, types, and APIs live in the open-source packages. This GitBook section is the human-oriented companion; pin package versions for signatures, fees, and network constants:
 
-- [COTI PoD SDK — documentation index](https://github.com/cotitech-io/coti-pod-sdk/tree/main/docs)
+- [`@coti-io/pod-sdk`](https://github.com/coti-io/coti-sdk-pod) — TypeScript
+- [`@coti-io/coti-contracts`](https://github.com/coti-io/coti-contracts/tree/main/contracts/pod) — Solidity (`PodLib`, Inbox, examples)

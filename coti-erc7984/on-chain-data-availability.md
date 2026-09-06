@@ -1,89 +1,61 @@
 # On-chain data availability
 
-COTI is a privacy blockchain: **encrypted data lives on-chain** as first-class contract state. Contracts can read private variables, compute on them, and combine those results with public actions in the same control flow.
+Encrypted **balances** are contract state on both stacks. What differs is **where the bulk ciphertext lives**, and whether a contract can turn a **private** predicate into a **public** `if` in the **same** transaction.
 
-Zama’s FHE model (as commonly deployed for confidential tokens) keeps **handles and execution traces** on-chain while bulk ciphertext and private execution sit with an off-chain privacy service / DAL (data availability layer) and coprocessor. What explorers see is often a log of requests — not private values the EVM contract can treat like ordinary readable state when deciding a public side effect.
+## Where private data lives
 
-## Why it matters
-
-If private data cannot participate in on-chain decision-making alongside public state, many product patterns break: payouts gated on private tallies, private eligibility that triggers a public ERC-20 send, or any flow where the contract must **branch on a private result and then touch a public token**.
-
-| | COTI | Zama FHE pattern (typical) |
-| :- | :--- | :------------------------- |
-| Where ciphertext lives | On-chain private state (`gt*` / user `ct*`) | Handle on-chain; blob / DA off-chain |
-| Contract reads private vars | Yes — native to the execution model | Handle ops via FHE API; not “plain” private storage for public branching the same way |
-| Private → public in one flow | Supported (compute privately, then public call) | Public transfer gated on a private tally is not a natural same-tx pattern |
+| | COTI | Zama / FHEVM (pinned stack) |
+| :- | :--- | :-------------------------- |
+| What explorers see | Encrypted `gt*` / `ct*` words in storage (two 32-byte limbs for `ctUint256`) | 32-byte **handles**; ciphertext with coprocessors |
+| Contract math on private values | MPC precompiles on `gt*` | FHE ops on handles (`FHE.add`, `FHE.select`, …) |
+| User-readable ciphertext | `ct*` on-chain, AES-decrypt on the client | Handle on-chain; user decrypt via Relayer / KMS |
 
 ```mermaid
 flowchart LR
   subgraph cotiModel [COTI]
-    PrivState[Encrypted state on-chain]
-    ContractLogic[Contract reads private vars]
-    PublicAction[Public ERC-20 transfer]
-    PrivState --> ContractLogic --> PublicAction
+    PrivState[Encrypted gt or ct in storage]
+    Mpc[MPC precompile]
+    PrivState --> Mpc
   end
-  subgraph zamaModel [Zama_FHE_pattern]
-    Handles[Handles and event traces on-chain]
-    Offchain[Off-chain DAL / coprocessor]
-    Handles -.-> Offchain
+  subgraph zamaModel [Zama_FHEVM]
+    Handles[Handles in storage]
+    Coproc[Coprocessor ciphertext]
+    Handles -.-> Coproc
   end
 ```
 
-## Example: private votes, public claim
+## Private vs public control flow
 
-Users privately vote for candidates. A candidate later claims a public ERC-20 (e.g. EUDC) proportional to votes received. On COTI this is a normal pattern: the contract holds encrypted tallies and, on `claim`, uses the private result to drive a public transfer.
+Three different questions:
 
-Illustrative pseudo-code (not production):
+1. **Encrypted branching** — pick ciphertext A or B without revealing the bit (`mux` / `FHE.select`). Both stacks do this in the transaction that runs the FHE/MPC op.
+2. **Public branching** — a plaintext `if`, a public ERC-20 `transfer`, an event that discloses an amount. That needs a **plaintext**.
+3. **When the plaintext exists** — same transaction, or a later one.
+
+| Path | Same transaction as the private compute? | Notes |
+| :--- | :--- | :---- |
+| **Native COTI** (gcEVM) | Yes | Contract can decrypt inside the call (`SetPublic` / garbled-circuit reveal) and then branch or send a public token. See [Advantages over FHE](../how-coti-works/advanced-topics/coti-vs-others.md#advantages-over-fhe). |
+| **PoD host-chain tokens** | No | Private work runs on COTI. The host contract sees the result in an **Inbox callback** ([Async private operations](../privacy-on-demand/async-private-operations.md)). |
+| **Zama FHEVM** | Encrypted: yes (`FHE.select`). Public: no | [Zama branching](https://docs.zama.org/protocol/solidity-guides/smart-contract/logics/conditions): moving from an encrypted condition to non-encrypted logic **requires off-chain public decryption**, then a **later** host tx (`FHE.checkSignatures` / `finalizeUnwrap`-style callbacks). |
+
+OpenZeppelin confidential wrappers follow that two-transaction public path (for example `unwrap` then `finalizeUnwrap`; swap then `finalizeSwap`).
+
+## Example: private tally, public payout
+
+On **native COTI**, a contract can hold encrypted tallies and, in `claim`, decrypt (or mux) and send a public ERC-20 in the **same** call.
 
 ```solidity
-// SPDX-License-Identifier: MIT
-pragma solidity ^0.8.19;
-
-interface IERC20 {
-    function transfer(address to, uint256 amount) external returns (bool);
-}
-
-/// @notice Illustrative only — shows private state gating a public ERC-20 send.
-contract PrivateVotePublicClaim {
-    IERC20 public immutable rewardToken; // e.g. EUDC
-
-    // Encrypted tallies live as on-chain private state (COTI gt* / equivalent).
-    // mapping(candidate => encryptedVoteCount)
-    mapping(address => uint256 /* stand-in for gtUint256 */) private votes;
-
-    mapping(address => bool) public claimed;
-
-    constructor(IERC20 rewardToken_) {
-        rewardToken = rewardToken_;
-    }
-
-    /// @dev User submits an encrypted ballot (it* validated on-chain on COTI).
-    function vote(address candidate, /* itUint256 */ uint256 encryptedOne) external {
-        // validateCiphertext(encryptedOne) → add into votes[candidate]
-        votes[candidate] = /* privateAdd(votes[candidate], validated) */;
-    }
-
-    function claim() external {
-        require(!claimed[msg.sender], "already claimed");
-        claimed[msg.sender] = true;
-
-        // Private tally is readable to the contract's private execution.
-        uint256 amount = /* privateRevealOrUse(votes[msg.sender]) */;
-        // In a fully private design, amount may stay encrypted until a
-        // controlled reveal; the point is the contract can use the private
-        // result to size the public payout in this flow.
-
-        // ★ This public ERC-20 send, gated on the private vote result,
-        //   is natural on COTI. In the typical Zama handle / off-chain DAL
-        //   model there is no equivalent synchronous private-state read
-        //   that can gate a public ERC-20 transfer in the same on-chain
-        //   control flow — the contract does not hold the private tally
-        //   as ordinary on-chain private state for that decision.
-        require(rewardToken.transfer(msg.sender, amount), "transfer failed");
-    }
+function claim() external {
+    require(!claimed[msg.sender], "already claimed");
+    claimed[msg.sender] = true;
+    // Native COTI: private result can become public in this call.
+    uint256 amount = /* decrypt or controlled reveal of votes[msg.sender] */;
+    require(rewardToken.transfer(msg.sender, amount), "transfer failed");
 }
 ```
 
-**Highlight:** the `rewardToken.transfer(...)` line (marked ★) is the line that does not work in the usual Zama deployment pattern for this use case. There is no way for the contract to know the private vote results as on-chain private state and, in the same control flow, send a public ERC-20 reward sized by that result. COTI’s on-chain encrypted state makes that combined private→public decision a first-class pattern.
+On **Zama**, the auction/prize pattern in the FHEVM docs is: encrypted bids with `FHE.select` during the sale, then `makePubliclyDecryptable` / off-chain decrypt, then a **second** function that verifies KMS signatures and transfers the prize.
 
-Related reading: [Compatibility and divergence](compatibility-and-divergence.md), [Privacy on Demand architecture](../privacy-on-demand/architecture-and-components.md).
+On **PoD**, a host-chain pToken transfer is already request → COTI → callback. A public ERC-20 send gated on a private host-chain tally uses that same two-step Inbox path, not a native same-tx decrypt.
+
+Related: [Compatibility and divergence](compatibility-and-divergence.md), [Concurrency](concurrency.md), [Privacy on Demand architecture](../privacy-on-demand/architecture-and-components.md).

@@ -1,6 +1,6 @@
 # How a private request travels end to end
 
-This page describes **one full cycle** of Privacy on Demand **without assuming Solidity knowledge**. Names match what you will see in the [PoD SDK documentation](https://github.com/cotitech-io/coti-pod-sdk/tree/main/docs).
+This page describes **one full cycle** of Privacy on Demand **without assuming Solidity knowledge**. Names match [Architecture and main components](architecture-and-components.md).
 
 ## Cast of roles
 
@@ -12,7 +12,7 @@ This page describes **one full cycle** of Privacy on Demand **without assuming S
 | **Inbox (EVM)** | On-chain **messaging hub** on **your chain** that **forwards** jobs to the **Inbox (COTI)** and **calls back** into your contract when the answer is ready. |
 | **Inbox (COTI)** | The **COTI-side Inbox contract**—the **counterpart** to the host Inbox. It receives cross-domain messages and routes work to the MPC Executor. |
 | **COTI private execution** | The environment that performs **private computation** on **compute-domain values** (`gt*` in developer docs). |
-| **MPC Executor** | The **COTI-side contract** your integration targets for a given network (see SDK presets such as `PodUserFuji` in [Getting started](https://github.com/cotitech-io/coti-pod-sdk/blob/main/docs/04-getting-started.md)). The **Inbox (COTI)** invokes it; it is **not** the same contract as either Inbox. |
+| **MPC Executor** | The **COTI-side contract** your integration targets for a given network (see SDK presets such as `PodUserFuji` in [Getting started](tutorial-private-adder-fuji.md)). The **Inbox (COTI)** invokes it; it is **not** the same contract as either Inbox. |
 
 ## The journey in seven steps
 
@@ -79,7 +79,7 @@ sequenceDiagram
 
 ## Fees and gas
 
-Private jobs that cross from your chain to COTI and back incur **network and execution costs**. Integrations typically attach **native token value** on the request and split it between **remote execution** and the **callback** leg. Operators configure **fee parameters** and **oracle** behavior on supporting contracts (see the SDK’s [Fees, gas, and oracle](https://github.com/cotitech-io/coti-pod-sdk/blob/main/docs/contracts/04-fees-gas-and-oracle.md) page).
+Private jobs that cross from your chain to COTI and back incur **network and execution costs**. Integrations typically attach **native token value** on the request and split it between **remote execution** and the **callback** leg. Operators configure **fee parameters** and **oracle** behavior on supporting contracts (see [How do PoA fees work?](how-poa-fees-work.md)).
 
 ## Next steps
 

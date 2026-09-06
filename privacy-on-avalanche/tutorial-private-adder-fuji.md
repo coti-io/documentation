@@ -2,9 +2,9 @@
 
 This walkthrough is the **primitive-only** path: your host-chain contract calls **`PodLib`** helpers (the SDK surface for **MpcLib**-style primitives) and never deploys custom Solidity on COTI. If you are unsure whether that is enough for your product, read **[Tutorials: building Privacy on Avalanche (PoD) dApps](tutorials-privacy-on-avalanche.md)** first.
 
-This guide shows how to build a minimal **Privacy on Demand** dApp that **adds two encrypted integers** on COTI and stores the **encrypted sum** on your EVM contract. It follows the same ideas as the SDK’s [MpcAdder.sol](https://github.com/cotitech-io/coti-pod-sdk/blob/main/contracts/examples/MpcAdder.sol) example, extended with **Avalanche Fuji routing presets** and **request correlation** suitable for a real UI.
+This guide shows how to build a minimal **Privacy on Demand** dApp that **adds two encrypted integers** on COTI and stores the **encrypted sum** on your EVM contract. It follows the same ideas as the SDK’s [MpcAdder.sol](https://github.com/coti-io/coti-sdk-pod/blob/main/examples/private-adder-e2e/contracts/PrivateAdder.sol) example, extended with **Avalanche Fuji routing presets** and **request correlation** suitable for a real UI.
 
-For background on async flows and fees, see [Async private operations](async-private-operations.md), [How do PoA fees work?](how-poa-fees-work.md), and the SDK’s [Fees, gas, and oracle](https://github.com/cotitech-io/coti-pod-sdk/blob/main/docs/contracts/04-fees-gas-and-oracle.md) page.
+For background on async flows and fees, see [Async private operations](async-private-operations.md) and [How do PoA fees work?](how-poa-fees-work.md).
 
 ## Writing a PoD example
 
@@ -15,7 +15,7 @@ In this example we will do the following:
 3. **Implement a success callback** that decodes `abi.encode(ctUint256)` and stores the ciphertext.
 4. **Wire `onDefaultMpcError.selector`** so failed remote runs surface through the SDK’s default error path (and emit `ErrorRemoteCall` from `PodUser`).
 
-After that works, you harden for production: per-user request ownership, explicit `pending / completed / failed` state, fee estimation via the Inbox, and tests for under-funded sends. The SDK’s [Examples with description](https://github.com/cotitech-io/coti-pod-sdk/blob/main/docs/05c-examples-with-description.md) lists what the shipped `MpcAdder` omits on purpose.
+After that works, you harden for production: per-user request ownership, explicit `pending / completed / failed` state, fee estimation via the Inbox, and tests for under-funded sends. The [tutorials index](tutorials-privacy-on-avalanche.md) lists what a minimal adder omits on purpose.
 
 ## Prerequisites
 
@@ -24,7 +24,7 @@ Complete **[Getting started on Avalanche Fuji (Day 0)](getting-started-fuji.md)*
 - **Solidity toolchain** (Foundry or Hardhat) targeting **Avalanche Fuji C-Chain** (where the SDK’s `PodUserFuji` Inbox is deployed).
 - **Node.js 18+** for scripts and `fetch` used by encryption helpers.
 - **Fuji AVAX** for deployment and for **`msg.value`** on each `add` call (plus gas).
-- **User onboarding** so your client can obtain an **account AES key** for decryption (see the SDK’s [TypeScript integration](https://github.com/cotitech-io/coti-pod-sdk/blob/main/docs/06-typescript-integration-ux-development.md) and [Onboarding / account AES key](https://github.com/cotitech-io/coti-pod-sdk/blob/main/docs/06c-onboarding-account-account-aes-key.md) docs).
+- **User onboarding** so your client can obtain an **account AES key** for decryption (see the SDK’s [TypeScript integration](typescript-pod-sdk.md) and [Onboarding / account AES key](../how-coti-works/advanced-topics/aes-keys.md) docs).
 
 Always confirm **Inbox**, **COTI chain id**, and **MPC executor** against `PodUserFuji.sol` / `PodNetworkConstants.sol` in your installed `@coti-io/coti-contracts` package; constants can change between releases.
 
@@ -46,7 +46,7 @@ Save as `PrivateAdder.sol`. The contract:
 
 - Inherits **`PodLib`** and **`PodUserFuji`** (Fuji Inbox + COTI Testnet routing are set in the `PodUserFuji` constructor — do not call `setInbox` / `configureCoti` again).
 - Calls **`add256`** with the caller’s encrypted inputs and your callback selector.
-- Resolves **`requestId`** in the callback the same way as the SDK’s [Getting started](https://github.com/cotitech-io/coti-pod-sdk/blob/main/docs/04-getting-started.md) example.
+- Resolves **`requestId`** in the callback the same way as the [PrivateAdder](https://github.com/coti-io/coti-sdk-pod/blob/main/examples/private-adder-e2e/contracts/PrivateAdder.sol) example.
 
 ```solidity
 // SPDX-License-Identifier: UNLICENSED
@@ -240,15 +240,14 @@ console.log("sum (plaintext string):", decryptedString);
 
 - **Callback decode** must stay **`(ctUint256)`** — changing the executor op or COTI-side behavior without updating the decode tuple will corrupt storage reads.
 - **Type lane** — This contract uses **`add256`** with **`itUint256`** / **`ctUint256`** on chain. **`CotiPodCrypto.decrypt`** still takes a **`DataType`** for the scalar decode; keep **`DataType.Uint64`** (or **`Uint256`**, etc.) aligned with how your app and onboarding produce the ciphertext for this flow, per your installed SDK.
-- **Production**: add tests for non-Inbox callers on `addCallback`, under-funded `msg.value`, and decrypt failures; follow the [first production checklist](https://github.com/cotitech-io/coti-pod-sdk/blob/main/docs/04-getting-started.md) in Getting started.
+- **Production**: add tests for non-Inbox callers on `addCallback`, under-funded `msg.value`, and decrypt failures; follow the [first production checklist](tutorial-private-adder-fuji.md) in Getting started.
 
 ## Reference links
 
 - [`pod-method-call.ts` (`PodContract`, fees, `extractRequestIds`)](https://github.com/coti-io/coti-sdk-pod/blob/main/src/pod-method-call.ts)
-- [MpcAdder.sol (minimal repo example)](https://github.com/cotitech-io/coti-pod-sdk/blob/main/contracts/examples/MpcAdder.sol)
-- [Examples with description](https://github.com/cotitech-io/coti-pod-sdk/blob/main/docs/05c-examples-with-description.md)
-- [Getting started (PodUserFuji pattern)](https://github.com/cotitech-io/coti-pod-sdk/blob/main/docs/04-getting-started.md)
-- [Async execution](https://github.com/cotitech-io/coti-pod-sdk/blob/main/docs/05a-async-execution.md)
+- [PrivateAdder.sol (repo example)](https://github.com/coti-io/coti-sdk-pod/blob/main/examples/private-adder-e2e/contracts/PrivateAdder.sol)
+- [Tutorials index](tutorials-privacy-on-avalanche.md)
+- [Async private operations](async-private-operations.md)
 
 <div style="width:100%; box-sizing:border-box; margin:2rem 0 0 0; padding:1.35rem 1rem; border:2px solid #334155; border-radius:10px; background:#f8fafc; text-align:center;">
 

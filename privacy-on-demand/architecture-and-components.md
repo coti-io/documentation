@@ -45,7 +45,7 @@ flowchart TB
 
 ### MPC executor (COTI)
 
-- **What it is**: The **COTI-side contract address** your dApp is configured to call for a given deployment. The SDK’s network presets expose this as a constant you set during construction (for example `MPC_EXECUTOR_ADDRESS` alongside `COTI_CHAIN_ID` in [Getting started](https://github.com/cotitech-io/coti-pod-sdk/blob/main/docs/04-getting-started.md)).
+- **What it is**: The **COTI-side contract address** your dApp is configured to call for a given deployment. The SDK’s network presets expose this as a constant you set during construction (for example `MPC_EXECUTOR_ADDRESS` alongside `COTI_CHAIN_ID` in [Getting started](tutorial-private-adder-sepolia.md)).
 - **Why it matters**: It anchors **where** private execution is invoked in the COTI environment for **library-style** flows.
 
 ### PodUser
@@ -55,8 +55,8 @@ flowchart TB
 
 ### PodLib
 
-- **What it is**: **High-level helpers** for **common private operations** (for example comparisons and arithmetic at fixed bit widths—see the SDK [features](https://github.com/cotitech-io/coti-pod-sdk/blob/main/docs/03-features.md) table).
-- **Why it matters**: Faster path than writing a **custom** COTI contract for every operation. If you outgrow it, you move to **custom** encoding and COTI-side contracts using `MpcAbiCodec`, described in the SDK’s [Writing privacy contracts](https://github.com/cotitech-io/coti-pod-sdk/blob/main/docs/05-writing-privacy-contracts-on-ethereum.md).
+- **What it is**: **High-level helpers** for **common private operations** (comparisons and arithmetic at fixed bit widths).
+- **Why it matters**: Faster path than writing a **custom** COTI contract for every operation. If you outgrow it, you move to **custom** encoding and COTI-side contracts using `MpcAbiCodec` ([Tutorial: custom privacy logic](tutorial-custom-logic.md)).
 
 ## Data shapes: a non-developer mental model
 
@@ -68,13 +68,11 @@ Engineers talk about **`it*`**, **`gt*`**, and **`ct*`**. At a high level:
 | **`gt*`** | **Private compute representation** during the operation | **Inside COTI** private execution |
 | **`ct*`** | **Encrypted output** you can **store on your chain** and **decrypt client-side** | **Returned** to your contract, **read** by the user’s app |
 
-A fuller table lives in the SDK’s [data types](https://github.com/cotitech-io/coti-pod-sdk/blob/main/docs/contracts/01-it-ct-gt-data-types.md) page.
-
 ## Trust and security highlights (for architects)
 
-- **Callback authentication**: Your contract should only accept **Inbox-originated** callbacks for private results—otherwise anyone could try to spoof answers. The SDK’s `onlyInbox` pattern exists for this boundary ([features](https://github.com/cotitech-io/coti-pod-sdk/blob/main/docs/03-features.md)).
+- **Callback authentication**: Your contract should only accept **Inbox-originated** callbacks for private results—otherwise anyone could try to spoof answers. The `onlyInbox` pattern on `InboxUser` exists for this boundary.
 - **Request correlation**: Private work completes **later**; your system must track **request IDs** and statuses honestly in UX and backends ([Async private operations](async-private-operations.md)).
-- **Key stewardship**: Client-side AES material is powerful; treat it like **credentials**, not analytics metadata ([TypeScript integration](https://github.com/cotitech-io/coti-pod-sdk/blob/main/docs/06-typescript-integration-ux-development.md)).
+- **Key stewardship**: Client-side AES material is powerful; treat it like **credentials**, not analytics metadata ([TypeScript PoD SDK](typescript-pod-sdk.md)).
 
 ## Next steps
 

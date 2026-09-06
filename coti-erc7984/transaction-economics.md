@@ -1,18 +1,25 @@
 # Transaction economics
 
-## Built for real transaction economics
+Confidentiality has a size and a **path** cost. On Zama FHEVM the client ZKPoK is sent to the Relayer. The host chain receives a short coprocessor attestation, not that proof.
 
-Confidentiality usually arrives with a size problem. Zama / FHE confidential tokens attach a zero-knowledge **input proof** to every encrypted value — commonly **16–20 KB per input** — and often keep multi-kilobyte ciphertext off-chain behind handles.
+Measured **6 September 2026** (`@zama-fhe/sdk` 3.5.1, Sepolia cUSDCMock):
 
-COTI encrypted inputs are small enough to treat like ordinary transaction data. Validity is checked on-chain with [`validateCiphertext`](input-validation.md), not proven in the browser.
+| | **COTI confidential tokens** | **Zama / FHE ERC-7984-style** |
+| :--------------- | :--------------------------- | :---------------------------- |
+| Encrypted input on the host chain | **`itUint256` ~192-byte payload** (two 32-byte limbs + ~65-byte signature) | 32-byte handle + **230-byte** `inputProof` (1 handle, 3 signers) |
+| Typical `confidentialTransfer` calldata | Same order of magnitude as a signed `it*` transfer | **452 bytes** in 8 of 9 sampled txs |
+| Packed ciphertext + ZKPoK | Not used | **18,794 bytes** in Relayer `ciphertextWithInputVerification` |
+| Where validity is checked | `validateCiphertext` in the same host/COTI call | Relayer / coprocessors first; `InputVerifier` signatures on-chain |
+| Client-side work | Encrypt and sign (WASM ZK proving not required) | Generate ZKPoK (WASM), wait for Relayer |
+| Numeric type in the token reference | 256-bit | `euint64` + 6 decimals in OpenZeppelin `ERC7984` |
 
-|                  | **COTI confidential tokens** | **Zama / FHE ERC-7984-style**            |
-| :--------------- | :--------------------------- | :--------------------------------------- |
-| Encrypted input  | **~192 bytes**               | ~16,000–20,000 bytes (with `inputProof`) |
-| On-chain balance | **2 storage slots**          | Handle on-chain, multi-KB blob offloaded |
-| Client-side work | **Encrypt and sign**         | Generate a ZK proof, per transaction     |
-| Numeric range    | **256-bit**                  | 64-bit                                   |
+On-chain encrypted-amount size is hundreds of bytes on both stacks. What differs:
 
-**Roughly two orders of magnitude smaller on input.** Confidential transfers that fit comfortably inside normal block economics, on chains that were never designed for privacy.
+- Users pay for **ZKPoK verification** on the Gateway path even though the ZK proof never appears in host calldata.
+- Input registration and decryption **depend on the Relayer**. A Relayer or coprocessor failure aborts **before** the host transaction exists.
+- Host `confidentialTransfer` gas on the sampled Sepolia txs was about **0.96M–1.85M**.
+- FHE arithmetic is metered in [HCU](https://docs.zama.org/protocol/solidity-guides/development-guide/hcu) on the coprocessor, separate from calldata.
 
-For proving cost, WASM/mobile constraints, and Solidity `validateCiphertext` examples, see [Input validation](input-validation.md).
+COTI balances that are `ctUint256` occupy two ciphertext limbs (see [On-chain data availability](on-chain-data-availability.md)). Zama balances are 32-byte handles; the ciphertext lives with the coprocessors.
+
+For the Relayer flow, `InputVerifier` layout, and Solidity `validateCiphertext` examples, see [Input validation](input-validation.md).

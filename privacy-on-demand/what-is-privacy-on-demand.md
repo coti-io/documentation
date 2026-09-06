@@ -29,13 +29,13 @@ What PoD does **not** automatically guarantee by itself:
 
 ## What ships in the SDK versus what your team builds
 
-The **COTI PoD SDK** ([GitHub](https://github.com/cotitech-io/coti-pod-sdk), [npm](https://www.npmjs.com/package/@coti/pod-sdk)) provides **contracts and TypeScript helpers** for the PoD pattern. Your project still typically supplies:
+The **COTI PoD stack** provides the pattern: TypeScript helpers in [`@coti-io/pod-sdk`](https://www.npmjs.com/package/@coti-io/pod-sdk) ([GitHub](https://github.com/coti-io/coti-sdk-pod)), and Solidity (`PodLib`, **`PodUserSepolia`**, …) in [`@coti-io/coti-contracts`](https://github.com/coti-io/coti-contracts). Your project still typically supplies:
 
 - **Application-specific** EVM contracts and state machines.
 - **User experience** for onboarding, showing **pending / completed / failed** private operations, and **safe key handling**.
 - **Operations**: monitoring, indexing, or internal tools for stuck requests and fee configuration, as appropriate for your deployment.
 
-The SDK’s own [documentation README](https://github.com/cotitech-io/coti-pod-sdk/blob/main/docs/README.md) states scope clearly: it does not replace deployment scripts, indexers, or backend services for you.
+Those packages do not replace your deployment scripts, indexers, or backend services.
 
 ## Next steps
 

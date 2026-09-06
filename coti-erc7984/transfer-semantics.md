@@ -1,17 +1,20 @@
 # Transfer semantics
 
-## Precise, confidential approvals
+## Allowances vs operators
 
-COTI keeps the allowance model developers already know from ERC-20 — and encrypts it. This is a deliberate alternative to ERC-7984’s time-boxed unlimited [operator model](compatibility-and-divergence.md).
+COTI confidential tokens keep **amount-bounded** `approve` / `transferFrom` (and ERC-2612-style permit where exposed). The allowance is an on-chain ciphertext. See [Compatibility and divergence](compatibility-and-divergence.md) for ERC-7984 `setOperator` (public, unlimited until `until`).
 
-- **Exact amounts.** Approve 50 tokens, not blanket authority over the balance.
-- **Encrypted on-chain.** The allowance value is a ciphertext, readable only by the owner and the spender.
-- **Standard semantics.** `approve` / `transferFrom`, the shape every integrator already knows (including ERC-2612-style permit flows where exposed).
+## Insufficient encrypted balance
 
-Blanket time-boxed operator models grant a spender full authority over a balance until expiry, and record that authority publicly. COTI grants a specific encrypted amount, and keeps the amount private.
+When the transfer **amount is encrypted**, both stacks avoid reverting on insolvency so observers cannot distinguish “not enough” from a successful private transfer.
 
-## Failure that reveals nothing
+| Stack | Mechanism | Host-visible result |
+| :---- | :-------- | :------------------ |
+| COTI PoD pToken (encrypted amount) | COTI-side `mux` of the effective amount to zero; callback **Success** | Request completes; balances unchanged if insolvent |
+| OpenZeppelin `ERC7984` | `FHESafeMath.tryDecrease` + `FHE.select(success, amount, 0)` | Transaction succeeds; `ConfidentialTransfer` amount is an encrypted zero |
 
-When an encrypted transfer exceeds a balance, COTI resolves it inside the garbled circuit: the effective amount becomes zero and the request completes normally. **No revert, no error code, no observable difference** between a transfer that moved value and one that did not.
+COTI **public** amounts (for example portal withdraw where fail vs success must be real) take the other branch: decrypt the comparison and return **Failure** instead of mux-to-zero.
 
-Insufficient balances stay as private as sufficient ones.
+Encrypted-path “success with zero moved” is therefore a **confidentiality** choice on both designs, not a COTI-only behaviour.
+
+Overlapping transfers: [Concurrency](concurrency.md).
