@@ -159,6 +159,17 @@
   * [Cookbook: private investor allocations with PoD](privacy-on-avalanche/cookbook-private-investor-allocations.md)
   * [Tutorial: private Adder on Avalanche Fuji](privacy-on-avalanche/tutorial-private-adder-fuji.md)
   * [Tutorial: custom privacy logic with PoD](privacy-on-avalanche/tutorial-custom-logic.md)
+* [COTI confidential tokens & ERC-7984 compatibility](coti-erc7984/README.md)
+  * [Compatibility and divergence](coti-erc7984/compatibility-and-divergence.md)
+  * [On-chain data availability](coti-erc7984/on-chain-data-availability.md)
+  * [Decryption trust model](coti-erc7984/decryption-trust-model.md)
+  * [Input validation](coti-erc7984/input-validation.md)
+  * [Precision and decimals](coti-erc7984/precision-and-decimals.md)
+  * [Host-chain deployment](coti-erc7984/host-chain-deployment.md)
+  * [Transaction economics](coti-erc7984/transaction-economics.md)
+  * [Transfer semantics](coti-erc7984/transfer-semantics.md)
+  * [Concurrency](coti-erc7984/concurrency.md)
+  * [Deployed contracts](coti-erc7984/deployed-contracts.md)
 
 ## Security
 

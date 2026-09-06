@@ -39,6 +39,8 @@ PrivateERC20 follows the ERC20 interface, but changes how data is stored and exp
 | Supports plain uint256 operations  | Yes            | Yes                                     |
 | Supports encrypted operations      | No             | Yes (`itUint256`, `gtUint256` variants) |
 
+For why COTI does not implement [ERC-7984](https://eips.ethereum.org/EIPS/eip-7984) as a full standard — and how Privacy on Demand `pERC20` compares with Zama / FHE designs on data availability, allowances vs operators, decrypt trust, and input validation — see [COTI confidential tokens & ERC-7984 compatibility](../../coti-erc7984/README.md).
+
 ### How it works
 
 #### Balances
