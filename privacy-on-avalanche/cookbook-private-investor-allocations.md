@@ -583,4 +583,4 @@ Before adapting this cookbook for a real launch, add:
 - [Tutorial: private Adder on Avalanche Fuji](tutorial-private-adder-fuji.md)
 - [Tutorial: custom privacy logic with PoD](tutorial-custom-logic.md)
 - [TypeScript PoD SDK (`CotiPodCrypto`, `PodContract`)](typescript-pod-sdk.md)
-- [For developers: mapping concepts to the SDK](for-developers-mapping-to-the-sdk.md)
+- [PoD SDK documentation](https://github.com/cotitech-io/coti-pod-sdk/tree/main/docs)

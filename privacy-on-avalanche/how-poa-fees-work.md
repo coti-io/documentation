@@ -141,6 +141,7 @@ const fee = await pod.estimateFee("add", podArgs, {
 
 - Payable **`add`** (or other `PodLib` helpers) with **`msg.value`** and **`callbackFeeLocalWei`** — see [Tutorial: private Adder on Avalanche Fuji](tutorial-private-adder-fuji.md).
 - Integration model context: [Tutorials overview](tutorials-privacy-on-avalanche.md).
+- Contract-level detail: SDK [Fees, gas, and oracle](https://github.com/cotitech-io/coti-pod-sdk/blob/main/docs/contracts/04-fees-gas-and-oracle.md).
 
 ## Disclaimer
 

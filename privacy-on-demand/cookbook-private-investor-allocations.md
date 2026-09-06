@@ -40,7 +40,7 @@ The public version is useful because it gives you a known baseline: owner assign
 - A Solidity toolchain such as Hardhat or Foundry.
 - A Sepolia wallet with test ETH for deploys, transactions, and PoD request fees.
 - Node.js 18+ for scripts.
-- The PoD SDK package: `npm install "@coti-io/pod-sdk"`.
+- The PoD SDK package: `npm install "@coti/pod-sdk"`.
 - A way for users to complete PoD onboarding and obtain their account AES key for local decryption.
 
 Before implementing the private version, read:
@@ -373,7 +373,7 @@ import {
   PodContract,
   type PodFeeEstimationConfig,
   type PodMethodArgument,
-} from "@coti-io/pod-sdk";
+} from "@coti/pod-sdk";
 
 const args: PodMethodArgument[] = [
   { type: DataType.Address, value: investorAddress, isCallBackFee: false },
@@ -400,7 +400,7 @@ Tune `forwardGasLimit`, `callBackGasLimit`, and `callBackDataSize` from real mea
 The project owner encrypts allocation amounts before submitting them to the private flow.
 
 ```typescript
-import { CotiPodCrypto, DataType } from "@coti-io/pod-sdk";
+import { CotiPodCrypto, DataType } from "@coti/pod-sdk";
 
 const encryptedAllocation = await CotiPodCrypto.encrypt(
   ethers.parseUnits("1000", 18).toString(),
@@ -583,4 +583,4 @@ Before adapting this cookbook for a real launch, add:
 - [Tutorial: private Adder on Sepolia](tutorial-private-adder-sepolia.md)
 - [Tutorial: custom privacy logic with PoD](tutorial-custom-logic.md)
 - [TypeScript PoD SDK (`CotiPodCrypto`, `PodContract`)](typescript-pod-sdk.md)
-- [For developers: mapping concepts to the SDK](for-developers-mapping-to-the-sdk.md)
+- [PoD SDK documentation](https://github.com/cotitech-io/coti-pod-sdk/tree/main/docs)

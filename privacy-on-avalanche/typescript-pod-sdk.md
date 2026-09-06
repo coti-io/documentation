@@ -83,3 +83,5 @@ const requestIds = receipt?.hash ? await pod.extractRequestIds(receipt.hash) : [
 
 - [Tutorial: private Adder on Avalanche Fuji](tutorial-private-adder-fuji.md) — full walkthrough including `PodContract` and `extractRequestIds`.
 - [Tutorial: custom privacy logic with PoD](tutorial-custom-logic.md) — custom COTI-side pattern.
+- [TypeScript integration (SDK docs)](https://github.com/cotitech-io/coti-pod-sdk/blob/main/docs/06-typescript-integration-ux-development.md)
+- [PoD SDK docs index](https://github.com/cotitech-io/coti-pod-sdk/tree/main/docs)

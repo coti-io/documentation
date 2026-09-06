@@ -51,7 +51,7 @@ The Onboard section of the plugin provides an easy way to generate an AES key. T
 
 If the account has already been onboarded and an AES key has already been created, the key will be displayed in this section.
 
-The Onboard action uses the [`AccountOnboard.sol`](https://github.com/coti-io/coti-contracts/blob/main/contracts/onboard/AccountOnboard.sol) contract. The TypeScript SDK no longer ships a dedicated `onboard.ts` file.
+The Onboard action makes use of the [**`AccountOnboard.sol`**](https://github.com/coti-io/confidentiality-contracts/blob/main/contracts/AccountOnboard/AccountOnboard.sol) smart contract via the Typescript SDK [**`onboard.ts`**](https://github.com/coti-io/coti-sdk-typescript/blob/main/src/account/onboard.ts) script.
 
 Once the `Onboard` button is clicked, the plugin will return data related to your AES key. You may clear this data by clicking on the `Clear AES Key` button.
 

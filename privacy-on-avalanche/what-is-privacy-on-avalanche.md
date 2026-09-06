@@ -35,7 +35,7 @@ The **COTI PoD stack** provides the pattern: TypeScript helpers in [`@coti-io/po
 - **User experience** for onboarding, showing **pending / completed / failed** private operations, and **safe key handling**.
 - **Operations**: monitoring, indexing, or internal tools for stuck requests and AVAX fee configuration, as appropriate for your deployment.
 
-Those packages do not replace your deployment scripts, indexers, or backend services.
+The SDK’s own [documentation README](https://github.com/cotitech-io/coti-pod-sdk/blob/main/docs/README.md) states scope clearly: it does not replace deployment scripts, indexers, or backend services for you.
 
 ## Next steps
 

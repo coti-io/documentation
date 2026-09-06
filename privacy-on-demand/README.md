@@ -17,8 +17,8 @@ Privacy on Demand lets applications use **strong privacy for data and computatio
 
 <h2 style="font-size: 2.35rem; font-weight: 600; margin-top: 1.75rem; margin-bottom: 1rem; line-height: 1.2;">Further resources</h2>
 
-- **[Examples](https://github.com/coti-io/coti-sdk-pod/tree/main/examples/private-adder-e2e)** — TypeScript e2e adder in [`@coti-io/pod-sdk`](https://github.com/coti-io/coti-sdk-pod).
-- **[Solidity (`PodLib`, Inbox)](https://github.com/coti-io/coti-contracts/tree/main/contracts/pod)** — contracts in [`@coti-io/coti-contracts`](https://github.com/coti-io/coti-contracts).
+- **[Examples](https://github.com/cotitech-io/coti-pod-sdk/tree/main/contracts/examples)** — Contract examples in the PoD SDK repo.
+- **[PoD SDK documentation](https://github.com/cotitech-io/coti-pod-sdk/tree/main/docs)** — Full SDK docs on GitHub.
 
 The same **Quick Access** and **Further resources** blocks appear on the [docs homepage](../README.md).
 
@@ -26,7 +26,7 @@ The same **Quick Access** and **Further resources** blocks appear on the [docs h
 
 ---
 
-This section explains **what PoD is**, **how it feels to users and operators**, and **how the main pieces fit together**. For integration, use [`@coti-io/pod-sdk`](https://www.npmjs.com/package/@coti-io/pod-sdk) (TypeScript) and [`@coti-io/coti-contracts`](https://github.com/coti-io/coti-contracts) (Solidity), plus the links below.
+This section explains **what PoD is**, **how it feels to users and operators**, and **how the main pieces fit together**. For step-by-step integration with the **COTI PoD SDK**, use the [npm package](https://www.npmjs.com/package/@coti/pod-sdk), the [documentation on GitHub](https://github.com/cotitech-io/coti-pod-sdk/tree/main/docs), and the links below.
 
 ## Who this documentation is for
 
@@ -50,7 +50,7 @@ This section explains **what PoD is**, **how it feels to users and operators**, 
 
 6. [Async private operations (why it is not instant)](async-private-operations.md) — What “pending” means and why UX must reflect it.
 7. [How do PoA fees work?](how-poa-fees-work.md) — Two-way Inbox budgets, oracle conversion, and step-by-step gas-unit consumption (worked example).
-8. [For developers: mapping concepts to the SDK](for-developers-mapping-to-the-sdk.md) — Checklists and links to source files.
+8. [For developers: mapping concepts to the SDK](for-developers-mapping-to-the-sdk.md) — Checklists and links to the [PoD SDK documentation on GitHub](https://github.com/cotitech-io/coti-pod-sdk/tree/main/docs).
 
 ### Tutorials (hands-on)
 
@@ -62,7 +62,6 @@ This section explains **what PoD is**, **how it feels to users and operators**, 
 
 ## Official technical reference
 
-Machine-readable contracts, types, and APIs live in the open-source packages. This GitBook section is the human-oriented companion; pin package versions for signatures, fees, and network constants:
+The machine-readable contracts, types, and APIs live in the open-source SDK. Treat this book chapter as the **human-oriented companion**; treat the repository as the **source of truth** for signatures, fees, and network constants:
 
-- [`@coti-io/pod-sdk`](https://github.com/coti-io/coti-sdk-pod) — TypeScript
-- [`@coti-io/coti-contracts`](https://github.com/coti-io/coti-contracts/tree/main/contracts/pod) — Solidity (`PodLib`, Inbox, examples)
+- [COTI PoD SDK — documentation index](https://github.com/cotitech-io/coti-pod-sdk/tree/main/docs)
