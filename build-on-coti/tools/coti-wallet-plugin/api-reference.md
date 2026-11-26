@@ -8,6 +8,8 @@ Public exports from `@coti-io/coti-wallet-plugin`.
 
 Sets up wagmi v2, RainbowKit, and multi-wallet connectors (MetaMask EIP-6963, Rabby, OneKey, Zerion).
 
+Import it from the `@coti-io/coti-wallet-plugin/rainbowkit` subpath, not the main entry. Apps that already mount `WagmiProvider` can skip it and use `CotiPluginProvider` directly.
+
 ```tsx
 <WagmiRainbowKitProvider walletConnectProjectId="your-project-id">
   {children}
@@ -16,14 +18,14 @@ Sets up wagmi v2, RainbowKit, and multi-wallet connectors (MetaMask EIP-6963, Ra
 
 Also exports `getWagmiConfig()`, `wagmiConfig`, and `WagmiConfigOptions`.
 
-### `PrivacyBridgeProvider`
+### `CotiPluginProvider`
 
 Core provider for wallet, network, tokens, unlock, swap, and PoD state. Nests `PrivateUnlockProvider` internally.
 
 ```tsx
-<PrivacyBridgeProvider privateUnlock={{ theme, warning }}>
+<CotiPluginProvider privateUnlock={{ theme, warning }}>
   {children}
-</PrivacyBridgeProvider>
+</CotiPluginProvider>
 ```
 
 **Props:**
@@ -35,7 +37,7 @@ Core provider for wallet, network, tokens, unlock, swap, and PoD state. Nests `P
 
 ### `PrivateUnlockProvider`
 
-Mounted internally by `PrivacyBridgeProvider`. Exposed for advanced use cases only.
+Mounted internally by `CotiPluginProvider`. Exposed for advanced use cases only.
 
 ## Hooks — unlock
 
@@ -53,7 +55,7 @@ High-level unlock controller. Preferred API for app UI.
 | `requireUnlock(action)` | `(action?) => Promise<boolean>` | Ensure unlock, then run action |
 | `reset()` | `() => void` | Reset unlock UI state |
 
-### `usePrivacyBridgeUnlock()`
+### `useCotiUnlock()`
 
 Low-level unlock and private crypto operations. Use inside or after `requireUnlock`.
 
@@ -84,9 +86,9 @@ Low-level unlock and private crypto operations. Use inside or after `requireUnlo
 
 ## Hooks — bounded context slices
 
-Prefer these over the legacy flat `usePrivacyBridgeContext()` for new code.
+Prefer these over the legacy flat `useCotiPluginContext()` for new code.
 
-### `usePrivacyBridgeWallet()`
+### `useCotiWallet()`
 
 | Property / method | Type | Description |
 | --- | --- | --- |
@@ -96,7 +98,7 @@ Prefer these over the legacy flat `usePrivacyBridgeContext()` for new code.
 | `handleDisconnect` | `() => Promise<void>` | Disconnect wallet |
 | `metamaskDetected` | `boolean` | MetaMask provider detected |
 
-### `usePrivacyBridgeNetwork()`
+### `useCotiNetwork()`
 
 | Property / method | Type | Description |
 | --- | --- | --- |
@@ -106,14 +108,14 @@ Prefer these over the legacy flat `usePrivacyBridgeContext()` for new code.
 | `isUnsupportedNetwork` | `boolean` | Chain not supported |
 | `enforceNetwork` | `() => Promise<void>` | Prompt network switch |
 
-### `usePrivacyBridgeTokens()`
+### `useCotiTokens()`
 
 | Property | Type | Description |
 | --- | --- | --- |
 | `publicTokens` | `Token[]` | Public token balances |
 | `privateTokens` | `Token[]` | Private token balances (after unlock) |
 
-### `usePrivacyBridgeSwap()`
+### `useCotiSwap()`
 
 | Property / method | Type | Description |
 | --- | --- | --- |
@@ -129,21 +131,21 @@ Prefer these over the legacy flat `usePrivacyBridgeContext()` for new code.
 | `portalFee` | `string \| null` | PoD portal fee (ETH/AVAX) |
 | `isPodChain` | `boolean` | Connected chain uses PoD portal |
 
-### `usePrivacyBridgePod()`
+### `useCotiPod()`
 
 | Property / method | Type | Description |
 | --- | --- | --- |
 | `podRequests` | `PodPortalRequest[]` | Tracked PoD portal requests |
 | `refreshPodRequest` | `(request) => Promise<void>` | Refresh request status |
 
-### `usePrivacyBridgeModals()`
+### `useCotiModals()`
 
 | Property | Type | Description |
 | --- | --- | --- |
 | `showInstallModal` | `boolean` | Snap install modal visible |
 | `showMultipleWalletsModal` | `boolean` | Multiple wallets conflict modal |
 
-### `usePrivacyBridgeContext()` (legacy)
+### `useCotiPluginContext()` (legacy)
 
 Flat union of all slices. Existing consumers may continue using this; new code should prefer bounded hooks.
 
@@ -156,7 +158,7 @@ Flat union of all slices. Existing consumers may continue using this; new code s
 | `useBalanceUpdater()` | Balance refresh utility |
 | `useNetworkEnforcer()` | Network enforcement helper |
 | `useMetamask()` | MetaMask provider helper |
-| `useConnectModal()` | Re-exported from RainbowKit |
+| `useConnectModal()` | Re-exported from RainbowKit (via `@coti-io/coti-wallet-plugin/rainbowkit`) |
 
 ## Components
 
@@ -183,7 +185,7 @@ Blocks children when the wallet is on an unsupported network.
 | `configureCotiPlugin(config)` | Set plugin configuration at startup |
 | `getPluginConfig()` | Read current configuration |
 | `getSnapRequestParams(snapId?, snapVersion?)` | Params for `wallet_requestSnaps` |
-| `isSnapInstallEnabled()` | Whether Snap install is allowed |
+| `isSnapEnabled()` | Whether Snap install is allowed |
 
 See [Configuration](configuration.md) for all `CotiPluginConfig` options.
 

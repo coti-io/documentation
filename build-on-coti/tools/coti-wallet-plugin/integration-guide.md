@@ -6,14 +6,11 @@ This guide walks through integrating the COTI Wallet Plugin into a React/wagmi d
 
 ## 1. Wrap your app once
 
-Mount `WagmiRainbowKitProvider` and `PrivacyBridgeProvider` near the root of your app:
+Mount `WagmiRainbowKitProvider` and `CotiPluginProvider` near the root of your app:
 
 ```tsx
-import {
-  PrivacyBridgeProvider,
-  WagmiRainbowKitProvider,
-  type OnboardModalTheme,
-} from '@coti-io/coti-wallet-plugin';
+import { CotiPluginProvider, type OnboardModalTheme } from '@coti-io/coti-wallet-plugin';
+import { WagmiRainbowKitProvider } from '@coti-io/coti-wallet-plugin/rainbowkit';
 
 const onboardTheme: OnboardModalTheme = {
   modal: { backgroundColor: '#ffffff', color: '#0f172a' },
@@ -28,7 +25,7 @@ const onboardTheme: OnboardModalTheme = {
 export function Root() {
   return (
     <WagmiRainbowKitProvider walletConnectProjectId={walletConnectProjectId}>
-      <PrivacyBridgeProvider
+      <CotiPluginProvider
         privateUnlock={{
           theme: onboardTheme,
           warning:
@@ -39,14 +36,14 @@ export function Root() {
         }}
       >
         <App />
-      </PrivacyBridgeProvider>
+      </CotiPluginProvider>
     </WagmiRainbowKitProvider>
   );
 }
 ```
 
 {% hint style="info" %}
-Do **not** render `<OnboardModal />` yourself. `PrivacyBridgeProvider` mounts the modal once internally via `PrivateUnlockProvider`.
+Do **not** render `<OnboardModal />` yourself. `CotiPluginProvider` mounts the modal once internally via `PrivateUnlockProvider`.
 {% endhint %}
 
 ### Optional: network guard
@@ -122,12 +119,12 @@ Use `requireUnlock(action)` for any operation that needs private balance or key 
 ```tsx
 import {
   usePrivateUnlock,
-  usePrivacyBridgeUnlock,
+  useCotiUnlock,
 } from '@coti-io/coti-wallet-plugin';
 
 export function EncryptButton() {
   const privateUnlock = usePrivateUnlock();
-  const unlock = usePrivacyBridgeUnlock();
+  const unlock = useCotiUnlock();
 
   const encrypt = async () => {
     const result = await unlock.encryptPrivateValue({
@@ -150,17 +147,17 @@ export function EncryptButton() {
 
 ## 5. Display token balances
 
-Use the bounded context hooks to read wallet and token state:
+Use the bounded context hooks to read wallet and token state. Token lists are an optional feature, so mount the provider with `features={['tokens']}` (or `'portal'`, which includes tokens); otherwise the lists stay empty.
 
 ```tsx
 import {
-  usePrivacyBridgeWallet,
-  usePrivacyBridgeTokens,
+  useCotiWallet,
+  useCotiTokens,
 } from '@coti-io/coti-wallet-plugin';
 
 export function BalancePanel() {
-  const { isConnected, walletAddress } = usePrivacyBridgeWallet();
-  const { publicTokens, privateTokens } = usePrivacyBridgeTokens();
+  const { isConnected, walletAddress } = useCotiWallet();
+  const { publicTokens, privateTokens } = useCotiTokens();
 
   if (!isConnected) return <p>Connect your wallet</p>;
 
@@ -184,10 +181,10 @@ Private balances appear only after unlock. Public balances are always readable o
 
 ## 6. Bridge public ↔ private tokens
 
-Use the swap context for portal operations:
+Use the swap context for portal operations. This needs `features={['portal']}` on `CotiPluginProvider`; without it the swap actions throw.
 
 ```tsx
-import { usePrivacyBridgeSwap } from '@coti-io/coti-wallet-plugin';
+import { useCotiSwap } from '@coti-io/coti-wallet-plugin';
 
 export function BridgeForm() {
   const {
@@ -198,7 +195,7 @@ export function BridgeForm() {
     handleSwap,
     isBridgingLoading,
     estimatedGasFee,
-  } = usePrivacyBridgeSwap();
+  } = useCotiSwap();
 
   return (
     <div>
@@ -256,9 +253,9 @@ See [Configuration](configuration.md) for encrypted backup and grant service set
 
 ## Do
 
-* Use `PrivacyBridgeProvider privateUnlock={...}` once near app root.
+* Use `CotiPluginProvider privateUnlock={...}` once near app root.
 * Use `usePrivateUnlock()` for unlock orchestration: `unlock()`, `lock()`, `toggleLock()`, `requireUnlock(action)`.
-* Use `usePrivacyBridgeUnlock()` inside or after that guard for private operations: `sendPrivateToken`, `encryptPrivateValue`, `decryptPrivateValue`.
+* Use `useCotiUnlock()` inside or after that guard for private operations: `sendPrivateToken`, `encryptPrivateValue`, `decryptPrivateValue`.
 * Let the plugin own `OnboardModal`, Snap install, restore-only flow, contract onboarding, and the AES key success screen.
 
 ## Do not
