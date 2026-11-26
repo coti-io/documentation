@@ -54,7 +54,7 @@ import "@coti-io/coti-contracts/contracts/pod/mpc/PodUserSepolia.sol";
 import "@coti-io/coti-contracts/contracts/utils/mpc/MpcCore.sol";
 
 /// @title PrivateAdder
-/// @notice Adds two encrypted uint64 values via PoD on Sepolia (SDK preset addresses).
+/// @notice Adds two encrypted uint256 values via PoD on Sepolia (SDK preset addresses).
 contract PrivateAdder is PodLib, PodUserSepolia {
     enum RequestStatus {
         None,
@@ -68,10 +68,8 @@ contract PrivateAdder is PodLib, PodUserSepolia {
     event AddRequested(bytes32 indexed requestId, address indexed caller);
     event AddCompleted(bytes32 indexed requestId);
 
-    constructor() PodLibBase(msg.sender) {
-        setInbox(INBOX_ADDRESS);
-        configureCoti(MPC_EXECUTOR_ADDRESS, COTI_CHAIN_ID);
-    }
+    // PodUserSepolia sets the Sepolia inbox and COTI testnet executor in its constructor.
+    constructor() PodLibBase(msg.sender) {}
 
     /// @param callbackFeeLocalWei Wei reserved for the callback leg; must be <= msg.value (see SDK fee docs).
     function add(
@@ -92,11 +90,9 @@ contract PrivateAdder is PodLib, PodUserSepolia {
         emit AddRequested(requestId, msg.sender);
     }
 
-    function addCallback(bytes memory data) external onlyInbox {
+    function addCallback(bytes memory data) external onlyMpcExecutor {
         bytes32 requestId = inbox.inboxSourceRequestId();
-        if (requestId == bytes32(0)) {
-            requestId = inbox.inboxRequestId();
-        }
+        require(statusByRequest[requestId] == RequestStatus.Pending, "request not pending");
 
         ctUint256 memory sum = abi.decode(data, (ctUint256));
         sumByRequest[requestId] = sum;
@@ -109,7 +105,8 @@ contract PrivateAdder is PodLib, PodUserSepolia {
 **Notes:**
 
 - **`onDefaultMpcError`** is implemented on `PodLibBase` and forwards failures to **`ErrorRemoteCall`** on `PodUser`. Your UI can listen for that event to mark a request failed.
-- **`addCallback`** must stay **`onlyInbox`** so random accounts cannot forge results.
+- **`addCallback`** uses **`onlyMpcExecutor`** so only the configured COTI executor, delivered through the Inbox, can post a result. Bare `onlyInbox` is not enough here: it only checks that the call came through the local Inbox, not which remote chain or contract sent it.
+- The result is keyed by **`inboxSourceRequestId()`** and must match a **Pending** request. Don't fall back to `inboxRequestId()` when the source id is zero; that is a new inbound message, not a reply to your request.
 - **`ctUint256`** is a Solidity **struct** `{ ctUint128 ciphertextHigh; ctUint128 ciphertextLow; }`, so the decoded local must use a `memory` location and the storage mapping holds the two‑limb tuple. The narrower garbled / ciphertext types (`gtUint8…gtUint256`, `gtBool`, and `ctUint8…ctUint128`) are **user‑defined value types** — pass and assign them like `uint256` (no `memory` / `calldata`). Encrypted-input wrappers such as **`itUint256`** stay structs and keep their `calldata` / `memory` location as before.
 
 ## Step 3: Compile and deploy on Sepolia

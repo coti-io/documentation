@@ -9,7 +9,7 @@ Use this checklist before deploying a production PoD contract. For conceptual ba
 3. Accept private values as `it*` on EVM entrypoints.
 4. Submit via `PodLib` helpers (e.g. `add64`, `gt256`) or `IInbox.sendTwoWayMessage{value: ...}(..., callbackFeeLocalWei)`.
 5. Store `requestId` correlation state.
-6. Implement success and error callbacks with `onlyInbox`.
+6. Implement success and error callbacks that check the remote sender: `onlyMpcExecutor` on the `PodLib` path, or `onlyInbox` plus an `inboxMsgSender()` peer check on the custom path.
 7. Decode callback data into `ct*` and persist.
 8. Expose status/result readers for async UX.
 
@@ -25,7 +25,8 @@ Preset wiring (`PodLib` + `PodUserSepolia` / `PodUserFuji`): [Reference: PodLib 
 
 - Access-control any method that changes routing or configuration.
 - Gate any call path that invokes `configureCoti(...)`.
-- Keep callback handlers `onlyInbox`.
+- Don't rely on bare `onlyInbox` in callback handlers; it only proves the local Inbox made the call. Also check the remote chain and contract (`onlyMpcExecutor` / `inboxMsgSender()`).
+- Key results by `inboxSourceRequestId()` and only accept them for requests that are still pending.
 - In custom COTI flows, verify `inboxMsgSender()` matches the expected peer contract.
 - Avoid external calls before state updates inside callback handlers.
 
