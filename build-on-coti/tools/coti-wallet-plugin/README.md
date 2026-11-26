@@ -78,18 +78,15 @@ This release is validated with `@rainbow-me/rainbowkit@2.2.0` and `wagmi@2.14.0`
 ## Quickstart
 
 ```tsx
-import {
-  PrivacyBridgeProvider,
-  WagmiRainbowKitProvider,
-  usePrivateUnlock,
-} from '@coti-io/coti-wallet-plugin';
+import { CotiPluginProvider, usePrivateUnlock } from '@coti-io/coti-wallet-plugin';
+import { WagmiRainbowKitProvider } from '@coti-io/coti-wallet-plugin/rainbowkit';
 
 export function Root() {
   return (
     <WagmiRainbowKitProvider walletConnectProjectId={process.env.WALLETCONNECT_PROJECT_ID}>
-      <PrivacyBridgeProvider>
+      <CotiPluginProvider>
         <App />
-      </PrivacyBridgeProvider>
+      </CotiPluginProvider>
     </WagmiRainbowKitProvider>
   );
 }

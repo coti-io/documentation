@@ -5,9 +5,9 @@ Onboarding retrieves or restores the wallet-bound AES key used to decrypt privat
 Application UI should use the provider-level private unlock controller:
 
 ```tsx
-<PrivacyBridgeProvider privateUnlock={{ theme, warning }}>
+<CotiPluginProvider privateUnlock={{ theme, warning }}>
   <App />
-</PrivacyBridgeProvider>
+</CotiPluginProvider>
 ```
 
 Then call `usePrivateUnlock().unlock()`, `usePrivateUnlock().lock()`, or `usePrivateUnlock().requireUnlock(action)` from app components. Do not orchestrate unlock directly with `refreshPrivateBalances({ restoreOnly: true })` or a locally owned `OnboardModal`.

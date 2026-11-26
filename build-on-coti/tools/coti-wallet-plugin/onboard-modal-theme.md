@@ -4,11 +4,11 @@ The unlock and onboarding modal is rendered by the plugin (`PrivateUnlockProvide
 
 ## Wire-up
 
-Pass a theme object when you mount `PrivacyBridgeProvider`:
+Pass a theme object when you mount `CotiPluginProvider`:
 
 ```tsx
 import {
-  PrivacyBridgeProvider,
+  CotiPluginProvider,
   type OnboardModalTheme,
 } from '@coti-io/coti-wallet-plugin';
 
@@ -30,9 +30,9 @@ const lightOnboardTheme: OnboardModalTheme = {
 
 export function AppRoot() {
   return (
-    <PrivacyBridgeProvider privateUnlock={{ theme: lightOnboardTheme }}>
+    <CotiPluginProvider privateUnlock={{ theme: lightOnboardTheme }}>
       <App />
-    </PrivacyBridgeProvider>
+    </CotiPluginProvider>
   );
 }
 ```
@@ -123,14 +123,14 @@ function useOnboardModalTheme(): OnboardModalTheme {
 Show a non-blocking warning in the modal:
 
 ```tsx
-<PrivacyBridgeProvider
+<CotiPluginProvider
   privateUnlock={{
     theme: myOnboardTheme,
     warning: 'This dApp never stores or receives the AES key. Unlock stays inside the plugin.',
   }}
 >
   <App />
-</PrivacyBridgeProvider>
+</CotiPluginProvider>
 ```
 
 ## Related docs
